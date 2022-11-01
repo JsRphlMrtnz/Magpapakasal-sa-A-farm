@@ -1,12 +1,18 @@
-import java.util.Properties;
-
 public  class Seed{
-   int cost, harvestTime, minWater, maxWater, minFertilizer, maxFertilizer, sellingPrice, minProduce, maxProduce;
-   double xp;
-   String name, type;
+   private int cost;
+   private int harvestTime;
+   private int minWater;
+   private int maxWater;
+   private int minFertilizer;
+   private int maxFertilizer;
+   private int sellingPrice;
+   private int minProduce;
+   private int maxProduce;
+   private double xp;
+   private String name;
+   private String type;
 
-   Seed(int cost, int harvestTime, int minWater,  int maxWater, int minFertilizer, int maxFertilizer, int sellingPrice, int minProduce, int maxProduce, double xp, String name, String type)
-   {
+   public Seed(int cost, int harvestTime, int minWater,  int maxWater, int minFertilizer, int maxFertilizer, int sellingPrice, int minProduce, int maxProduce, double xp, String name, String type) {
       this.cost = cost;
       this.harvestTime = harvestTime;
       this.minWater = minWater;
@@ -21,63 +27,51 @@ public  class Seed{
       this.type = type;
    }
 
-   public int getCost() 
-   {
+   public int getCost() {
       return this.cost;
    }
 
-   public int getHarvestTime() 
-   {
+   public int getHarvestTime() {
       return this.harvestTime;
    }
 
-   public int getMinWater() 
-   {
+   public int getMinWater() {
       return this.minWater;
    }
 
-   public int getMaxWater() 
-   {
+   public int getMaxWater() {
       return this.maxWater;
    }
 
-   public int getMinFertilizer() 
-   {
+   public int getMinFertilizer() {
       return this.minFertilizer;
    }
 
-   public int getMaxFertilizer() 
-   {
+   public int getMaxFertilizer() {
       return this.maxFertilizer;
    }
 
-   public int getSellingPrice() 
-   {
+   public int getSellingPrice() {
       return this.sellingPrice;
    }
 
-   public int getMinProduce() 
-   {
+   public int getMinProduce() {
       return this.minProduce;
    }
 
-   public int getMaxProduce() 
-   {
+   public int getMaxProduce() {
       return this.maxProduce;
    }
 
-   public double getXp() 
-   {
+   public double getXp() {
       return this.xp;
    }
 
-   public String getName() 
-   {
+   public String getName() {
       return this.name;
    }
 
-   public String getType() 
-   {
+   public String getType() {
       return this.type;
    }
 }
