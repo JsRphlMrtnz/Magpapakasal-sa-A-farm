@@ -5,7 +5,7 @@ public  class Seed{
    double xp;
    String name, type;
 
-   Seed(int cost, int harvestTime, int minWater,  int maxWater, int minFertilizer, int maxFertilizer, int sellingPrice, int minProduce, int maxProduce, double xp, string name, string type)
+   Seed(int cost, int harvestTime, int minWater,  int maxWater, int minFertilizer, int maxFertilizer, int sellingPrice, int minProduce, int maxProduce, double xp, String name, String type)
    {
       this.cost = cost;
       this.harvestTime = harvestTime;
