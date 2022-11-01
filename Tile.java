@@ -64,7 +64,7 @@ public class Tile {
     }
 
     public boolean isWithered() {
-        if (this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer() && this.harvestTime == 0) {
+        if ((this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer()) && this.harvestTime == 0 || this.harvestTime < 0) {
             return true;
         }
         return false;

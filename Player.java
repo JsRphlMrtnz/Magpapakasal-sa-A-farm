@@ -1,13 +1,15 @@
+import java.util.Random;
+
 public class Player {
     private double xp;
-    private int objectCoins;
+    private double objectCoins;
     private FarmerType type;
     private String name;
 
     public Player(String name) {
         this.name = name;
         this.xp = 0;
-        this.objectCoins = 0;
+        this.objectCoins = 100;
         type = new FarmerType(0, 0, 0, 0, 0, 0, "Farmer");
     }
 
@@ -27,6 +29,16 @@ public class Player {
         this.xp += xp;
     }
 
+    public boolean plant(Seed seed, Tile tile) {
+        if (tile.getHasSeed() || !tile.getPlowed() || this.objectCoins < seed.getCost()) {
+            return false;
+        }
+        
+        this.objectCoins -= seed.getCost();
+        tile.setSeed(seed);
+        return true;
+    }
+
     public boolean plow(Tools tool, Tile tile) {
         if (tool.getName() == "Plow" && !tile.getPlowed()) {
             tile.updatePlow();
@@ -38,7 +50,7 @@ public class Player {
     }
 
     public boolean water(Tools tool, Tile tile) {
-        if (tool.getName() == "Watering Can" && tile.getPlowed()) {
+        if (tool.getName() == "Watering Can" && tile.getHasSeed()) {
             tile.updateWater();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
@@ -48,28 +60,32 @@ public class Player {
     }
 
     public boolean fertilize(Tools tool, Tile tile) {
-        if (tool.getName() == "Fertilizer" && tile.getPlowed() && tile.getHasSeed()) {
-            tile.updateFert();
-            xp += tool.getXp();
-            this.objectCoins -= tool.getCost();
-            return true;
-        }
-        return false;
+        if (this.objectCoins - tool.getCost() <= 0 || !tile.getHasSeed())
+            return false;
+
+        tile.updateFert();
+        xp += tool.getXp();
+        this.objectCoins -= tool.getCost();
+        return true;
     }
     
     public boolean dig (Tools tool, Tile tile) {
-        if (tool.getName() == "Shovel" && tile.getPlowed() && tile.getHasSeed()) {
+        if (this.objectCoins - tool.getCost() <= 0)
+            return false;
+        if (tool.getName() == "Shovel" && tile.getPlowed()) {
             tile.updatePlow();
-            xp += tool.getXp();
-        }
+            if (tile.getHasSeed())
+                tile.reset();
+            }
+        xp += tool.getXp();
         this.objectCoins -= tool.getCost();
-        return false;
+        return true;
     }
 
     public boolean harvest(Tile tile) {
-        if (tile.getTime() == 0) {
-            int productsProduced = (int) (Math.random() * (tile.getSeed().getMaxProduce() - tile.getSeed().getMinProduce() + 1) + tile.getSeed().getMinProduce());
-            int harvestTotal = productsProduced * (tile.getSeed().getCost() + this.type.getBonusEarning());
+        if (tile.getTime() == 0 && tile.getHasSeed()) {
+            int productsProduced = new Random().nextInt(tile.getSeed().getMaxProduce() - tile.getSeed().getMinProduce() + 1) + tile.getSeed().getMinProduce();
+            int harvestTotal = productsProduced * (tile.getSeed().getSellingPrice() + this.type.getBonusEarning());
             
             int waterCount = tile.getWater() + this.type.getBonusWaterLimit();
             if (waterCount > tile.getSeed().getMaxWater())
@@ -80,8 +96,15 @@ public class Player {
             if (fertCount > tile.getSeed().getMaxFertilizer())
                 fertCount = tile.getSeed().getMaxFertilizer();
             double fertBonus = harvestTotal * 0.5 * (fertCount - 1);
+            
+            double total = harvestTotal + waterBonus + fertBonus;
+            this.objectCoins += total;
 
-            this.objectCoins += harvestTotal + waterBonus + fertBonus;
+            double xpGain = tile.getSeed().getXp() * productsProduced;
+            this.xp += xpGain;
+
+            System.out.println("Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.");
+            System.out.println("Gained " + xpGain + " xp.");
             tile.reset();
             return true;
         }
@@ -92,7 +115,7 @@ public class Player {
         return (int) Math.floor(this.xp / 100);
     }
 
-    public int getCoins() {
+    public double getCoins() {
         return this.objectCoins;
     }
 
