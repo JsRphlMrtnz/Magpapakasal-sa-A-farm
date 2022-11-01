@@ -46,4 +46,35 @@ public class Tile {
     public void updateTime() {
         this.harvestTime--;
     }
+
+    public boolean getPlowed() {
+        return this.isPlowed;
+    }
+
+    public boolean getHasSeed() {
+        return this.hasSeed;
+    }
+
+    public int getTime() {
+        return this.harvestTime;
+    }
+
+    public Seed getSeed() {
+        return this.seed;
+    }
+
+    public boolean isWithered() {
+        if (this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer() && this.harvestTime == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getWater() {
+        return this.water;
+    }
+
+    public int getFert() {
+        return this.fertilizer;
+    }
 }
