@@ -1,5 +1,5 @@
 public class FarmerType {
-   private int bonusProduce;
+   private int bonusEarning;
    private int costReduction;
    private int bonusWaterLimit;
    private int bonusFertilizerLimit;
@@ -7,8 +7,8 @@ public class FarmerType {
    private int minLevel;
    private String type;
 
-   public FarmerType(int bonusProduce, int costReduction, int bonusWaterLimit, int bonusFertilizerLimit, int regFee, int minLevel, String type) {
-      this.bonusProduce = bonusProduce;
+   public FarmerType(int bonusEarning, int costReduction, int bonusWaterLimit, int bonusFertilizerLimit, int regFee, int minLevel, String type) {
+      this.bonusEarning = bonusEarning;
       this.costReduction = costReduction;
       this.bonusWaterLimit = bonusWaterLimit;
       this.bonusFertilizerLimit = bonusFertilizerLimit;
@@ -18,8 +18,8 @@ public class FarmerType {
    }
    
 
-   public int getBonusProduce() {
-      return this.bonusProduce;
+   public int getBonusEarning() {
+      return this.bonusEarning;
    }
 
    public int getCostReduction() {
