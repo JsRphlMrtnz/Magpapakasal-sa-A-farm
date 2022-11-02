@@ -1,26 +1,32 @@
 import java.util.Scanner;
 
 public class MyFarm {
-    private int day;
+    private int day; // amount of days that have passed by in the game
     private Player player;
-    private Tile tile;
-    private Tools[] tool = new Tools[5];
-    private Seed seed;
+    private Tile tile; // one tile (for MC01)
+    private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
+    private Seed seed; // turnip (for MC01)
     
 
     public MyFarm(String name) {
         this.player = new Player(name);
-        this.tile = new Tile();
+        this.tile = new Tile(); 
         this.day = 1;
-        this.tool[0] = new Tools(0, 0.5, "Plow");
-        this.tool[1] = new Tools(0, 0.5, "Watering Can");
-        this.tool[2] = new Tools(10, 4, "Fertilizer");
-        this.tool[3] = new Tools(50, 15, "Pickaxe");
-        this.tool[4] = new Tools(7, 2, "Shovel");
-        this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop");
+        this.tool[0] = new Tools(0, 0.5, "Plow"); // instantiates the plow tool
+        this.tool[1] = new Tools(0, 0.5, "Watering Can"); // instantiates the watering can tool
+        this.tool[2] = new Tools(10, 4, "Fertilizer"); // instantiates the fertilizer tool
+        this.tool[3] = new Tools(50, 15, "Pickaxe"); // instantiates the pickaxe tool
+        this.tool[4] = new Tools(7, 2, "Shovel"); // instantiates the shovel tool
+        this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
     }
 
-    public void startDay(Scanner sc) {
+    /**
+     * This method is to combine all the game mechanics for the player to be able to
+     * play the game. 
+     * 
+     * @param sc Scanner used to scan the user input.
+     */
+    public void operation(Scanner sc) {
         char tileChar = ' ';
 
         int option = 0;
@@ -120,12 +126,21 @@ public class MyFarm {
         this.endDay();
     }
 
+/**
+ * This method increments the day and updates the harvest time of the tile
+ */
     public void endDay() {
         this.day++;
         this.tile.updateTime();
         System.out.println("\n\n");
     }
 
+/**
+ * This method determines if it is gameover for the player. If it is gameover for the player, there are no
+ * active growing crops and the player has no coins to buy a seed which 5 objectCoins.
+ * 
+ * @return This returns a boolean value to determine if it is gameover.
+ */
     public boolean gameOver() {
         return (!this.tile.getHasSeed() && this.player.getCoins() < 5);
     }
@@ -136,8 +151,9 @@ public class MyFarm {
         String name = sc.nextLine();
         MyFarm farm = new MyFarm(name);
 
+        // the game will go on as long it is not gameOver for the player.
         while (!farm.gameOver()) {
-            farm.startDay(sc);
+            farm.operation(sc);
         }
         sc.close();
     }
