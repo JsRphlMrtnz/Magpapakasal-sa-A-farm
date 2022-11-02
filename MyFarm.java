@@ -1,22 +1,22 @@
 import java.util.Scanner;
 
 public class MyFarm {
-    private int day; // amount of days that have passed by in the game
+    private int day;                     // amount of days that have passed by in the game
     private Player player;
-    private Tile tile; // one tile (for MC01)
+    private Tile tile;                   // one tile (for MC01)
     private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
-    private Seed seed; // turnip (for MC01)
+    private Seed seed;                   // turnip (for MC01)
     
 
     public MyFarm(String name) {
         this.player = new Player(name);
         this.tile = new Tile(); 
         this.day = 1;
-        this.tool[0] = new Tools(0, 0.5, "Plow"); // instantiates the plow tool
+        this.tool[0] = new Tools(0, 0.5, "Plow");         // instantiates the plow tool
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // instantiates the watering can tool
-        this.tool[2] = new Tools(10, 4, "Fertilizer"); // instantiates the fertilizer tool
-        this.tool[3] = new Tools(50, 15, "Pickaxe"); // instantiates the pickaxe tool
-        this.tool[4] = new Tools(7, 2, "Shovel"); // instantiates the shovel tool
+        this.tool[2] = new Tools(10, 4, "Fertilizer");    // instantiates the fertilizer tool
+        this.tool[3] = new Tools(50, 15, "Pickaxe");      // instantiates the pickaxe tool
+        this.tool[4] = new Tools(7, 2, "Shovel");         // instantiates the shovel tool
         this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
     }
 
@@ -136,8 +136,8 @@ public class MyFarm {
     }
 
 /**
- * This method determines if it is gameover for the player. If it is gameover for the player, there are no
- * active growing crops and the player has no coins to buy a seed which 5 objectCoins.
+ * This method determines if it is gameover for the player. The game is over if there are no
+ * active growing crops and the player cannot buy a Turnip seed.
  * 
  * @return This returns a boolean value to determine if it is gameover.
  */

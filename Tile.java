@@ -3,12 +3,12 @@
  * conditions of the certain crop (if the crop is watered, fertilized enough, harvested in the right time).
  */
 public class Tile {
-    private Seed seed;
-    private boolean isPlowed;
-    private int water;
-    private int fertilizer;
-    private int harvestTime;
-    private boolean hasSeed;
+    private Seed seed;          // The seed that is planted on the tile
+    private boolean isPlowed;   // If the tile is plowed
+    private int water;          // The amount of times the tile was watered
+    private int fertilizer;     // The amount of times the tile was fertilized
+    private int harvestTime;    // The amount of days until the crop is ready to harvest
+    private boolean hasSeed;    // If the tile has a seed planted on it
 
     public Tile() {
         reset();
@@ -28,8 +28,7 @@ public class Tile {
     }
 
 /**
- * This method accepts a seed and sets the seed variable onto the tile which then
- * sets the necessary variables to when a seed is planted onto a tile.
+ * This method sets the seed that is being planted on the tile.
  * 
  * @param seed The seed that is planted in the plot.
  */
@@ -42,9 +41,8 @@ public class Tile {
     }
 
 /**
- * The method helps change the plow situation of a certain tile since there are
- * different ways in which a tile can be plowed and not plowed.
- * Overall the method checks if the field is plowed, then sets it to not plowed. Otherwise, it is set to plowed.
+ * The method acts as a toggle for the isPlowed attribute.
+ * If the tile is plowed, it will be set to false and vice-versa.
  */
     public void updatePlow() {
         if (this.isPlowed) {
@@ -55,50 +53,48 @@ public class Tile {
     }
 
  /**
-  * This method updates the water variable by adding one. This is going to be used
-  * everytime the tile is watered by the player.
+  * This method increments the amount of times the tile was watered.
   */
     public void updateWater() {
         this.water++;
     }
 
 /**
- * This method increases the fertilizer level by one. This is going to be used 
- * everytime the tile is fertilized by the player.
+ * This method increments the amount of times the tile was fertilized.
  */
     public void updateFert() {
         this.fertilizer++;
     }
 
 /**
- * Decrements the harvestTime variable by 1 when a day passes by.
+ * This method decrements the amount of days until the crop is ready to harvest.
  */
     public void updateTime() {
         this.harvestTime--;
     }
 
 /**
- * This method returns a boolean value that represents whether or not the field is plowed.
+ * This method gets the value of isPlowed and returns it.
  * 
- * @return The boolean value of isPlowed.
+ * @return The value of isPlowed.
  */
     public boolean getPlowed() {
         return this.isPlowed;
     }
 
   /**
-   * This method returns a boolean value that indicates whether or not the tile has a seed.
+   * This method gets the value of hasSeed and returns it.
    * 
-   * @return The value of the variable hasSeed.
+   * @return The value of the hasSeed.
    */
     public boolean getHasSeed() {
         return this.hasSeed;
     }
 
 /**
- * This method returns the harvest time of the crop when it is planted onto the tile.
+ * This method gets the amount of days left until the plant is ready to harvest.
  * 
- * @return The harvestTime variable is being returned.
+ * @return Days left until harvest.
  */
     public int getTime() {
         return this.harvestTime;
@@ -107,17 +103,18 @@ public class Tile {
 /**
  * This method returns the seed that has been planted onto the tile.
  * 
- * @return The seed object.
+ * @return The current planted seed.
  */
     public Seed getSeed() {
         return this.seed;
     }
 
 /**
- * If the water or fertilizer is less than the minimum required, and the harvest time is 0 or less,
- * then the plant is withered. Otherwise, the plant is healthy.
+ * This method checks if the plant currently on the tile is withered.
+ * A plant is withered if it has not been watered and fertilized enough on the day of harvest
+ * or if the day of harvest has passed.
  * 
- * @return A boolean value that represents whether or not the plant is withered.
+ * @return The current withered status of the plant.
  */
     public boolean isWithered() {
         if ((this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer()) && this.harvestTime == 0 || this.harvestTime < 0) {
@@ -129,7 +126,7 @@ public class Tile {
 /**
  * This method returns the amount of times that the tile has been watered.
  * 
- * @return The water variable is being returned.
+ * @return The amount of times that the tile has been watered.
  */
     public int getWater() {
         return this.water;
@@ -138,7 +135,7 @@ public class Tile {
 /**
  * This method returns the amount of times that the tile has been fertilized.
  * 
- * @return The fertilizer variable.
+ * @return The amount of times that the tile has been fertilized.
  */
     public int getFert() {
         return this.fertilizer;

@@ -6,9 +6,9 @@
  * using these tools the player gains xp but loses object coins.
  */
 public class Tools {
-   private int cost;
-   private double xp;
-   private String name;
+   private int cost;    // The cost of using the tool
+   private double xp;   // The amount of xp the player receives when using the tool
+   private String name; // The name of the tool
 
    public Tools(int cost, double xp, String name) {
       this.cost = cost;
@@ -19,7 +19,7 @@ public class Tools {
 /**
  * This method returns the cost of using the certain tool.
  * 
- * @return The cost variable is being returned.
+ * @return The cost of the tool.
  */
    public int getCost() {
       return this.cost;
@@ -28,17 +28,16 @@ public class Tools {
 /**
  * This method returns xp gained from using the certain tool.
  * 
- * @return The xp variable is being returned.
+ * @return The amount of xp the user gains when using the tool.
  */
    public double getXp() {
       return this.xp;
    }
 
 /**
- * This method returns the name of the certain tool which can be
- * plow, watering can, fertilizer, pickaxe, shovel.
+ * This method returns the name of the tool.
  * 
- * @return The name variable is being returne.
+ * @return The name of the tool.
  */
    public String getName() {
       return this.name;

@@ -1,10 +1,15 @@
+/**
+ * This class contains the necessary attributes of the player.
+ * It contains the player's name, money, and the player's inventory.
+ * It also contains the necessary actions for each tool as well as harvesting.
+ */
 import java.util.Random;
 
 public class Player {
-    private double xp;
-    private double objectCoins;
-    private FarmerType type;
-    private String name;
+    private double xp;          // The player's experience points
+    private double objectCoins; // The player's money
+    private FarmerType type;    // The player's farmer type
+    private String name;        // The player's name
 
     public Player(String name) {
         this.name = name;
@@ -17,8 +22,8 @@ public class Player {
   * This method helps change the certain farmer type of the player by checking if the player 
   * has reached a certain level and has enough objectCoins to afford it. 
   *
-  * @param newType Is new type of farmer status that the player wants to change to.
-  * @return The boolean value that determines if the player has successfully changed their farmer status.
+  * @param newType Is new type of farmer that the player wants to change to.
+  * @return true if the player has met the requirements for the next type
   */
     public boolean updateFarmerType(FarmerType newType) {
         if (newType.getMinLevel() <= this.getLevel() && this.objectCoins >= newType.getRegFee()) {
