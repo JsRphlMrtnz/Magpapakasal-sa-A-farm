@@ -1,3 +1,12 @@
+/**
+ * 
+ * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
+ * 
+ * @author Don Laude A. Aspecto
+ * @author Jose Raphael E. Martinez
+ * @version 1.0
+ */
+
 import java.util.Scanner;
 
 public class MyFarm {
