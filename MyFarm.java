@@ -36,31 +36,38 @@ public class MyFarm {
      * @param sc Scanner used to scan the user input.
      */
     public void operation(Scanner sc) {
-        char tileChar = ' ';
+        char tileChar;
 
         int option = 0;
         do {
+            tileChar = ' ';
+            
             System.out.println("Hello " + this.player.getName() + "!");
-            System.out.println("Day :" + this.day);
+            System.out.println("Day: " + this.day);
             System.out.println("ObjectCoins: " + this.player.getCoins());
             System.out.println("Level: " + this.player.getLevel());
 
-            if (!this.tile.getHasSeed())
-            tileChar = ' ';
-            else {
-                switch (this.tile.getSeed().getName()) {
-                case "Turnip":
-                    tileChar = 'T';
-                    break;
-                }
-                if (this.tile.isWithered())
+            if (this.tile.getPlowed()) {
+                if (this.tile.getHasSeed() == false)
+                    tileChar = '_';
+                else if (this.tile.isWithered())
                     tileChar = 'W';
+                else {
+                    switch (this.tile.getSeed().getName()) {
+                    case "Turnip":
+                        tileChar = 'T';
+                        break;
+                    }
+                }
             }
             System.out.println("=============");
-            System.out.println("|" + tileChar + "|");
+            System.out.println("     |" + tileChar + "|");
             System.out.println("=============");
-            if (this.tile.getHasSeed())
+            if (this.tile.getHasSeed()) {
                 System.out.println("Time left to harvest: " + this.tile.getTime());
+                System.out.println("Times watered: " + this.tile.getWater());
+                System.out.println("Times fertilized: " + this.tile.getFert());
+            }
 
             System.out.println("1. Actions\t2. End Day");
             System.out.print("What would you like to do: ");
@@ -68,7 +75,7 @@ public class MyFarm {
 
             switch (option) {
                 case 1: {
-                    System.out.println("1. Plow\t2. Plant\t3. Water\t4. Fertilize\t5. Dig\t 6. Harvest\t7. Back");
+                    System.out.println("1. Plow\n2. Plant\n3. Water\n4. Fertilize\n5. Dig\n6. Harvest\n7. Back");
                     int action;
                     do {
                         System.out.print("What would you like to do: ");
@@ -129,9 +136,9 @@ public class MyFarm {
                     break;
                 }
             }
-            
+            System.out.println("\n\n");
         } while (option != 2);
-
+        
         this.endDay();
     }
 
@@ -160,7 +167,7 @@ public class MyFarm {
         String name = sc.nextLine();
         MyFarm farm = new MyFarm(name);
 
-        // the game will go on as long it is not gameOver for the player.
+        // the game will go on as long for the player.
         while (!farm.gameOver()) {
             farm.operation(sc);
         }
