@@ -167,7 +167,7 @@ public class MyFarm {
         String name = sc.nextLine();
         MyFarm farm = new MyFarm(name);
 
-        // the game will go on as long for the player.
+        // the game will continue while game over conditions are not met.
         while (!farm.gameOver()) {
             farm.operation(sc);
         }
