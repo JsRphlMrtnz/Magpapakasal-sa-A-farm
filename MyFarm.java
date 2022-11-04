@@ -153,7 +153,7 @@ public class MyFarm {
 
 /**
  * This method determines if it is gameover for the player. The game is over if there are no
- * active growing crops and the player cannot buy a Turnip seed.
+ * active growing crops and the player cannot buy a Turnip seed or if all tiles are withered.
  * 
  * @return This returns a boolean value to determine if it is gameover.
  */
