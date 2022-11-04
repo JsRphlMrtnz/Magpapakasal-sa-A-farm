@@ -9,7 +9,7 @@ public class Tile {
     private int fertilizer;     // The amount of times the tile was fertilized
     private int harvestTime;    // The amount of days until the crop is ready to harvest
     private boolean hasSeed;    // If the tile has a seed planted on it
-    private boolean isWithered;
+    private boolean isWithered; // If the crop is withered
 
     public Tile() {
         reset();

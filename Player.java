@@ -59,7 +59,7 @@ public class Player {
  * 
  * @param seed The seed that that the player wants to plant onto the tile.
  * @param tile The tile that the player is trying to plant a crop on.
- * @return A boolean value whether a crop has been planted.
+ * @return true if a crop has been successfully planted.
  */
     public boolean plant(Seed seed, Tile tile) {
         //  Checks if the tile has a seed, plowed, or if the player dosen't have enough coins.Then it will return false immediately.
@@ -81,7 +81,7 @@ public class Player {
  * 
  * @param tool The tool that the player is using
  * @param tile The tile that the player is trying to plow
- * @return A boolean value whether it was successfully plowed.
+ * @return true if it was successfully plowed.
  */
     public boolean plow(Tools tool, Tile tile) {
         if (tile.getPlowed() == false) {
@@ -101,7 +101,7 @@ public class Player {
  * 
  * @param tool The tool that the player is using to water the tile
  * @param tile The tile that the player is trying to water
- * @return If the tile was successfully watered.
+ * @return true if the tile was successfully watered.
  */
     public boolean water(Tools tool, Tile tile) {
         if (tile.getHasSeed()) {
@@ -122,7 +122,7 @@ public class Player {
  * 
  * @param tool The tool that is being used to fertilize the tile.
  * @param tile Tile object
- * @return A boolean value.
+ * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
         if (this.objectCoins < tool.getCost() || tile.getHasSeed() == false)
@@ -142,7 +142,7 @@ public class Player {
  * 
  * @param tool the tool that the player is using
  * @param tile a Tile object
- * @return The method is returning a boolean value.
+ * @return true if the tile was successfully dug.
  */
     public boolean dig (Tools tool, Tile tile) {
         if (this.objectCoins < tool.getCost())
