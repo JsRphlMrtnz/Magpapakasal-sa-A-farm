@@ -104,7 +104,7 @@ public class Player {
  * @return true if the tile was successfully watered.
  */
     public boolean water(Tools tool, Tile tile) {
-        if (tile.getHasSeed()) {
+        if (tile.getHasSeed() && tile.getIsWithered() == false) {
             tile.updateWater();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
@@ -125,7 +125,7 @@ public class Player {
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
-        if (this.objectCoins < tool.getCost() || tile.getHasSeed() == false)
+        if (this.objectCoins < tool.getCost() || tile.getHasSeed() == false && tile.getIsWithered())
             return false;
 
         tile.updateFert();
@@ -135,9 +135,9 @@ public class Player {
     }
     
 /**
- * This method returns a boolean value whether a tile has been successfully dugged
+ * This method returns a boolean value whether a tile has been successfully dug
  * by having enough obejectCoins. If the tile was dug up, objectCoins of the player 
- * is deducted by the cost of using the certain tool, the player receives a certain amount of xp,
+ * is deducted by the cost of using the tool, the player receives a certain amount of xp,
  * the tile values are set to null, and the method returns a true value. Otherwise it will return a false value.
  * 
  * @param tool the tool that the player is using
