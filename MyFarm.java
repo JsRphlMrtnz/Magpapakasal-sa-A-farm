@@ -148,6 +148,7 @@ public class MyFarm {
     public void endDay() {
         this.day++;
         this.tile.updateTime();
+        this.tile.updateWithered();
         System.out.println("\n\n");
     }
 

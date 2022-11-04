@@ -76,17 +76,22 @@ public class Tile {
     }
 
 /**
- * This method checks if the plant currently on the tile is withered.
+ * This method updates if the plant currently on the tile is withered.
  * A plant is withered if it has not been watered and fertilized enough on the day of harvest
  * or if the day of harvest has passed.
+ * 
+ */
+    public void updateWithered() {
+        this.isWithered = ((this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer()) && this.harvestTime == 0 || this.harvestTime < 0);
+    }
+
+/**
+ * This method gets the value of isWithered and returns it
  * 
  * @return The current withered status of the plant.
  */
     public boolean getIsWithered() {
-        if ((this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer()) && this.harvestTime == 0 || this.harvestTime < 0) {
-            isWithered = true;
-        }
-        return isWithered;
+        return this.isWithered;
 }
 
 /**
