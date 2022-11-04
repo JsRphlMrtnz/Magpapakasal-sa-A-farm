@@ -50,7 +50,7 @@ public class MyFarm {
             if (this.tile.getPlowed()) {
                 if (this.tile.getHasSeed() == false)
                     tileChar = '_';
-                else if (this.tile.isWithered())
+                else if (this.tile.getIsWithered())
                     tileChar = 'W';
                 else {
                     switch (this.tile.getSeed().getName()) {
@@ -75,7 +75,7 @@ public class MyFarm {
 
             switch (option) {
                 case 1: {
-                    System.out.println("1. Plow\n2. Plant\n3. Water\n4. Fertilize\n5. Dig\n6. Harvest\n7. Back");
+                    System.out.println("1. Plow\t\t(Cost : 0)\n2. Plant\t(Cost : 5)\n3. Water\t(Cost : 0)\n4. Fertilize\t(Cost : 10)\n5. Dig\t\t(Cost : 7)\n6. Harvest\n7. Back");
                     int action;
                     do {
                         System.out.print("What would you like to do: ");
@@ -158,19 +158,34 @@ public class MyFarm {
  * @return This returns a boolean value to determine if it is gameover.
  */
     public boolean gameOver() {
-        return (!this.tile.getHasSeed() && this.player.getCoins() < 5);
+        if(this.tile.getSeed() != null)
+            return ((!this.tile.getHasSeed() && this.player.getCoins() < 5) || this.tile.getIsWithered());
+        else 
+            return ((!this.tile.getHasSeed() && this.player.getCoins() < 5));
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter farmer name: ");
-        String name = sc.nextLine();
-        MyFarm farm = new MyFarm(name);
+        MyFarm farm;
+        String name;
+        int option;
 
         // the game will go on as long for the player.
-        while (!farm.gameOver()) {
-            farm.operation(sc);
-        }
+        do{
+            System.out.print("Enter farmer name: ");
+            name = sc.nextLine();
+            farm = new MyFarm(name);
+
+            do{
+                farm.operation(sc);
+            }while (!farm.gameOver());
+
+            System.out.println("[GAME OVER]\n");
+            System.out.print("Do you want to play again? \n[1] Yes\t[2] No\n Input: ");
+            option = sc.nextInt();
+            System.out.println("\n\n\n\n");
+        }while (option != 2);
+
         sc.close();
     }
 }

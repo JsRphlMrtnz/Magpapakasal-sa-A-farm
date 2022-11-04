@@ -166,7 +166,7 @@ public class Player {
      * @return A boolean value whether a tile has been successfully harvested.
      */
     public boolean harvest(Tile tile) {
-        if (tile.getTime() == 0 && tile.getHasSeed()) {
+        if (tile.getTime() == 0 && tile.getHasSeed() && tile.getIsWithered() == false) {
             int productsProduced = new Random().nextInt(tile.getSeed().getMaxProduce() - tile.getSeed().getMinProduce() + 1) + tile.getSeed().getMinProduce();
             int harvestTotal = productsProduced * (tile.getSeed().getSellingPrice() + this.type.getBonusEarning());
             

@@ -9,6 +9,7 @@ public class Tile {
     private int fertilizer;     // The amount of times the tile was fertilized
     private int harvestTime;    // The amount of days until the crop is ready to harvest
     private boolean hasSeed;    // If the tile has a seed planted on it
+    private boolean isWithered;
 
     public Tile() {
         reset();
@@ -25,6 +26,7 @@ public class Tile {
         this.fertilizer = 0;
         this.harvestTime = 0;
         this.hasSeed = false;
+        this.isWithered = false;
     }
 
 /**
@@ -80,11 +82,11 @@ public class Tile {
  * 
  * @return The current withered status of the plant.
  */
-    public boolean isWithered() {
+    public boolean getIsWithered() {
         if ((this.water < this.seed.getMinWater() || this.fertilizer < this.seed.getMinFertilizer()) && this.harvestTime == 0 || this.harvestTime < 0) {
-            return true;
+            isWithered = true;
         }
-        return false;
+        return isWithered;
 }
 
 /**
