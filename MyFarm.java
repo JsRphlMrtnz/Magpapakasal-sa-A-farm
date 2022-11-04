@@ -170,7 +170,7 @@ public class MyFarm {
         String name;
         int option;
 
-        // the game will go on as long for the player.
+        // the game will continue while game over conditions are not met
         do{
             System.out.print("Enter farmer name: ");
             name = sc.nextLine();
