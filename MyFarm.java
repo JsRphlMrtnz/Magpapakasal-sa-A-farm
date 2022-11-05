@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class MyFarm {
     private int day;                     // amount of days that have passed by in the game
-    private Player player;
+    private Player player;               // the player of the game
     private Tile tile;                   // one tile (for MC01)
-    private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
+    private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
     private Seed seed;                   // turnip (for MC01)
     
 
@@ -24,14 +24,13 @@ public class MyFarm {
         this.tool[0] = new Tools(0, 0.5, "Plow");         // instantiates the plow tool
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // instantiates the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // instantiates the fertilizer tool
-        this.tool[3] = new Tools(50, 15, "Pickaxe");      // instantiates the pickaxe tool
         this.tool[4] = new Tools(7, 2, "Shovel");         // instantiates the shovel tool
         this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
     }
 
     /**
-     * This method is to combine all the game mechanics for the player to be able to
-     * play the game. 
+     * This method displays important information about the player and tile and
+     * asks the player what they want to do.
      * 
      * @param sc Scanner used to scan the user input.
      */
@@ -116,7 +115,7 @@ public class MyFarm {
                             break;
                         }
                         case 5: {
-                            if (this.player.dig(this.tool[4], this.tile)) {
+                            if (this.player.dig(this.tool[3], this.tile)) {
                                 System.out.println("You dug the tile out!");
                             } else {
                                 System.out.println("Digging failed!");
