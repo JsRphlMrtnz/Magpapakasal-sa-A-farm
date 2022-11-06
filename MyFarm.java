@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 /**
  * 
  * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
@@ -6,9 +9,6 @@
  * @author Jose Raphael E. Martinez
  * @version 1.0
  */
-
-import java.util.Scanner;
-
 public class MyFarm {
     private int day;                     // amount of days that have passed by in the game
     private Player player;               // the player of the game
