@@ -158,10 +158,10 @@ public class MyFarm {
  * @return This returns a boolean value to determine if it is gameover.
  */
     public boolean gameOver() {
-        if(this.tile.getSeed() != null)
-            return ((!this.tile.getHasSeed() && this.player.getCoins() < 5) || this.tile.getIsWithered());
+        if(this.tile.getHasSeed())
+            return (this.tile.getIsWithered());
         else 
-            return ((!this.tile.getHasSeed() && this.player.getCoins() < 5));
+            return (this.player.getCoins() < 5);
     }
 
     public static void main(String[] args) {
