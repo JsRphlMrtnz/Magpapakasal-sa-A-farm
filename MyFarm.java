@@ -161,7 +161,7 @@ public class MyFarm {
         if(this.tile.getHasSeed())
             return (this.tile.getIsWithered());
         else 
-            return ((!this.tile.getHasSeed() && this.player.getCoins() < 5));
+            return (this.player.getCoins() < 5);
     }
 
     public static void main(String[] args) {
