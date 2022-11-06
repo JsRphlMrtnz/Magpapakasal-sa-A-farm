@@ -111,13 +111,13 @@ public class Player {
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
-        if (this.objectCoins < tool.getCost() || tile.getHasSeed() == false && tile.getIsWithered())
-            return false;
-
-        tile.updateFert();
-        xp += tool.getXp();
-        this.objectCoins -= tool.getCost();
-        return true;
+        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
+            tile.updateFert();
+            xp += tool.getXp();
+            this.objectCoins -= tool.getCost();
+            return true;
+        }
+        return false;
     }
     
 /**
