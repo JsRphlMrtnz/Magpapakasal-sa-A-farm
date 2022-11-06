@@ -4,7 +4,7 @@
  * that are going to be created are turnip, 
  * carrot, potato, rose, sunflower, mango, and apple.
  */
-public  class Seed{
+public class Seed{
    private int cost;          // cost of the seed 
    private int harvestTime;   // harvest time of the seed 
    private int minWater;      // minimum water needed to grow the seed
@@ -18,6 +18,21 @@ public  class Seed{
    private String name;       // name of the seed
    private String type;       // type of the seed
 
+   /**
+    * This constructor assigns the values of each attribute.
+    * @param cost cost of the seed
+    * @param harvestTime harvest time of the seed
+    * @param minWater minimum water needed to grow the seed
+    * @param maxWater bonus water limit
+    * @param minFertilizer minimum fertilizer needed to grow the seed
+    * @param maxFertilizer bonus fertilizer limit
+    * @param sellingPrice selling price of the harvest
+    * @param minProduce minimum produce per harvest
+    * @param maxProduce maximum produce per harvest
+    * @param xp xp the crop gives when harvested
+    * @param name name of the seed
+    * @param type type of the seed
+    */
    public Seed(int cost, int harvestTime, int minWater,  int maxWater, int minFertilizer, int maxFertilizer, int sellingPrice, int minProduce, int maxProduce, double xp, String name, String type) {
       this.cost = cost;
       this.harvestTime = harvestTime;

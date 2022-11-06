@@ -1,16 +1,20 @@
+import java.util.Random;
+
 /**
  * This class contains the necessary attributes of the player.
  * It contains the player's name, money, and the player's inventory.
  * It also contains the necessary actions for each tool as well as harvesting.
  */
-import java.util.Random;
-
 public class Player {
     private double xp;          // The player's experience points
     private double objectCoins; // The player's money
     private FarmerType type;    // The player's farmer type
     private String name;        // The player's name
 
+    /**
+     * This constructor assigns the name and initializes each attribute.
+     * @param name The player's name
+     */
     public Player(String name) {
         this.name = name;
         this.xp = 0;
