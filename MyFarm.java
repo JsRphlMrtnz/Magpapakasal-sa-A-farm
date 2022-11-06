@@ -24,7 +24,7 @@ public class MyFarm {
         this.tool[0] = new Tools(0, 0.5, "Plow");         // instantiates the plow tool
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // instantiates the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // instantiates the fertilizer tool
-        this.tool[4] = new Tools(7, 2, "Shovel");         // instantiates the shovel tool
+        this.tool[3] = new Tools(7, 2, "Shovel");         // instantiates the shovel tool
         this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
     }
 
