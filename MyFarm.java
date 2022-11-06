@@ -178,7 +178,7 @@ public class MyFarm {
         // the game will continue while game over conditions are not met
         do{
             System.out.print("Enter farmer name: ");
-            name = sc.nextLine();
+            name = sc.next();
             farm = new MyFarm(name);
 
             do{
