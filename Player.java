@@ -35,15 +35,6 @@ public class Player {
     }
 
 /**
- * This method updates the coins of the player by adding a certain amount of coins when the player harvests a crop.
- * 
- * @param objectCoins The amount of coins that will be given to the player.
- */
-    public void updateCoins(int objectCoins) {
-        this.objectCoins += objectCoins;
-    }
-
-/**
  * This method updates the xp of the player by adding a given amount of xp when a player harvests a crop or uses a tool.
  * 
  * @param xp The amount of xp that will be given to the player.
