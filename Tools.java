@@ -10,6 +10,12 @@ public class Tools {
    private double xp;   // The amount of xp the player receives when using the tool
    private String name; // The name of the tool
 
+   /**
+    * This constructor assigns the cost, xp, and name of the tool.
+    * @param cost The cost of using the tool
+    * @param xp The amount of xp the player receives when using the tool
+    * @param name The name of the tool
+    */
    public Tools(int cost, double xp, String name) {
       this.cost = cost;
       this.xp = xp;

@@ -1,16 +1,20 @@
+import java.util.Random;
+
 /**
  * This class contains the necessary attributes of the player.
  * It contains the player's name, money, and the player's inventory.
  * It also contains the necessary actions for each tool as well as harvesting.
  */
-import java.util.Random;
-
 public class Player {
     private double xp;          // The player's experience points
     private double objectCoins; // The player's money
     private FarmerType type;    // The player's farmer type
     private String name;        // The player's name
 
+    /**
+     * This constructor assigns the name and initializes each attribute.
+     * @param name The player's name
+     */
     public Player(String name) {
         this.name = name;
         this.xp = 0;
@@ -107,13 +111,13 @@ public class Player {
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
-        if (this.objectCoins < tool.getCost() || tile.getHasSeed() == false && tile.getIsWithered())
-            return false;
-
-        tile.updateFert();
-        xp += tool.getXp();
-        this.objectCoins -= tool.getCost();
-        return true;
+        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
+            tile.updateFert();
+            xp += tool.getXp();
+            this.objectCoins -= tool.getCost();
+            return true;
+        }
+        return false;
     }
     
 /**

@@ -13,6 +13,16 @@ public class FarmerType {
    private int minLevel;             // minimum level to register
    private String type;              // type of farmer (farmer, registered farmer, distinguished farmer, legendary farmer)
 
+   /**
+    * This constructor assigns the values of each attribute.
+    * @param bonusEarning The bonus earning of the farmer per harvest
+    * @param costReduction The cost reduction of the farmer per seed
+    * @param bonusWaterLimit The bonus water limit of the farmer per seed
+    * @param bonusFertilizerLimit The bonus fertilizer limit of the farmer per seed
+    * @param regFee registration fee of the type of farmer
+    * @param minLevel minimum level to register
+    * @param type type of farmer (farmer, registered farmer, distinguished farmer, legendary farmer)
+    */
    public FarmerType(int bonusEarning, int costReduction, int bonusWaterLimit, int bonusFertilizerLimit, int regFee, int minLevel, String type) {
       this.bonusEarning = bonusEarning;
       this.costReduction = costReduction;

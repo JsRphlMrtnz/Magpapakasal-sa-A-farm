@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 /**
  * 
  * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
@@ -6,25 +9,26 @@
  * @author Jose Raphael E. Martinez
  * @version 1.0
  */
-
-import java.util.Scanner;
-
 public class MyFarm {
     private int day;                     // amount of days that have passed by in the game
     private Player player;               // the player of the game
     private Tile tile;                   // one tile (for MC01)
-    private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
+    private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel
     private Seed seed;                   // turnip (for MC01)
     
 
+    /**
+     * This constructor initializes all the attributes of the MyFarm class.
+     * @param name is the name of the farmer to be used on the Player class constructor.
+     */
     public MyFarm(String name) {
         this.player = new Player(name);
         this.tile = new Tile(); 
         this.day = 1;
-        this.tool[0] = new Tools(0, 0.5, "Plow");         // instantiates the plow tool
-        this.tool[1] = new Tools(0, 0.5, "Watering Can"); // instantiates the watering can tool
-        this.tool[2] = new Tools(10, 4, "Fertilizer");    // instantiates the fertilizer tool
-        this.tool[3] = new Tools(7, 2, "Shovel");         // instantiates the shovel tool
+        this.tool[0] = new Tools(0, 0.5, "Plow");         // initializes the plow tool
+        this.tool[1] = new Tools(0, 0.5, "Watering Can"); // initializes the watering can tool
+        this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
+        this.tool[3] = new Tools(7, 2, "Shovel");         // initializes the shovel tool
         this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
     }
 
@@ -147,7 +151,8 @@ public class MyFarm {
     public void endDay() {
         this.day++;
         this.tile.updateTime();
-        this.tile.updateWithered();
+        if (this.tile.getHasSeed())
+            this.tile.updateWithered();
         System.out.println("\n\n");
     }
 
@@ -173,7 +178,7 @@ public class MyFarm {
         // the game will continue while game over conditions are not met
         do{
             System.out.print("Enter farmer name: ");
-            name = sc.nextLine();
+            name = sc.next();
             farm = new MyFarm(name);
 
             do{

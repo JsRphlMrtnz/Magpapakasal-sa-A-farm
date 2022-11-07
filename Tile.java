@@ -11,6 +11,9 @@ public class Tile {
     private boolean hasSeed;    // If the tile has a seed planted on it
     private boolean isWithered; // If the crop is withered
 
+    /**
+     * This constructor initializes all the attributes to empty values.
+     */
     public Tile() {
         reset();
     }
