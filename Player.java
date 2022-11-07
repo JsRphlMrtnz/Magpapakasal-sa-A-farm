@@ -169,7 +169,7 @@ public class Player {
             double total = harvestTotal + waterBonus + fertBonus;
             this.objectCoins += total;
 
-            double xpGain = tile.getSeed().getXp() * productsProduced;
+            double xpGain = tile.getSeed().getXp();
             this.xp += xpGain;
 
             System.out.println("Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.");
