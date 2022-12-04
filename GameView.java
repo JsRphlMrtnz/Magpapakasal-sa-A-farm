@@ -19,7 +19,7 @@ public class GameView implements ActionListener {
     private JPanel playerArea;//PlayerArea = includes player info(name,level,objectCoins,farmerPic) 
     private JPanel playerInfo;
     private JPanel toolArea;
-    private JLabel farmerPic, name, level, objectCoins;
+    private JLabel  name, level, objectCoins, farmerPic;
     private JButton farmerType;
     
     /*tools on top */
@@ -48,14 +48,16 @@ public class GameView implements ActionListener {
     */
 
       //all about the player
-      this.farmerPic = new JLabel();
-      this.farmerPic.setBorder(BorderFactory.createLineBorder(Color.black));
-      
+      JPanel farmerPanel=new JPanel(); 
+  
+      farmerPanel.setBounds(0,0,50,100);
+      JLabel farmerPic=new JLabel(new ImageIcon("farmer.png"));
       //this.farmerPic.setIcon(new ImageIcon("farmer.png"));
-      this.farmerPic.setMinimumSize(new Dimension(50, 100));
-      this.farmerPic.setMaximumSize(new Dimension(50, 100));
+      farmerPanel.add(farmerPic);
+
+
       this.name = new JLabel(name);
-      this.level =  new JLabel("Level 1");
+      this.level =  new JLabel("Level : 1");
       this.farmerType = new JButton("Farmer");
       this.objectCoins = new JLabel("ObjectCoins: 0");
 
@@ -72,7 +74,7 @@ public class GameView implements ActionListener {
       this.playerArea = new JPanel(new GridLayout(1,2, 0, 0));
       this.playerArea.setMaximumSize(new Dimension(150, 100));
       this.playerArea.setMinimumSize(new Dimension(150, 100));
-      this.playerArea.add(this.farmerPic);
+      this.playerArea.add(farmerPanel);
       this.playerArea.add(this.playerInfo);
 
 
