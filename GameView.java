@@ -1,12 +1,15 @@
 import java.awt.*;
 import javax.swing.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.concurrent.Flow;
-import java.awt.Dimension;
 
 
-public class GameView {
+public class GameView implements ActionListener {
     private JFrame mainFrame;
 
     //top
@@ -31,8 +34,7 @@ public class GameView {
     //middle
     private JPanel tileArea;
     private JButton[] tiles;
-    private JPopupMenu popupMenu[];
-    private JMenuItem tileStatus[];
+    private JPopupMenu popupMenu[]; //popup menu for each tile
     
     // bottom
     private JPanel bottomArea;
@@ -41,17 +43,15 @@ public class GameView {
 
     
     public GameView(String name){
-      /*
+    /*
       --------------TOP AREA----------------
-      */
+    */
 
       //all about the player
       this.farmerPic = new JLabel();
       this.farmerPic.setBorder(BorderFactory.createLineBorder(Color.black));
-
-      this.farmerPic.setIcon(new ImageIcon("farmer.png"));
-
-
+      
+      //this.farmerPic.setIcon(new ImageIcon("farmer.png"));
       this.farmerPic.setMinimumSize(new Dimension(50, 100));
       this.farmerPic.setMaximumSize(new Dimension(50, 100));
       this.name = new JLabel(name);
@@ -69,7 +69,7 @@ public class GameView {
       this.playerInfo.add(this.farmerType);
 
       // hold player info and picture
-      this.playerArea = new JPanel(new GridLayout(0,2, 10, 10));
+      this.playerArea = new JPanel(new GridLayout(1,2, 0, 0));
       this.playerArea.setMaximumSize(new Dimension(150, 100));
       this.playerArea.setMinimumSize(new Dimension(150, 100));
       this.playerArea.add(this.farmerPic);
@@ -129,6 +129,7 @@ public class GameView {
       for(int j = 0; j < this.seeds.length; j++){
         this.seeds[j].setMinimumSize(new Dimension(300,125));
         this.seeds[j].setMaximumSize(new Dimension(300,125));
+        
         this.seedArea.add(seeds[j]);
       }
 
@@ -156,6 +157,11 @@ public class GameView {
       this.popupMenu = new JPopupMenu[50];
       for(int i = 0; i < this.popupMenu.length; i++){
         this.popupMenu[i] = new JPopupMenu();
+        this.popupMenu[i].add(new JLabel("Plowed : No"));
+        this.popupMenu[i].add(new JLabel("Rock : None"));
+        this.popupMenu[i].add(new JLabel("Watered : 0"));
+        this.popupMenu[i].add(new JLabel("Fertilized : 0"));
+        this.popupMenu[i].add(new JLabel("Harvestable : No"));
       }
 
       /*
@@ -171,7 +177,7 @@ public class GameView {
 
       this.mainFrame = new JFrame("Magpapakasal-sa-A-farm");
       this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.mainFrame.setLayout(new BorderLayout(10, 10));
+      this.mainFrame.setLayout(new BorderLayout(30, 30));
       this.mainFrame.setSize(1500,1000);
       this.mainFrame.setResizable(false);
       this.mainFrame.setVisible(true);
@@ -183,6 +189,8 @@ public class GameView {
 
       this.mainFrame.setVisible(true);
 
+
+      /// add onto controller
       farmerType.addActionListener(new ActionListener()
       {
         public void actionPerformed(ActionEvent arg0)
@@ -191,7 +199,19 @@ public class GameView {
           frame.setVisible(true);
         }
       });
-    }
+
+      for(int i = 0; i < this.tiles.length; i++){
+        addActionListeneronTiles(tiles[i], i);
+      }
+
+
+  }
+
+
+
+
+    
+
 
 
 
@@ -275,6 +295,76 @@ public class GameView {
   public static void main (String args[]){
     GameView farm = new GameView("Farmer");
   }
+
+
+  //add onto controller
+  public void addActionListeneronTiles(JButton tiles, int number)
+  {
+      tiles.addMouseListener((MouseListener) new MouseListener()
+      {
+
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mousePressed(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          if(SwingUtilities.isRightMouseButton(e)){
+            popupMenu[number].show(tiles, e.getX(), e.getY());
+          }
+        }
+
+        @Override
+        public void mouseReleased(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mouseExited(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+    
+  }
+  
+
+
+
+
+
+
+
 
 
 
