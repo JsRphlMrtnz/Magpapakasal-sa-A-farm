@@ -11,8 +11,9 @@ public class BuyView extends JFrame{
 
       // shows the type of farmer types to buy 
       JPanel[] farmerTypes = new JPanel[3];
+      
       for (int i = 0; i < farmerTypes.length; i++){
-        farmerTypes[i] = new JPanel(new GridLayout(6,1));
+        farmerTypes[i] = new JPanel(new GridLayout(6,1, 10, 0));
       }
       
       farmerTypes[0].add(new JLabel("Registered Farmer = 200 ObjectCoins"));
@@ -39,13 +40,14 @@ public class BuyView extends JFrame{
 
 
       // holds all the farmer type panels only
-      JPanel farmerTypePanels = new JPanel(new GridLayout(1,3));
+      JPanel farmerTypePanels = new JPanel(new GridLayout(1,3, 100 ,50));
       for(int i = 0; i < farmerTypes.length; i++){
         farmerTypePanels.add(farmerTypes[i]);
       }
 
       // holds all the buy buttons
       JPanel buyPanel = new JPanel(new GridLayout(1,3));
+
       this.buyButtons = new JButton[3];
 
       for (int i = 0; i < buyButtons.length; i++){
@@ -60,7 +62,7 @@ public class BuyView extends JFrame{
      this.mainFrame = new JFrame("Buy Farmer Types");
      this.mainFrame.setLayout(new BorderLayout(10, 10));
      this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-     this.mainFrame.setSize(1500,1000);
+     this.mainFrame.setSize(900,500);
      this.mainFrame.setResizable(false);
      this.mainFrame.setVisible(true);
 

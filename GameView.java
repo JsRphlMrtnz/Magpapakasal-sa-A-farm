@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.Flow;
 import java.awt.Dimension;
 
-import java.util.Arrays;
 
 public class GameView {
     private JFrame mainFrame;
@@ -35,11 +34,16 @@ public class GameView {
     private JPopupMenu popupMenu[];
     private JMenuItem tileStatus[];
     
-    
+    // bottom
+    private JPanel bottomArea;
+    private JButton advanceDay;
 
 
     
     public GameView(String name){
+      /*
+      --------------TOP AREA----------------
+      */
 
       //all about the player
       this.farmerPic = new JLabel();
@@ -65,7 +69,7 @@ public class GameView {
       this.playerInfo.add(this.farmerType);
 
       // hold player info and picture
-      this.playerArea = new JPanel(new GridLayout(0,2));
+      this.playerArea = new JPanel(new GridLayout(0,2, 10, 10));
       this.playerArea.setMaximumSize(new Dimension(150, 100));
       this.playerArea.setMinimumSize(new Dimension(150, 100));
       this.playerArea.add(this.farmerPic);
@@ -92,7 +96,7 @@ public class GameView {
       }
 
       //topArea holds tools and player info
-      this.topArea = new JPanel(new BorderLayout());
+      this.topArea = new JPanel(new BorderLayout(10, 10));
       this.topArea.setMaximumSize(new Dimension(1300,100));
       this.topArea.setMinimumSize(new Dimension(1300,50));
       this.topArea.setBounds(0,0, 1300,100);
@@ -100,7 +104,9 @@ public class GameView {
       this.topArea.add(this.playerArea, BorderLayout.WEST);
       this.topArea.add(this.toolArea, BorderLayout.CENTER);
       
-
+      /*
+        --------------RIGHT AREA----------------
+      */
       //all about the seeds
       this.seeds = new JButton[8];
       this.seeds[0] = new JButton("Turnip");
@@ -117,15 +123,19 @@ public class GameView {
       this.seedArea = new JPanel();
       this.seedArea.setBorder(BorderFactory.createLineBorder(Color.black));
       this.seedArea.setLayout(new BoxLayout(this.seedArea, BoxLayout.Y_AXIS));
-      this.seedArea.setBounds(0,0, 300, 990);
-      this.seedArea.setMinimumSize(new Dimension(300,990));
-      this.seedArea.setMaximumSize(new Dimension(300,990));
+      this.seedArea.setMinimumSize(new Dimension(300,1000));
+      this.seedArea.setMaximumSize(new Dimension(300,1000));
 
       for(int j = 0; j < this.seeds.length; j++){
         this.seeds[j].setMinimumSize(new Dimension(300,125));
         this.seeds[j].setMaximumSize(new Dimension(300,125));
         this.seedArea.add(seeds[j]);
       }
+
+
+      /*
+        --------------MIDDLE AREA----------------
+      */
 
       // all about the tiles
       this.tiles = new JButton[50];
@@ -136,7 +146,7 @@ public class GameView {
 
 
       //holds the tiles
-      this.tileArea = new JPanel(new GridLayout(10,5, 10, 10));
+      this.tileArea = new JPanel(new GridLayout(10,5, 60, 10));
 
       for(int k = 0; k < this.tiles.length; k++){
         this.tileArea.add(this.tiles[k]);
@@ -148,7 +158,12 @@ public class GameView {
         this.popupMenu[i] = new JPopupMenu();
       }
 
-
+      /*
+        --------------BOTTOM AREA----------------
+      */
+      this.bottomArea = new JPanel(new BorderLayout());
+      this.advanceDay = new JButton("Advance Day");
+      this.bottomArea.add(this.advanceDay, BorderLayout.EAST);
 
       
 
@@ -164,6 +179,7 @@ public class GameView {
       this.mainFrame.add(this.topArea, BorderLayout.NORTH);
       this.mainFrame.add(this.tileArea, BorderLayout.CENTER);
       this.mainFrame.add(this.seedArea, BorderLayout.EAST);
+      this.mainFrame.add(this.bottomArea, BorderLayout.SOUTH);
 
       this.mainFrame.setVisible(true);
 
@@ -171,10 +187,8 @@ public class GameView {
       {
         public void actionPerformed(ActionEvent arg0)
         {
-        //call the object of NewWindow and set visible true
           BuyView frame = new BuyView();
           frame.setVisible(true);
-          //set default close operation
         }
       });
     }
