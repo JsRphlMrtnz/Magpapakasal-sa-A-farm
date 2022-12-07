@@ -18,7 +18,7 @@ public class MyFarm {
     private Player player;               // the player of the game
     private Tile[] tiles = new Tile[50]; // 50 tiles
     private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel
-    private Seed seed;                   // turnip (for MC01)
+    private Seed[] seeds = new Seed[8];  // Turnip, Carrot, Potato, Rose, Tulips, Sunflower, Mango, Apple
     private GameView farmView;
 
     /**
@@ -36,12 +36,12 @@ public class MyFarm {
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // initializes the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
         this.tool[3] = new Tools(7, 2, "Shovel");         // initializes the shovel tool
-        this.seed = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
+        this.seeds[0] = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
         
         farmView = new GameView(name);
         addEventListeners(farmView);
     }
-
+    // region unimplemented methods
     // /**
     //  * This method displays important information about the player and tile and
     //  * asks the player what they want to do.
@@ -178,7 +178,7 @@ public class MyFarm {
 //         else 
 //             return (this.player.getCoins() < 5);
 //     }
-
+// endregion
 
     public void addEventListeners(GameView farmView) {
         farmView.setAddTileBtnListener(new ActionListener() {
@@ -197,11 +197,53 @@ public class MyFarm {
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
                 }
-                    
             }
         });
 
-        // farmView.set
+        farmView.setAddWateringCanBtnListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (player.water(tool[01], tiles[farmView.getCurrTileIndex()])) {
+                    farmView.setCurrTileIndex(-1);
+                    farmView.toggleButtons();
+                }
+            }
+        });
+
+        farmView.setAddFertilizerBtnListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (player.fertilize(tool[2], tiles[farmView.getCurrTileIndex()])) {
+                    farmView.setCurrTileIndex(-1);
+                    farmView.toggleButtons();
+                }
+            }
+        });
+
+        farmView.setAddShovelBtnListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (player.dig(tool[3], tiles[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                    farmView.setCurrTileIndex(-1);
+                    farmView.toggleButtons();
+                }
+            }
+        });
+
+        for (int i = 0; i < 1; i++) {
+            farmView.setAddSeedBtnListener(i, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    farmView.setCurrSeedIndex(farmView.currSeedIndex((JButton) e.getSource()));
+                    if (player.plant(seeds[farmView.getCurrSeedIndex()], tiles[farmView.getCurrTileIndex()])) {
+                        farmView.setButtonText(farmView.getCurrTileIndex(), seeds[farmView.getCurrSeedIndex()].getName());
+                        farmView.setCurrTileIndex(-1);
+                        farmView.toggleButtons();
+                    }
+                }
+            });
+        }
     }
 
 

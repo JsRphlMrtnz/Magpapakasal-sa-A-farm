@@ -40,6 +40,7 @@ public class GameView {
     private JButton advanceDay;
 
     private int currIndex = -1;
+    private int currSeedIndex = -1;
     
     public GameView(String name){
     /*
@@ -233,10 +234,8 @@ public class GameView {
 
 
     //method for seeds btns
-    public void setAddSeedBtnListener(ActionListener listener){
-      for(int i = 0; i < this.seeds.length; i++){
-        this.seeds[i].addActionListener(listener);
-      }
+    public void setAddSeedBtnListener(int index, ActionListener listener){
+        this.seeds[index].addActionListener(listener);
     }
 
 
@@ -296,6 +295,25 @@ public class GameView {
     }
     
     return -1;
+  }
+
+  public int currSeedIndex(JButton b) {
+    
+    for (int i = 0; i < this.seeds.length; i++) {
+      if (b == this.seeds[i]) {
+        return i;
+      }
+    }
+    
+    return -1;
+  }
+
+  public int getCurrSeedIndex() {
+    return this.currSeedIndex;
+  }
+
+  public int setCurrSeedIndex(int index) {
+    return this.currSeedIndex = index;
   }
 
   public int getCurrTileIndex() {
