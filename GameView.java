@@ -1,15 +1,14 @@
 import java.awt.*;
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.concurrent.Flow;
 
 
-public class GameView implements ActionListener {
+public class GameView {
     private JFrame mainFrame;
 
     //top
@@ -40,7 +39,7 @@ public class GameView implements ActionListener {
     private JPanel bottomArea;
     private JButton advanceDay;
 
-
+    private int currIndex = -1;
     
     public GameView(String name){
     /*
@@ -106,9 +105,7 @@ public class GameView implements ActionListener {
       this.topArea.add(this.playerArea, BorderLayout.WEST);
       this.topArea.add(this.toolArea, BorderLayout.CENTER);
       
-      /*
-        --------------RIGHT AREA----------------
-      */
+      //region  --------------RIGHT AREA----------------
       //all about the seeds
       this.seeds = new JButton[8];
       this.seeds[0] = new JButton("Turnip");
@@ -134,7 +131,7 @@ public class GameView implements ActionListener {
         
         this.seedArea.add(seeds[j]);
       }
-
+      //endregion
 
       /*
         --------------MIDDLE AREA----------------
@@ -146,7 +143,7 @@ public class GameView implements ActionListener {
       for(int l = 0; l < this.tiles.length; l++){
         this.tiles[l] = new JButton("tile");
       }
-
+      // setAddTileBtnListener();
 
       //holds the tiles
       this.tileArea = new JPanel(new GridLayout(10,5, 60, 10));
@@ -177,7 +174,7 @@ public class GameView implements ActionListener {
 
       
 
-      this.mainFrame = new JFrame("Magpapakasal-sa-A-farm");
+      this.mainFrame = new JFrame("Magpapakasal sa A-farm");
       this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       this.mainFrame.setLayout(new BorderLayout(30, 30));
       this.mainFrame.setSize(1500,1000);
@@ -206,7 +203,7 @@ public class GameView implements ActionListener {
         addActionListeneronTiles(tiles[i], i);
       }
 
-
+      toggleButtons();
   }
 
 
@@ -290,85 +287,85 @@ public class GameView implements ActionListener {
 
 
 
-
-
-
-  
-  public static void main (String args[]){
-    GameView farm = new GameView("Farmer");
+  public int currTileIndex(JButton b) {
+    
+    for (int i = 0; i < this.tiles.length; i++) {
+      if (b == this.tiles[i] && currIndex != i) {
+        return i;
+      }
+    }
+    
+    return -1;
   }
 
+  public int getCurrTileIndex() {
+    return this.currIndex;
+  }
+
+  public void setCurrTileIndex(int index) {
+    this.currIndex = index;
+  }
+
+  public void toggleButtons() {
+    
+    if (this.currIndex == -1) {
+      for (JButton b : this.seeds) {
+        b.setEnabled(false);
+      }
+      for (JButton b : this.tools) {
+        b.setEnabled(false);
+      }
+    }
+    else {
+      for (JButton b : this.seeds) {
+        b.setEnabled(true);
+      }
+      for (JButton b : this.tools) {
+        b.setEnabled(true);
+      }
+    }
+  }
+  
+  public void setButtonText(int index, String text) {
+    this.tiles[index].setText(text);
+  }
 
   //add onto controller
-  public void addActionListeneronTiles(JButton tiles, int number)
+  public void addActionListeneronTiles(JButton tile, int number)
   {
-      tiles.addMouseListener((MouseListener) new MouseListener()
+      tile.addMouseListener((MouseListener) new MouseListener()
       {
-
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
         @Override
         public void mousePressed(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
           if(SwingUtilities.isRightMouseButton(e)){
-            popupMenu[number].show(tiles, e.getX(), e.getY());
+            popupMenu[number].show(tile, e.getX(), e.getY());
           }
         }
 
         @Override
-        public void mouseReleased(java.awt.event.MouseEvent e) {
+        public void mouseClicked(MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
 
         @Override
-        public void mouseEntered(java.awt.event.MouseEvent e) {
+        public void mouseReleased(MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
 
         @Override
-        public void mouseExited(java.awt.event.MouseEvent e) {
+        public void mouseEntered(MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
       });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    
-  }
-  
-
-
-
-
-
-
-
-
-
-
 }
 
