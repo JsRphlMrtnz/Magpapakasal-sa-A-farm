@@ -89,9 +89,9 @@ public class GameView extends JFrame implements ActionListener {
       JLabel objectCoinsLabel = new JLabel("Object Coins : ");
       this.objectCoins = new JLabel("0");
       JLabel levelLabel =  new JLabel("Level : ");
-      this.level =  new JLabel("1");
+      this.level = new JLabel("1");
       JLabel expLabel = new JLabel("Exp : ");
-      this.exp = new JLabel("0.0");
+      this.exp = new JLabel("0");
       JLabel farmerTypeLabel = new JLabel("Farmer Type : ");
       this.farmerType = new JButton("Farmer");
 
@@ -265,14 +265,6 @@ public class GameView extends JFrame implements ActionListener {
 
       //popup menu
       this.popupMenu = new JPopupMenu();
-      // for(int i = 0; i < this.popupMenu.length; i++){
-      //   this.popupMenu[i] = new JPopupMenu();
-      //   this.popupMenu[i].add(new JLabel("Plowed : No"));
-      //   this.popupMenu[i].add(new JLabel("Rock : None"));
-      //   this.popupMenu[i].add(new JLabel("Watered : 0"));
-      //   this.popupMenu[i].add(new JLabel("Fertilized : 0"));
-      //   this.popupMenu[i].add(new JLabel("Harvestable : No"));
-      // }
 
       /*
         --------------BOTTOM AREA----------------
@@ -380,21 +372,6 @@ public class GameView extends JFrame implements ActionListener {
 
   }
 
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
     //methods for buttons
     public int currTileIndex(JButton b) {
     
@@ -474,7 +451,22 @@ public class GameView extends JFrame implements ActionListener {
       this.popupMenu = popupMenu;
       this.popupMenu.show(tiles[i], x, y);
     }
-    // public void set
+    
+    public void setObjectCoins(String coins){
+      this.objectCoins.setText(coins);
+    }
+
+    public void setLevel(String level){
+      this.level.setText(level);
+    }
+
+    public void setFarmerType(String farmerType){
+      this.farmerType.setText(farmerType);
+    }
+
+    public void setExp(String exp){
+      this.exp.setText(exp);
+    }
 
     //method for tiles btns
     public void setAddTileBtnListener(ActionListener listener){
@@ -528,9 +520,7 @@ public class GameView extends JFrame implements ActionListener {
       this.farmerType.addActionListener(listener);
     }
     
-    public void setFarmerType(String farmerType){
-      this.farmerType.setText(farmerType);
-    }
+    
 
 
 

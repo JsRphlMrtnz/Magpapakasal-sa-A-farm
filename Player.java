@@ -167,6 +167,8 @@ public class Player {
             double fertBonus = harvestTotal * 0.5 * (fertCount - 1);
             
             double total = harvestTotal + waterBonus + fertBonus;
+            if (tile.getSeed().getType() == "Flower")
+                total *= 1.1;
             this.objectCoins += total;
 
             double xpGain = tile.getSeed().getXp() * productsProduced;
@@ -214,5 +216,14 @@ public class Player {
    */
     public String getType() {
         return this.type.getType();
+    }
+
+   /**
+    * This method returns the amount of xp that the player has.
+    *
+    * @return current xp of player
+    */
+    public double getXp() {
+        return this.xp;
     }
 }

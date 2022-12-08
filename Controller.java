@@ -8,7 +8,19 @@ import java.awt.event.MouseListener;
 public class Controller {
     MyFarm myFarm;
    public Controller(){
-        myFarm = new MyFarm("temp");
+    myFarm = new MyFarm("temp");
+   }
+
+   private void initializeView(GameView farmView) {
+    addEventListeners(farmView);
+    updateFarmerLabels(farmView);
+   }
+
+   private void updateFarmerLabels(GameView farmView) {
+    farmView.setObjectCoins(String.valueOf(myFarm.getPlayer().getCoins()));
+    farmView.setLevel(String.valueOf(myFarm.getPlayer().getLevel()));
+    farmView.setExp(String.valueOf(myFarm.getPlayer().getXp()));
+    farmView.setFarmerType(String.valueOf(myFarm.getPlayer().getType()));
    }
 
    private void addEventListeners(GameView farmView) {
@@ -27,6 +39,7 @@ public class Controller {
                   farmView.setButtonText(farmView.getCurrTileIndex(), "Plowed");
                   farmView.setCurrTileIndex(-1);
                   farmView.toggleButtons();
+                  updateFarmerLabels(farmView);
               }
           }
       });
@@ -37,6 +50,7 @@ public class Controller {
               if (myFarm.getPlayer().water(myFarm.getTool()[01], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                   farmView.setCurrTileIndex(-1);
                   farmView.toggleButtons();
+                  updateFarmerLabels(farmView);
               }
           }
       });
@@ -47,6 +61,7 @@ public class Controller {
               if (myFarm.getPlayer().fertilize(myFarm.getTool()[2], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                   farmView.setCurrTileIndex(-1);
                   farmView.toggleButtons();
+                  updateFarmerLabels(farmView);
               }
           }
       });
@@ -58,6 +73,7 @@ public class Controller {
                   farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
                   farmView.setCurrTileIndex(-1);
                   farmView.toggleButtons();
+                  updateFarmerLabels(farmView);
               }
           }
       });
@@ -71,6 +87,7 @@ public class Controller {
                       farmView.setButtonText(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
                       farmView.setCurrTileIndex(-1);
                       farmView.toggleButtons();
+                      updateFarmerLabels(farmView);
                   }
               }
           });
@@ -123,7 +140,7 @@ public class Controller {
 
   private void run() {
       GameView view = new GameView();
-      addEventListeners(view);
+      initializeView(view);
   }
    public static void main(String[] args){
         Controller controller = new Controller();
