@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class Controller {
     MyFarm myFarm;
@@ -75,6 +76,48 @@ public class Controller {
           });
       }
 
+      for (int i = 0; i < myFarm.getTiles().length; i++) {
+          farmView.addActionListeneronTiles(i, new MouseListener()
+          {
+    
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+              // TODO Auto-generated method stub
+              
+            }
+    
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+              // TODO Auto-generated method stub
+              if(SwingUtilities.isRightMouseButton(e)){
+                JPopupMenu popup = new JPopupMenu();
+                popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getPlowed()));
+                popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getWater()));
+                popup.add(new JLabel("Times Fertilized: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getFert()));
+                popup.add(new JLabel("Days until harvest: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getTime()));
+                farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource()), e.getX(), e.getY());
+              }
+            }
+    
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+              // TODO Auto-generated method stub
+              
+            }
+    
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+              // TODO Auto-generated method stub
+              
+            }
+    
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+              // TODO Auto-generated method stub
+              
+            }
+          });
+      }
       farmView.toggleButtons();
   }
 

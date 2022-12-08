@@ -41,7 +41,7 @@ public class GameView extends JFrame implements ActionListener {
     //middle
     private JPanel tileArea;
     private JButton[] tiles;
-    private JPopupMenu popupMenu[]; //popup menu for each tile
+    private JPopupMenu popupMenu; //popup menu for each tile
     
     // bottom
     private JButton advanceDay;
@@ -66,6 +66,11 @@ public class GameView extends JFrame implements ActionListener {
       startGame.setBounds(560, 400, 100, 50);
 
       JPanel startUp = new JPanel(null);
+      this.setSize(1280, 720);
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      this.setLocationRelativeTo(null);
+      this.setResizable(false);
+      this.setVisible(true);
       startUp.add(startGame);
 
     /*
@@ -132,7 +137,7 @@ public class GameView extends JFrame implements ActionListener {
       /*
         --------------SEED AREA----------------
       */
-      //all about the seeds
+      //region all about the seeds
       this.seeds = new JButton[8];
       this.seeds[0] = new JButton("Turnip");
       this.seeds[1] = new JButton("Carrot");
@@ -235,7 +240,7 @@ public class GameView extends JFrame implements ActionListener {
         this.seedArea.add(seeds[j]);
       }
       this.seedArea.setBounds(250, 0, 810, 100); 
-      
+      //endregion
 
       /*
         --------------TILE AREA----------------
@@ -259,15 +264,15 @@ public class GameView extends JFrame implements ActionListener {
       }
 
       //popup menu
-      this.popupMenu = new JPopupMenu[50];
-      for(int i = 0; i < this.popupMenu.length; i++){
-        this.popupMenu[i] = new JPopupMenu();
-        this.popupMenu[i].add(new JLabel("Plowed : No"));
-        this.popupMenu[i].add(new JLabel("Rock : None"));
-        this.popupMenu[i].add(new JLabel("Watered : 0"));
-        this.popupMenu[i].add(new JLabel("Fertilized : 0"));
-        this.popupMenu[i].add(new JLabel("Harvestable : No"));
-      }
+      this.popupMenu = new JPopupMenu();
+      // for(int i = 0; i < this.popupMenu.length; i++){
+      //   this.popupMenu[i] = new JPopupMenu();
+      //   this.popupMenu[i].add(new JLabel("Plowed : No"));
+      //   this.popupMenu[i].add(new JLabel("Rock : None"));
+      //   this.popupMenu[i].add(new JLabel("Watered : 0"));
+      //   this.popupMenu[i].add(new JLabel("Fertilized : 0"));
+      //   this.popupMenu[i].add(new JLabel("Harvestable : No"));
+      // }
 
       /*
         --------------BOTTOM AREA----------------
@@ -369,10 +374,6 @@ public class GameView extends JFrame implements ActionListener {
         }
       });
 
-      for(int i = 0; i < this.tiles.length; i++){
-        addActionListeneronTiles(tiles[i], i);
-      }
-
       for(int i = 0; i < this.seeds.length; i++){
         addActionListeneronSeed(seeds[i], i);
       }
@@ -406,6 +407,14 @@ public class GameView extends JFrame implements ActionListener {
       return -1;
     }
   
+  public int rightClickIndex(JButton b) {
+    for (int i = 0; i < this.tiles.length; i++) {
+      if (b == this.tiles[i]) {
+        return i;
+      }
+    }
+    return -1;
+  }
     public int currSeedIndex(JButton b) {
       
       for (int i = 0; i < this.seeds.length; i++) {
@@ -457,6 +466,16 @@ public class GameView extends JFrame implements ActionListener {
       this.tiles[index].setText(text);
     }
 
+    public void setDayLabel(String text){
+      this.day.setText(text);
+    }
+
+    public void setPopupMenu(JPopupMenu popupMenu, int i, int x, int y){
+      this.popupMenu = popupMenu;
+      this.popupMenu.show(tiles[i], x, y);
+    }
+    // public void set
+
     //method for tiles btns
     public void setAddTileBtnListener(ActionListener listener){
       for(int i = 0; i < this.tiles.length; i++){
@@ -467,10 +486,6 @@ public class GameView extends JFrame implements ActionListener {
     public void setAddSeedBtnListener(int i, ActionListener listener){
       this.seeds[i].addActionListener(listener);
     }
-
-
-
-
 
     //methods for tools
     public void setAddHarvestBtnListener(ActionListener listener){
@@ -531,43 +546,9 @@ public class GameView extends JFrame implements ActionListener {
 
   
   //add onto controller
-  public void addActionListeneronTiles(JButton tiles, int number)
+  public void addActionListeneronTiles(int i, MouseListener listener)
   {
-      tiles.addMouseListener((MouseListener) new MouseListener()
-      {
-
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mousePressed(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          if(SwingUtilities.isRightMouseButton(e)){
-            popupMenu[number].show(tiles, e.getX(), e.getY());
-          }
-        }
-
-        @Override
-        public void mouseReleased(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mouseEntered(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mouseExited(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-      });
+      tiles[i].addMouseListener(listener);
   }
 
   public void addActionListeneronSeed(JButton seeds, int number)
