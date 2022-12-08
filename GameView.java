@@ -44,6 +44,7 @@ public class GameView extends JFrame implements ActionListener {
     private JPopupMenu popupMenu; //popup menu for each tile
     
     // bottom
+    private JTextField feedback;
     private JButton advanceDay;
 
     /*
@@ -286,6 +287,15 @@ public class GameView extends JFrame implements ActionListener {
       dayPanel.add(this.day);
       dayPanel.setBounds(1060, 0, 205, 100);
       dayPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+      /*
+       * -----------------FEEDBACK AREA----------------
+       */
+
+      this.feedback = new JTextField("TextField");
+      this.feedback.setBounds(340, 660, 500, 20);
+      this.feedback.setEditable(false);
+      this.feedback.setBorder(BorderFactory.createLineBorder(Color.black));
       
       //gameArea
       JPanel gameArea = new JPanel(null);
@@ -297,6 +307,8 @@ public class GameView extends JFrame implements ActionListener {
       gameArea.add(this.seedArea);
       gameArea.add(this.advanceDay);
       gameArea.add(dayPanel);
+      gameArea.add(feedback);
+      
 
 
       /*
