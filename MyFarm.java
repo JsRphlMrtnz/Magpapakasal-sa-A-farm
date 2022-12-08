@@ -19,7 +19,6 @@ public class MyFarm {
     private Tile[] tiles = new Tile[50]; // 50 tiles
     private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel
     private Seed[] seeds = new Seed[8];  // Turnip, Carrot, Potato, Rose, Tulips, Sunflower, Mango, Apple
-    private GameView farmView;
 
     /**
      * This constructor initializes all the attributes of the MyFarm class.
@@ -37,9 +36,6 @@ public class MyFarm {
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
         this.tool[3] = new Tools(7, 2, "Shovel");         // initializes the shovel tool
         this.seeds[0] = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
-        
-        farmView = new GameView(name);
-        addEventListeners(farmView);
     }
     // region unimplemented methods
     // /**
@@ -180,73 +176,26 @@ public class MyFarm {
 //     }
 // endregion
 
-    public void addEventListeners(GameView farmView) {
-        farmView.setAddTileBtnListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                farmView.setCurrTileIndex(farmView.currTileIndex((JButton) e.getSource()));
-                farmView.toggleButtons();
-            }
-        });
-
-        farmView.setAddPlowBtnListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.plow(tool[0], tiles[farmView.getCurrTileIndex()])) {
-                    farmView.setButtonText(farmView.getCurrTileIndex(), "Plowed");
-                    farmView.setCurrTileIndex(-1);
-                    farmView.toggleButtons();
-                }
-            }
-        });
-
-        farmView.setAddWateringCanBtnListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.water(tool[01], tiles[farmView.getCurrTileIndex()])) {
-                    farmView.setCurrTileIndex(-1);
-                    farmView.toggleButtons();
-                }
-            }
-        });
-
-        farmView.setAddFertilizerBtnListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.fertilize(tool[2], tiles[farmView.getCurrTileIndex()])) {
-                    farmView.setCurrTileIndex(-1);
-                    farmView.toggleButtons();
-                }
-            }
-        });
-
-        farmView.setAddShovelBtnListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.dig(tool[3], tiles[farmView.getCurrTileIndex()])) {
-                    farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
-                    farmView.setCurrTileIndex(-1);
-                    farmView.toggleButtons();
-                }
-            }
-        });
-
-        for (int i = 0; i < 1; i++) {
-            farmView.setAddSeedBtnListener(i, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    farmView.setCurrSeedIndex(farmView.currSeedIndex((JButton) e.getSource()));
-                    if (player.plant(seeds[farmView.getCurrSeedIndex()], tiles[farmView.getCurrTileIndex()])) {
-                        farmView.setButtonText(farmView.getCurrTileIndex(), seeds[farmView.getCurrSeedIndex()].getName());
-                        farmView.setCurrTileIndex(-1);
-                        farmView.toggleButtons();
-                    }
-                }
-            });
-        }
+    // region getters and setters
+    public int getDay() {
+        return this.day;
     }
 
+    public Player getPlayer() {
+        return this.player;
+    }
 
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public Tools[] getTool() {
+        return tool;
+    }
+
+    public Seed[] getSeeds() {
+        return seeds;
+    }
     public static void main(String[] args) {
         MyFarm farm = new MyFarm("Farmer");
     }

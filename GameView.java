@@ -1,24 +1,34 @@
 import java.awt.*;
 import javax.swing.*;
 
+import org.w3c.dom.events.MouseEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.concurrent.Flow;
 
 
-public class GameView {
+public class GameView extends JFrame implements ActionListener {
     private JFrame mainFrame;
+    private CardLayout cardLayout;
+    private Container container;
+  
+    /*
+      --------------FOR THE STARTUP----------------
+    */
+    private JButton startButton;
+    private JTextField nameField;
+    private JButton male, female, startGame;
 
-    //top
-    private JPanel topArea; // puts playerArea and seedArea together
 
-    
-    private JPanel playerArea;//PlayerArea = includes player info(name,level,objectCoins,farmerPic) 
-    private JPanel playerInfo;
-    private JPanel toolArea;
-    private JLabel  name, level, objectCoins, farmerPic;
+
+
+
+    /*
+      --------------FOR THE GAME----------------
+     */
+    private JLabel  name, level, objectCoins, day;
     private JButton farmerType;
     
     /*tools on top */
@@ -28,7 +38,7 @@ public class GameView {
     //right
     private JPanel seedArea;
     private JButton[] seeds;//turnip, carrot, potato, rose, tulips, sunflower, mango, apple
-
+    private JPopupMenu seedPopupMenu[]; //popup menu for each seed
 
     //middle
     private JPanel tileArea;
@@ -36,53 +46,124 @@ public class GameView {
     private JPopupMenu popupMenu[]; //popup menu for each tile
     
     // bottom
-    private JPanel bottomArea;
     private JButton advanceDay;
+
+    /*
+     * --------------FOR THE GAME OVER----------------
+     */
+    //game over buttton
+    private JButton gameOverButtonYes;
+    private JButton gameOverButtonNo;
 
     private int currIndex = -1;
     private int currSeedIndex = -1;
+
     
-    public GameView(String name){
+    public GameView(){
+
+
+      // startUp
+      JPanel nameLabelPanel = new JPanel(new GridLayout(1,1));
+      nameLabelPanel.add(new JLabel("Name: "));
+      nameLabelPanel.setBounds(500, 130, 50, 40);
+      nameLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+      JPanel nameFieldPanel = new JPanel(new GridLayout(1,1));
+      nameFieldPanel.add(this.nameField = new JTextField(20));
+      nameFieldPanel.setBounds(550, 130, 100, 40);
+      nameFieldPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+      JPanel genderLabelPanel = new JPanel(new GridLayout(1,1));
+      genderLabelPanel.add(new JLabel("Gender: "));
+      genderLabelPanel.setBounds(525, 200, 50 , 25);
+      genderLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+      JPanel genderButtonPanel = new JPanel();
+      genderButtonPanel.setLayout(new GridLayout(1, 2, 5, 5));
+      genderButtonPanel.setBounds(400, 230, 300, 150);
+      this.male = new JButton("male");
+      this.female = new JButton("female");
+      genderButtonPanel.add(male);
+      genderButtonPanel.add(female);
+
+
+      JPanel startGameButtonPanel = new JPanel(null);
+      startGameButtonPanel.setBounds(500, 400, 100, 30);
+      startGameButtonPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+      this.startGame = new JButton("Start Game");
+      this.startGame.setSize(100, 30);
+      startGameButtonPanel.add(startGame);
+
+      JPanel startUp = new JPanel(null);
+      startUp.add(nameLabelPanel);
+      startUp.add(nameFieldPanel);
+      startUp.add(genderLabelPanel);
+      startUp.add(genderButtonPanel);
+      startUp.add(startGameButtonPanel);
+      this.setSize(1280, 720);
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      this.setLocationRelativeTo(null);
+      this.setResizable(false);
+      this.setVisible(true);
+      
+
+      
+
+
+      
+
+
+
+
+
+
+
+
+
     /*
-      --------------TOP AREA----------------
+      --------------PLAYER AREA----------------
     */
 
       //all about the player
       JPanel farmerPanel=new JPanel(); 
-  
-      farmerPanel.setBounds(0,0,50,100);
-      JLabel farmerPic=new JLabel(new ImageIcon("farmer.png"));
+      JLabel farmerPic = new JLabel(new ImageIcon("farmer.png"));
       //this.farmerPic.setIcon(new ImageIcon("farmer.png"));
       farmerPanel.add(farmerPic);
+      farmerPanel.setBounds(0, 0, 80, 100);
 
 
-      this.name = new JLabel(name);
-      this.level =  new JLabel("Level : 1");
+
+      JLabel nameLabel = new JLabel("Name : ");
+      this.name = new JLabel(" ");
+      JLabel levelLabel =  new JLabel("Level : ");
+      this.level =  new JLabel("1");
+      JLabel farmerTypeLabel = new JLabel("Farmer Type : ");
       this.farmerType = new JButton("Farmer");
-      this.objectCoins = new JLabel("ObjectCoins: 0");
+      JLabel objectCoinsLabel = new JLabel("Object Coins : ");
+      this.objectCoins = new JLabel("0");
 
       // holds player info
-      this.playerInfo = new JPanel(new GridLayout(4,0));
-      this.playerInfo.setMaximumSize(new Dimension(100, 100));
-      this.playerInfo.setMinimumSize(new Dimension(100, 100));
-      this.playerInfo.add(this.name);
-      this.playerInfo.add(this.level);
-      this.playerInfo.add(this.objectCoins);
-      this.playerInfo.add(this.farmerType);
+      JPanel playerInfo = new JPanel(new GridLayout(4,2, 0,0));
+      playerInfo.setBounds(80, 0, 170, 100);
+      playerInfo.add(nameLabel);
+      playerInfo.add(name);
+      playerInfo.add(levelLabel);
+      playerInfo.add(this.level);
+      playerInfo.add(objectCoinsLabel);
+      playerInfo.add(this.objectCoins);
+      playerInfo.add(farmerTypeLabel);
+      playerInfo.add(this.farmerType);
+      playerInfo.setBorder(BorderFactory.createLineBorder(Color.black));
+    ;
 
-      // hold player info and picture
-      this.playerArea = new JPanel(new GridLayout(1,2, 0, 0));
-      this.playerArea.setMaximumSize(new Dimension(150, 100));
-      this.playerArea.setMinimumSize(new Dimension(150, 100));
-      this.playerArea.add(farmerPanel);
-      this.playerArea.add(this.playerInfo);
-
-
+      /*
+       * --------------TOOL AREA----------------
+       */
       //holds only tools
-      this.toolArea = new JPanel(new GridLayout(1,6));
-      this.toolArea.setBorder(BorderFactory.createLineBorder(Color.black));
-      this.toolArea.setMaximumSize(new Dimension(1150, 100));
-      this.toolArea.setMinimumSize(new Dimension(1150, 100));
+      
+      JPanel toolArea = new JPanel(new GridLayout(6,1));
+      toolArea.setBorder(BorderFactory.createLineBorder(Color.black));
+      toolArea.setBounds(1105, 100, 160, 500);
       this.tools = new JButton[6];
       this.tools[0] = new JButton("Harvest");
       this.tools[1] = new JButton("Plow");
@@ -94,19 +175,13 @@ public class GameView {
 
       // toolArea
       for(int i = 0; i < this.tools.length; i++){
-        this.toolArea.add(this.tools[i]);
+        toolArea.add(this.tools[i]);
       }
 
-      //topArea holds tools and player info
-      this.topArea = new JPanel(new BorderLayout(10, 10));
-      this.topArea.setMaximumSize(new Dimension(1300,100));
-      this.topArea.setMinimumSize(new Dimension(1300,50));
-      this.topArea.setBounds(0,0, 1300,100);
-      this.topArea.setBorder(BorderFactory.createLineBorder(Color.black));
-      this.topArea.add(this.playerArea, BorderLayout.WEST);
-      this.topArea.add(this.toolArea, BorderLayout.CENTER);
-      
-      //region  --------------RIGHT AREA----------------
+
+      /*
+        --------------SEED AREA----------------
+      */
       //all about the seeds
       this.seeds = new JButton[8];
       this.seeds[0] = new JButton("Turnip");
@@ -117,25 +192,103 @@ public class GameView {
       this.seeds[5] = new JButton("Sunflower");
       this.seeds[6] = new JButton("Mango");
       this.seeds[7] = new JButton("Apple");
-      
+
+
+      this.seedPopupMenu = new JPopupMenu[8];
+      this.seedPopupMenu[0] = new JPopupMenu();
+      this.seedPopupMenu[0].add(new JLabel("Turnip seed"));
+      this.seedPopupMenu[0].add(new JLabel("Time : 2 days"));
+      this.seedPopupMenu[0].add(new JLabel("Water : 1 (2)"));
+      this.seedPopupMenu[0].add(new JLabel("Fertilizer : 0 (1)"));
+      this.seedPopupMenu[0].add(new JLabel("Produce : 1-2"));
+      this.seedPopupMenu[0].add(new JLabel("Cost : 5"));
+      this.seedPopupMenu[0].add(new JLabel("Sell : 6"));
+      this.seedPopupMenu[0].add(new JLabel("XP : 5"));
+
+      this.seedPopupMenu[1] = new JPopupMenu();
+      this.seedPopupMenu[1].add(new JLabel("Seed : Carrot"));
+      this.seedPopupMenu[1].add(new JLabel("Time : 3 days"));
+      this.seedPopupMenu[1].add(new JLabel("Water : 1 (2)"));
+      this.seedPopupMenu[1].add(new JLabel("Fertilizer : 0 (1)"));
+      this.seedPopupMenu[1].add(new JLabel("Produce : 1-2"));
+      this.seedPopupMenu[1].add(new JLabel("Cost : 10"));
+      this.seedPopupMenu[1].add(new JLabel("Sell : 9"));
+      this.seedPopupMenu[1].add(new JLabel("XP : 7.5"));
+
+
+      this.seedPopupMenu[2] = new JPopupMenu();
+      this.seedPopupMenu[2].add(new JLabel("Seed : Potato"));
+      this.seedPopupMenu[2].add(new JLabel("Time : 5 days"));
+      this.seedPopupMenu[2].add(new JLabel("Water : 3 (4)"));
+      this.seedPopupMenu[2].add(new JLabel("Fertilizer : 1 (2)"));
+      this.seedPopupMenu[2].add(new JLabel("Produce : 1-10"));
+      this.seedPopupMenu[2].add(new JLabel("Cost : 20"));
+      this.seedPopupMenu[2].add(new JLabel("Sell : 3"));
+      this.seedPopupMenu[2].add(new JLabel("XP : 12.5"));
+
+      this.seedPopupMenu[3] = new JPopupMenu();
+      this.seedPopupMenu[3].add(new JLabel("Seed : Rose"));
+      this.seedPopupMenu[3].add(new JLabel("Time : 1 day"));
+      this.seedPopupMenu[3].add(new JLabel("Water : 1 (2)"));
+      this.seedPopupMenu[3].add(new JLabel("Fertilizer : 0 (1)"));
+      this.seedPopupMenu[3].add(new JLabel("Produce : 1"));
+      this.seedPopupMenu[3].add(new JLabel("Cost : 5"));
+      this.seedPopupMenu[3].add(new JLabel("Sell : 5"));
+      this.seedPopupMenu[3].add(new JLabel("XP : 2.5"));
+
+      this.seedPopupMenu[4] = new JPopupMenu();
+      this.seedPopupMenu[4].add(new JLabel("Seed : Tulips"));
+      this.seedPopupMenu[4].add(new JLabel("Time : 2 days"));
+      this.seedPopupMenu[4].add(new JLabel("Water : 2 (3)"));
+      this.seedPopupMenu[4].add(new JLabel("Fertilizer : 0 (1)"));
+      this.seedPopupMenu[4].add(new JLabel("Produce : 1"));
+      this.seedPopupMenu[4].add(new JLabel("Cost : 10"));
+      this.seedPopupMenu[4].add(new JLabel("Sell : 9"));
+      this.seedPopupMenu[4].add(new JLabel("XP : 5"));
+
+
+      this.seedPopupMenu[5] = new JPopupMenu();
+      this.seedPopupMenu[5].add(new JLabel("Seed : Sunflower"));
+      this.seedPopupMenu[5].add(new JLabel("Time : 3 days"));
+      this.seedPopupMenu[5].add(new JLabel("Water : 2 (3)"));
+      this.seedPopupMenu[5].add(new JLabel("Fertilizer : 1 (2)"));
+      this.seedPopupMenu[5].add(new JLabel("Produce : 1"));
+      this.seedPopupMenu[5].add(new JLabel("Cost : 20"));
+      this.seedPopupMenu[5].add(new JLabel("Sell : 19"));
+      this.seedPopupMenu[5].add(new JLabel("XP : 7.5"));
+
+      this.seedPopupMenu[6] = new JPopupMenu();
+      this.seedPopupMenu[6].add(new JLabel("Seed : Mango"));
+      this.seedPopupMenu[6].add(new JLabel("Time : 10 days"));
+      this.seedPopupMenu[6].add(new JLabel("Water : 7 (7)"));
+      this.seedPopupMenu[6].add(new JLabel("Fertilizer : 4 (4)"));
+      this.seedPopupMenu[6].add(new JLabel("Produce : 5-15"));
+      this.seedPopupMenu[6].add(new JLabel("Cost : 100"));
+      this.seedPopupMenu[6].add(new JLabel("Sell : 8"));
+      this.seedPopupMenu[6].add(new JLabel("XP : 25"));
+
+      this.seedPopupMenu[7] = new JPopupMenu();
+      this.seedPopupMenu[7].add(new JLabel("Seed : Apple"));
+      this.seedPopupMenu[7].add(new JLabel("Time : 10 days"));
+      this.seedPopupMenu[7].add(new JLabel("Water : 7 (7)"));
+      this.seedPopupMenu[7].add(new JLabel("Fertilizer : 5 (5)"));
+      this.seedPopupMenu[7].add(new JLabel("Produce : 10-15"));
+      this.seedPopupMenu[7].add(new JLabel("Cost : 200"));
+      this.seedPopupMenu[7].add(new JLabel("Sell : 5"));
+      this.seedPopupMenu[7].add(new JLabel("XP : 25"));
 
       // holds the seeds
       this.seedArea = new JPanel();
       this.seedArea.setBorder(BorderFactory.createLineBorder(Color.black));
-      this.seedArea.setLayout(new BoxLayout(this.seedArea, BoxLayout.Y_AXIS));
-      this.seedArea.setMinimumSize(new Dimension(300,1000));
-      this.seedArea.setMaximumSize(new Dimension(300,1000));
-
+      this.seedArea.setLayout(new GridLayout(1,8));
       for(int j = 0; j < this.seeds.length; j++){
-        this.seeds[j].setMinimumSize(new Dimension(300,125));
-        this.seeds[j].setMaximumSize(new Dimension(300,125));
-        
         this.seedArea.add(seeds[j]);
       }
-      //endregion
+      this.seedArea.setBounds(250, 0, 810, 100); 
+      
 
       /*
-        --------------MIDDLE AREA----------------
+        --------------TILE AREA----------------
       */
 
       // all about the tiles
@@ -144,13 +297,15 @@ public class GameView {
       for(int l = 0; l < this.tiles.length; l++){
         this.tiles[l] = new JButton("tile");
       }
-      // setAddTileBtnListener();
+
 
       //holds the tiles
-      this.tileArea = new JPanel(new GridLayout(10,5, 60, 10));
-
+      tileArea = new JPanel(new GridLayout(10,5));
+      tileArea.setBorder(BorderFactory.createLineBorder(Color.black));
+      tileArea.setBounds(250, 300, 450, 300);
+      
       for(int k = 0; k < this.tiles.length; k++){
-        this.tileArea.add(this.tiles[k]);
+        tileArea.add(this.tiles[k]);
       }
 
       //popup menu
@@ -167,27 +322,91 @@ public class GameView {
       /*
         --------------BOTTOM AREA----------------
       */
-      this.bottomArea = new JPanel(new BorderLayout());
       this.advanceDay = new JButton("Advance Day");
-      this.bottomArea.add(this.advanceDay, BorderLayout.EAST);
+      this.advanceDay.setBounds(1140, 635, 120, 40);
 
+
+      /*
+        --------------DAY AREA----------------
+      */
+      JPanel dayPanel = new JPanel();
+      dayPanel.setLayout(new FlowLayout());
+      JLabel dayLabel = new JLabel("Day : ");
+      dayLabel.setFont(new Font("Serif", Font.PLAIN, 40));
+      this.day = new JLabel("1");
+      this.day.setFont(new Font("Serif", Font.PLAIN, 40));
+      dayPanel.add(dayLabel);
+      dayPanel.add(this.day);
+      dayPanel.setBounds(1060, 0, 205, 100);
+      dayPanel.setBorder(BorderFactory.createLineBorder(Color.black));
       
+      //gameArea
+      JPanel gameArea = new JPanel(null);
+      gameArea.add(farmerPanel);
+      gameArea.add(playerInfo);
+      gameArea.add(farmerPanel);
+      gameArea.add(toolArea);
+      gameArea.add(tileArea);
+      gameArea.add(this.seedArea);
+      gameArea.add(this.advanceDay);
+      gameArea.add(dayPanel);
 
+
+      /*
+       * GAME OVER
+      */
+
+      JPanel gameOverButtonPanel = new JPanel();
+      gameOverButtonPanel.setLayout(new GridLayout(1,2, 10, 10));
+      this.gameOverButtonNo = new JButton("No");
+      this.gameOverButtonYes = new JButton("Yes");
+      gameOverButtonPanel.add(gameOverButtonYes);
+      gameOverButtonPanel.add(gameOverButtonNo);
+      gameOverButtonPanel.setBounds(540, 400, 125, 30);
+
+      JPanel centerGameOverSign = new JPanel();
+      centerGameOverSign.setLayout(new FlowLayout());
+      centerGameOverSign.add(new JLabel ("Game Over"));
+      centerGameOverSign.setBounds(540, 150, 125, 30);
+
+      JPanel centerPlayAgainSign = new JPanel();
+      centerPlayAgainSign.setLayout(new FlowLayout());
+      centerPlayAgainSign.add(new JLabel ("Do you want to play again?"));
+      centerPlayAgainSign.setBounds(500, 250, 200, 30);
+      centerPlayAgainSign.setBorder(BorderFactory.createLineBorder(Color.black));
+
+
+
+      JPanel gameOver = new JPanel(null);
       
+      gameOver.add(gameOverButtonPanel);
+      gameOver.add(centerGameOverSign);
+      gameOver.add(centerPlayAgainSign);
 
-      this.mainFrame = new JFrame("Magpapakasal sa A-farm");
-      this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.mainFrame.setLayout(new BorderLayout(30, 30));
-      this.mainFrame.setSize(1500,1000);
-      this.mainFrame.setResizable(false);
-      this.mainFrame.setVisible(true);
+      this.cardLayout = new CardLayout();
+      this.container = getContentPane();
+      this.container.setLayout(cardLayout);
+      this.container.add("1", startUp);
+      this.container.add("2", gameArea);
+      this.container.add("3", gameOver);
 
-      this.mainFrame.add(this.topArea, BorderLayout.NORTH);
-      this.mainFrame.add(this.tileArea, BorderLayout.CENTER);
-      this.mainFrame.add(this.seedArea, BorderLayout.EAST);
-      this.mainFrame.add(this.bottomArea, BorderLayout.SOUTH);
 
-      this.mainFrame.setVisible(true);
+
+
+
+
+
+      startGame.addActionListener(this);
+      advanceDay.addActionListener(this);
+
+
+
+
+
+
+
+
+
 
 
       /// add onto controller
@@ -204,7 +423,10 @@ public class GameView {
         addActionListeneronTiles(tiles[i], i);
       }
 
-      toggleButtons();
+      for(int i = 0; i < this.seeds.length; i++){
+        addActionListeneronSeed(seeds[i], i);
+      }
+
   }
 
 
@@ -223,7 +445,67 @@ public class GameView {
 
 
     //methods for buttons
-
+    public int currTileIndex(JButton b) {
+    
+      for (int i = 0; i < this.tiles.length; i++) {
+        if (b == this.tiles[i] && currIndex != i) {
+          return i;
+        }
+      }
+      
+      return -1;
+    }
+  
+    public int currSeedIndex(JButton b) {
+      
+      for (int i = 0; i < this.seeds.length; i++) {
+        if (b == this.seeds[i]) {
+          return i;
+        }
+      }
+      
+      return -1;
+    }
+  
+    public int getCurrSeedIndex() {
+      return this.currSeedIndex;
+    }
+  
+    public int setCurrSeedIndex(int index) {
+      return this.currSeedIndex = index;
+    }
+  
+    public int getCurrTileIndex() {
+      return this.currIndex;
+    }
+  
+    public void setCurrTileIndex(int index) {
+      this.currIndex = index;
+    }
+  
+    public void toggleButtons() {
+      
+      if (this.currIndex == -1) {
+        for (JButton b : this.seeds) {
+          b.setEnabled(false);
+        }
+        for (JButton b : this.tools) {
+          b.setEnabled(false);
+        }
+      }
+      else {
+        for (JButton b : this.seeds) {
+          b.setEnabled(true);
+        }
+        for (JButton b : this.tools) {
+          b.setEnabled(true);
+        }
+      }
+    }
+    
+    public void setButtonText(int index, String text) {
+      this.tiles[index].setText(text);
+    }
 
     //method for tiles btns
     public void setAddTileBtnListener(ActionListener listener){
@@ -232,11 +514,12 @@ public class GameView {
       }
     }
 
-
-    //method for seeds btns
-    public void setAddSeedBtnListener(int index, ActionListener listener){
-        this.seeds[index].addActionListener(listener);
+    public void setAddSeedBtnListener(int i, ActionListener listener){
+      this.seeds[i].addActionListener(listener);
     }
+
+
+
 
 
     //methods for tools
@@ -266,11 +549,13 @@ public class GameView {
 
     //methods for player info
     public void setPlayerLevel(int level){
-      this.level.setText("Level: " + level);
+      String levelString = Integer.toString(level);
+      this.level.setText(levelString);
     }
 
     public void addPlayerMoney(int objectCoins){
-      this.objectCoins.setText("ObjectCoins: " + objectCoins);
+      String objectCoinsString = Integer.toString(objectCoins);
+      this.objectCoins.setText(objectCoinsString);
     }
 
     //this method is to show the panel where it displays the types of farmer statuses that the player can buy
@@ -279,111 +564,129 @@ public class GameView {
     }
     
     public void setFarmerType(String farmerType){
-      this.farmerType.setText("Farmer Type: " + farmerType);
+      this.farmerType.setText(farmerType);
     }
 
 
 
 
 
-  public int currTileIndex(JButton b) {
-    
-    for (int i = 0; i < this.tiles.length; i++) {
-      if (b == this.tiles[i] && currIndex != i) {
-        return i;
-      }
-    }
-    
-    return -1;
-  }
 
-  public int currSeedIndex(JButton b) {
-    
-    for (int i = 0; i < this.seeds.length; i++) {
-      if (b == this.seeds[i]) {
-        return i;
-      }
-    }
-    
-    return -1;
-  }
 
-  public int getCurrSeedIndex() {
-    return this.currSeedIndex;
-  }
 
-  public int setCurrSeedIndex(int index) {
-    return this.currSeedIndex = index;
-  }
-
-  public int getCurrTileIndex() {
-    return this.currIndex;
-  }
-
-  public void setCurrTileIndex(int index) {
-    this.currIndex = index;
-  }
-
-  public void toggleButtons() {
-    
-    if (this.currIndex == -1) {
-      for (JButton b : this.seeds) {
-        b.setEnabled(false);
-      }
-      for (JButton b : this.tools) {
-        b.setEnabled(false);
-      }
-    }
-    else {
-      for (JButton b : this.seeds) {
-        b.setEnabled(true);
-      }
-      for (JButton b : this.tools) {
-        b.setEnabled(true);
-      }
-    }
-  }
   
-  public void setButtonText(int index, String text) {
-    this.tiles[index].setText(text);
-  }
+  // public static void main (String args[]){
+  //   GameView farm = new GameView("Farmer");
+  // }
 
+  
   //add onto controller
-  public void addActionListeneronTiles(JButton tile, int number)
+  public void addActionListeneronTiles(JButton tiles, int number)
   {
-      tile.addMouseListener((MouseListener) new MouseListener()
+      tiles.addMouseListener((MouseListener) new MouseListener()
       {
+
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
         @Override
         public void mousePressed(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
           if(SwingUtilities.isRightMouseButton(e)){
-            popupMenu[number].show(tile, e.getX(), e.getY());
+            popupMenu[number].show(tiles, e.getX(), e.getY());
           }
         }
 
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseReleased(java.awt.event.MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
 
         @Override
-        public void mouseReleased(MouseEvent e) {
+        public void mouseEntered(java.awt.event.MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
+        public void mouseExited(java.awt.event.MouseEvent e) {
           // TODO Auto-generated method stub
           
         }
       });
   }
+
+  public void addActionListeneronSeed(JButton seeds, int number)
+  {
+      seeds.addMouseListener((MouseListener) new MouseListener()
+      {
+
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mousePressed(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          if(SwingUtilities.isRightMouseButton(e)){
+            seedPopupMenu[number].show(seeds, e.getX(), e.getY());
+          }
+        }
+
+        @Override
+        public void mouseReleased(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+
+        @Override
+        public void mouseExited(java.awt.event.MouseEvent e) {
+          // TODO Auto-generated method stub
+          
+        }
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    // TODO Auto-generated method stub
+    cardLayout.next(container);
+  }
+  
+
+
+
+
+
+
+
+
+
+
 }
 
