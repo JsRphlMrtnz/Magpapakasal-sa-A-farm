@@ -61,7 +61,7 @@ public class Controller {
           }
       });
 
-      for (int i = 0; i < 1; i++) {
+      for (int i = 0; i < myFarm.getSeeds().length; i++) {
           farmView.setAddSeedBtnListener(i, new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
