@@ -6,10 +6,11 @@ import java.util.Random;
  * It also contains the necessary actions for each tool as well as harvesting.
  */
 public class Player {
-    private double xp;          // The player's experience points
-    private double objectCoins; // The player's money
-    private FarmerType type;    // The player's farmer type
-    private String name;        // The player's name
+    private double xp;             // The player's experience points
+    private double objectCoins;    // The player's money
+    private FarmerType type;       // The player's farmer type
+    private String name;           // The player's name
+    private String feedbackString; // The feedback string that will be displayed on the GUI
 
     /**
      * This constructor assigns the name and initializes each attribute.
@@ -55,6 +56,7 @@ public class Player {
         
         this.objectCoins -= seed.getCost();
         tile.setSeed(seed);
+        feedbackString = "Successfully planted the " + seed.getName() + " seed";
         return true;
     }
 
@@ -74,6 +76,7 @@ public class Player {
             tile.updatePlow();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully plowed the tile";
             return true;
         }
         return false;
@@ -94,6 +97,7 @@ public class Player {
             tile.updateWater();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully watered the " + tile.getSeed().getName();
             return true;
         }
         return false;
@@ -115,6 +119,7 @@ public class Player {
             tile.updateFert();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully fertilized the " + tile.getSeed().getName();
             return true;
         }
         return false;
@@ -140,6 +145,7 @@ public class Player {
         }
         xp += tool.getXp();
         this.objectCoins -= tool.getCost();
+        feedbackString = "Successfully dug up the tile.";
         return true;
     }
 
@@ -174,9 +180,8 @@ public class Player {
             double xpGain = tile.getSeed().getXp() * productsProduced;
             this.xp += xpGain;
 
-            System.out.println("Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.");
-            System.out.println("Gained " + xpGain + " xp.");
-            tile.reset();
+            feedbackString = "Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.";
+            feedbackString += " Gained " + xpGain + " xp.";
             return true;
         }
         return false;
@@ -225,5 +230,14 @@ public class Player {
     */
     public double getXp() {
         return this.xp;
+    }
+
+   /**
+    * This method returns the feedback string that is being used to display the feedback to the player.
+    * 
+    * @return The feedback string.
+    */
+    public String getFeedbackString() {
+        return this.feedbackString;
     }
 }

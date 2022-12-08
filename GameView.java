@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.concurrent.Flow;
 
 
-public class GameView extends JFrame implements ActionListener {
+public class GameView extends JFrame {
     private JFrame mainFrame;
     private CardLayout cardLayout;
     private Container container;
@@ -19,10 +19,6 @@ public class GameView extends JFrame implements ActionListener {
     */
     private JButton startGame;
 
-
-
-
-
     /*
       --------------FOR THE GAME----------------
      */
@@ -31,7 +27,6 @@ public class GameView extends JFrame implements ActionListener {
     
     /*tools on top */
     private JButton[] tools; //harvest, plow, wateringCan, fertilizer, pickaxe, shovel
-
 
     //right
     private JPanel seedArea;
@@ -57,7 +52,6 @@ public class GameView extends JFrame implements ActionListener {
     private int currIndex = -1;
     private int currSeedIndex = -1;
 
-    
     public GameView(){
 
       /*
@@ -110,7 +104,6 @@ public class GameView extends JFrame implements ActionListener {
       playerInfo.add(farmerTypeLabel);
       playerInfo.add(this.farmerType);
       playerInfo.setBorder(BorderFactory.createLineBorder(Color.black));
-    ;
 
       /*
        * --------------TOOL AREA----------------
@@ -292,7 +285,7 @@ public class GameView extends JFrame implements ActionListener {
        * -----------------FEEDBACK AREA----------------
        */
 
-      this.feedback = new JTextField("TextField");
+      this.feedback = new JTextField();
       this.feedback.setBounds(340, 660, 500, 20);
       this.feedback.setEditable(false);
       this.feedback.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -348,35 +341,7 @@ public class GameView extends JFrame implements ActionListener {
       this.container.add("1", startUp);
       this.container.add("2", gameArea);
       this.container.add("3", gameOver);
-
-
-
-
-
-
-
-      startGame.addActionListener(this);
-      advanceDay.addActionListener(this);
-
-
-
-
-
-
-
-
-
-
-
-      /// add onto controller
-      farmerType.addActionListener(new ActionListener()
-      {
-        public void actionPerformed(ActionEvent arg0)
-        {
-          BuyView frame = new BuyView();
-          frame.setVisible(true);
-        }
-      });
+      
 
       for(int i = 0; i < this.seeds.length; i++){
         addActionListeneronSeed(seeds[i], i);
@@ -415,9 +380,32 @@ public class GameView extends JFrame implements ActionListener {
       return -1;
     }
   
-    public int getCurrSeedIndex() {
-      return this.currSeedIndex;
-    }
+  // region getters and setters
+  public void setFeedbackText(String text) {
+    this.feedback.setText(text);
+  }
+
+  public void setStartActionListener(ActionListener listener) {
+    this.startGame.addActionListener(listener);
+  }
+
+  public void setAdvanceDayActionListener(ActionListener listener) {
+    this.advanceDay.addActionListener(listener);
+  }
+
+  public void setFarmerTypeActionListener(ActionListener listener) {
+    this.farmerType.addActionListener(listener);
+  }
+  public CardLayout getCardLayout() {
+    return this.cardLayout;
+  }
+  
+  public Container getCont() {
+    return this.container;
+  }
+  public int getCurrSeedIndex() {
+    return this.currSeedIndex;
+  }
   
     public int setCurrSeedIndex(int index) {
       return this.currSeedIndex = index;
@@ -515,41 +503,14 @@ public class GameView extends JFrame implements ActionListener {
     public void setAddShovelBtnListener(ActionListener listener){
       this.tools[5].addActionListener(listener);
     }
-
-    //methods for player info
-    public void setPlayerLevel(int level){
-      String levelString = Integer.toString(level);
-      this.level.setText(levelString);
-    }
-
-    public void addPlayerMoney(int objectCoins){
-      String objectCoinsString = Integer.toString(objectCoins);
-      this.objectCoins.setText(objectCoinsString);
-    }
+    //endregion
 
     //this method is to show the panel where it displays the types of farmer statuses that the player can buy
     public void setFarmerTypeBtnListener(ActionListener listener){
       this.farmerType.addActionListener(listener);
     }
     
-    
-
-
-
-
-
-
-
-
-  
-  // public static void main (String args[]){
-  //   GameView farm = new GameView("Farmer");
-  // }
-
-  
-  //add onto controller
-  public void addActionListeneronTiles(int i, MouseListener listener)
-  {
+  public void addActionListeneronTiles(int i, MouseListener listener) {
       tiles[i].addMouseListener(listener);
   }
 
@@ -591,35 +552,6 @@ public class GameView extends JFrame implements ActionListener {
         }
       });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    cardLayout.next(container);
-  }
-  
-
-
-
-
-
-
-
-
-
 
 }
 

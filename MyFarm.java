@@ -47,31 +47,35 @@ public class MyFarm {
         this.seeds[7] = new Seed(200, 10, 7, 7, 5, 5, 5, 10, 15, 25, "Apple", "Fruit tree"); // instantiates the apple seed
     }
 
-    // region unimplemented methods
-// /**
-//  * This method increments the day and updates the harvest time of the tile
-//  */
-//     public void endDay() {
-//         this.day++;
-//         this.tile.updateTime();
-//         if (this.tile.getHasSeed())
-//             this.tile.updateWithered();
-//         System.out.println("\n\n");
-//     }
+/**
+ * This method increments the day and updates the harvest time of the tile
+ */
+    public void endDay() {
+        this.day++;
+        for (int i = 0; i < seeds.length; i++) {
+            if (tiles[i].getHasSeed()) {
+                tiles[i].updateTime();
+                tiles[i].updateWithered();
+            }
+        }
+    }
 
-// /**
-//  * This method determines if it is gameover for the player. The game is over if there are no
-//  * active growing crops and the player cannot buy a Turnip seed or if all tiles are withered.
-//  * 
-//  * @return This returns a boolean value to determine if it is gameover.
-//  */
-//     public boolean gameOver() {
-//         if(this.tile.getHasSeed())
-//             return (this.tile.getIsWithered());
-//         else 
-//             return (this.player.getCoins() < 5);
-//     }
-// endregion
+/**
+ * This method determines if it is gameover for the player. The game is over if there are no
+ * active growing crops and the player cannot buy a Turnip seed or if all tiles are withered.
+ * 
+ * @return This returns a boolean value to determine if it is gameover.
+ */
+    public boolean gameOver() {
+        boolean allTilesWithered = true;
+        for (int i = 0; i < seeds.length; i++) {
+            if (!tiles[i].getHasSeed())
+                allTilesWithered = false;
+            else if (!tiles[i].getIsWithered())
+                allTilesWithered = false;
+        }    
+        return allTilesWithered || (this.player.getCoins() < 5);
+    }
 
     // region getters and setters
     public int getDay() {
@@ -92,8 +96,5 @@ public class MyFarm {
 
     public Seed[] getSeeds() {
         return seeds;
-    }
-    public static void main(String[] args) {
-        MyFarm farm = new MyFarm("Farmer");
     }
 }
