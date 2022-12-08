@@ -9,18 +9,16 @@ public class Player {
     private double xp;             // The player's experience points
     private double objectCoins;    // The player's money
     private FarmerType type;       // The player's farmer type
-    private String name;           // The player's name
     private String feedbackString; // The feedback string that will be displayed on the GUI
 
     /**
      * This constructor assigns the name and initializes each attribute.
      * @param name The player's name
      */
-    public Player(String name) {
-        this.name = name;
+    public Player(FarmerType type) {
         this.xp = 0;
-        this.objectCoins = 100;
-        type = new FarmerType(0, 0, 0, 0, 0, 0, "Farmer");
+        this.objectCoins = 0;
+        this.type = type;
     }
 
  /**
@@ -31,9 +29,10 @@ public class Player {
   * @return true if the player has met the requirements for the next type
   */
     public boolean updateFarmerType(FarmerType newType) {
-        if (newType.getMinLevel() <= this.getLevel() && this.objectCoins >= newType.getRegFee()) {
+        if (newType.getMinLevel() <= this.getLevel() && this.objectCoins >= newType.getRegFee() && newType.getMinLevel() - this.type.getMinLevel() == 5) {
             this.type = newType;
             this.objectCoins -= newType.getRegFee();
+            feedbackString = "Successfully changed to " + type.getType();
             return true;
         }
         return false;
@@ -214,15 +213,6 @@ public class Player {
  */
     public double getCoins() {
         return this.objectCoins;
-    }
-
-/**
- * It returns the name of the player.
- * 
- * @return The name variable is being returned.
- */
-    public String getName() {
-        return this.name;
     }
 
   /**

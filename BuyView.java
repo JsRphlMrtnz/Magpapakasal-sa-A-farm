@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class BuyView extends JFrame{
    private JFrame mainFrame;
@@ -63,4 +64,19 @@ public class BuyView extends JFrame{
 
    }
 
+   public void setRegisteredBtnActionListener(ActionListener listener){
+    this.buyButtons[0].addActionListener(listener);
+   }
+
+    public void setDistinguishedBtnActionListener(ActionListener listener){
+      this.buyButtons[1].addActionListener(listener);
+    }
+
+    public void setLegendaryBtnActionListener(ActionListener listener){
+      this.buyButtons[2].addActionListener(listener);
+    }
+
+    public void disableButtons(int index) {
+      this.buyButtons[index].setEnabled(false);
+    }
 }

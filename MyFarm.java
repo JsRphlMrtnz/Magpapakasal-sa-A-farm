@@ -19,14 +19,13 @@ public class MyFarm {
     private Tile[] tiles = new Tile[50]; // 50 tiles
     private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
     private Seed[] seeds = new Seed[8];  // Turnip, Carrot, Potato, Rose, Tulips, Sunflower, Mango, Apple
+    private FarmerType[] farmerTypes = new FarmerType[4]; // Regular Farmer, Registered Farmer, Distinguished Farmer, Legendary Farmer
 
     /**
      * This constructor initializes all the attributes of the MyFarm class.
      * @param name is the name of the farmer to be used on the Player class constructor.
      */
-    public MyFarm(String name) {
-        this.player = new Player(name);
-        this.day = 1;
+    public MyFarm() {
 
         for (int i = 0; i < tiles.length; i++) { // initializes all the tiles
             tiles[i] = new Tile();
@@ -45,6 +44,14 @@ public class MyFarm {
         this.seeds[5] = new Seed(20, 3, 2, 3, 1, 2, 19, 1, 1, 7.5, "Sunflower", "Flower"); // instantiates the sunflower seed
         this.seeds[6] = new Seed(100, 10, 7, 7, 4, 4, 8, 5, 15, 25, "Mango", "Fruit tree"); // instantiates the mango seed
         this.seeds[7] = new Seed(200, 10, 7, 7, 5, 5, 5, 10, 15, 25, "Apple", "Fruit tree"); // instantiates the apple seed
+
+        this.farmerTypes[0] = new FarmerType(0, 0, 0, 0, 0, 0, "Farmer"); // instantiates the farmer type
+        this.farmerTypes[1] = new FarmerType(1, 1, 0, 0, 200, 5, "Registered Farmer"); // instantiates the registered farmer type
+        this.farmerTypes[2] = new FarmerType(2, 2, 1, 0, 300, 10, "Distinguished Farmer"); // instantiates the distinguished farmer type
+        this.farmerTypes[3] = new FarmerType(4, 3, 2, 1, 400, 15, "Legendary Farmer"); // instantiates the legendary farmer type
+
+        this.player = new Player(farmerTypes[0]);
+        this.day = 1;
     }
 
 /**
@@ -118,5 +125,9 @@ public class MyFarm {
 
     public Seed[] getSeeds() {
         return seeds;
+    }
+
+    public FarmerType[] getFarmerTypes() {
+        return farmerTypes;
     }
 }

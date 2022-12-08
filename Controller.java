@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 public class Controller {
     MyFarm myFarm;
    public Controller(){
-    myFarm = new MyFarm("temp");
+    myFarm = new MyFarm();
    }
 
    private void initializeView(GameView farmView) {
@@ -118,6 +118,72 @@ public class Controller {
       public void actionPerformed(ActionEvent e)
       {
         BuyView frame = new BuyView();
+
+        switch (myFarm.getPlayer().getType()) {
+            case "Legendary Farmer": {
+                frame.disableButtons(2);
+            }
+            case "Distinguished Farmer": {
+                frame.disableButtons(1);
+            }
+            case "Registered Farmer": {
+                frame.disableButtons(0);
+            }
+            break;
+            default:
+                break;
+        }
+        
+        frame.setRegisteredBtnActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            if (myFarm.getPlayer().updateFarmerType(myFarm.getFarmerTypes()[1])) {
+              farmView.setFarmerType(myFarm.getPlayer().getType());
+              farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
+              frame.disableButtons(0);
+              updateFarmerLabels(farmView);
+            }
+            else {
+              farmView.setFeedbackText("Not enough coins/xp");
+            }
+            frame.dispose();
+          }
+        });
+
+        frame.setDistinguishedBtnActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+              if (myFarm.getPlayer().updateFarmerType(myFarm.getFarmerTypes()[2])) {
+                farmView.setFarmerType(myFarm.getPlayer().getType());
+                farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
+                frame.disableButtons(1);
+                updateFarmerLabels(farmView);
+              }
+              else {
+                farmView.setFeedbackText("Not enough coins/xp");
+              }
+              frame.dispose();
+            }
+          });
+
+          frame.setLegendaryBtnActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+              if (myFarm.getPlayer().updateFarmerType(myFarm.getFarmerTypes()[3])) {
+                farmView.setFarmerType(myFarm.getPlayer().getType());
+                farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
+                frame.disableButtons(2);
+                updateFarmerLabels(farmView);
+              }
+              else {
+                farmView.setFeedbackText("Not enough coins/xp");
+              }
+              frame.dispose();
+            }
+          });
       }
     });
 
