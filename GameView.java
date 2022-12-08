@@ -17,9 +17,7 @@ public class GameView extends JFrame implements ActionListener {
     /*
       --------------FOR THE STARTUP----------------
     */
-    private JButton startButton;
-    private JTextField nameField;
-    private JButton male, female, startGame;
+    private JButton startGame;
 
 
 
@@ -28,7 +26,7 @@ public class GameView extends JFrame implements ActionListener {
     /*
       --------------FOR THE GAME----------------
      */
-    private JLabel  name, level, objectCoins, day;
+    private JLabel  level, exp, objectCoins, day;
     private JButton farmerType;
     
     /*tools on top */
@@ -61,64 +59,14 @@ public class GameView extends JFrame implements ActionListener {
     
     public GameView(){
 
-
-      // startUp
-      JPanel nameLabelPanel = new JPanel(new GridLayout(1,1));
-      nameLabelPanel.add(new JLabel("Name: "));
-      nameLabelPanel.setBounds(500, 130, 50, 40);
-      nameLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-      JPanel nameFieldPanel = new JPanel(new GridLayout(1,1));
-      nameFieldPanel.add(this.nameField = new JTextField(20));
-      nameFieldPanel.setBounds(550, 130, 100, 40);
-      nameFieldPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-      JPanel genderLabelPanel = new JPanel(new GridLayout(1,1));
-      genderLabelPanel.add(new JLabel("Gender: "));
-      genderLabelPanel.setBounds(525, 200, 50 , 25);
-      genderLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-      JPanel genderButtonPanel = new JPanel();
-      genderButtonPanel.setLayout(new GridLayout(1, 2, 5, 5));
-      genderButtonPanel.setBounds(400, 230, 300, 150);
-      this.male = new JButton("male");
-      this.female = new JButton("female");
-      genderButtonPanel.add(male);
-      genderButtonPanel.add(female);
-
-
-      JPanel startGameButtonPanel = new JPanel(null);
-      startGameButtonPanel.setBounds(500, 400, 100, 30);
-      startGameButtonPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+      /*
+       * --------------STARTUP----------------
+       */
       this.startGame = new JButton("Start Game");
-      this.startGame.setSize(100, 30);
-      startGameButtonPanel.add(startGame);
+      startGame.setBounds(560, 400, 100, 50);
 
       JPanel startUp = new JPanel(null);
-      startUp.add(nameLabelPanel);
-      startUp.add(nameFieldPanel);
-      startUp.add(genderLabelPanel);
-      startUp.add(genderButtonPanel);
-      startUp.add(startGameButtonPanel);
-      this.setSize(1280, 720);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setLocationRelativeTo(null);
-      this.setResizable(false);
-      this.setVisible(true);
-      
-
-      
-
-
-      
-
-
-
-
-
-
-
-
+      startUp.add(startGame);
 
     /*
       --------------PLAYER AREA----------------
@@ -131,26 +79,28 @@ public class GameView extends JFrame implements ActionListener {
       farmerPanel.add(farmerPic);
       farmerPanel.setBounds(0, 0, 80, 100);
 
-
-
-      JLabel nameLabel = new JLabel("Name : ");
-      this.name = new JLabel(" ");
-      JLabel levelLabel =  new JLabel("Level : ");
-      this.level =  new JLabel("1");
-      JLabel farmerTypeLabel = new JLabel("Farmer Type : ");
-      this.farmerType = new JButton("Farmer");
+      JLabel nameLabel = new JLabel("Name : " );
+      JLabel name = new JLabel("Dave");
       JLabel objectCoinsLabel = new JLabel("Object Coins : ");
       this.objectCoins = new JLabel("0");
+      JLabel levelLabel =  new JLabel("Level : ");
+      this.level =  new JLabel("1");
+      JLabel expLabel = new JLabel("Exp : ");
+      this.exp = new JLabel("0.0");
+      JLabel farmerTypeLabel = new JLabel("Farmer Type : ");
+      this.farmerType = new JButton("Farmer");
 
       // holds player info
-      JPanel playerInfo = new JPanel(new GridLayout(4,2, 0,0));
+      JPanel playerInfo = new JPanel(new GridLayout(5,2, 0,0));
       playerInfo.setBounds(80, 0, 170, 100);
       playerInfo.add(nameLabel);
       playerInfo.add(name);
-      playerInfo.add(levelLabel);
-      playerInfo.add(this.level);
       playerInfo.add(objectCoinsLabel);
       playerInfo.add(this.objectCoins);
+      playerInfo.add(levelLabel);
+      playerInfo.add(this.level);
+      playerInfo.add(expLabel);
+      playerInfo.add(this.exp);
       playerInfo.add(farmerTypeLabel);
       playerInfo.add(this.farmerType);
       playerInfo.setBorder(BorderFactory.createLineBorder(Color.black));
