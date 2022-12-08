@@ -17,7 +17,7 @@ public class MyFarm {
     private int day;                     // amount of days that have passed by in the game
     private Player player;               // the player of the game
     private Tile[] tiles = new Tile[50]; // 50 tiles
-    private Tools[] tool = new Tools[4]; // Plow, Watering Can, Fertilizer, Shovel
+    private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
     private Seed[] seeds = new Seed[8];  // Turnip, Carrot, Potato, Rose, Tulips, Sunflower, Mango, Apple
 
     /**
@@ -35,122 +35,19 @@ public class MyFarm {
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // initializes the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
         this.tool[3] = new Tools(7, 2, "Shovel");         // initializes the shovel tool
-        this.seeds[0] = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
-    }
-    // region unimplemented methods
-    // /**
-    //  * This method displays important information about the player and tile and
-    //  * asks the player what they want to do.
-    //  * 
-    //  * @param sc Scanner used to scan the user input.
-    //  */
-    // public void operation(Scanner sc) {
-    //     char tileChar;
-
-    //     int option = 0;
-    //     do {
-    //         tileChar = ' ';
-            
-    //         System.out.println("Hello " + this.player.getName() + "!");
-    //         System.out.println("Day: " + this.day);
-    //         System.out.println("ObjectCoins: " + this.player.getCoins());
-    //         System.out.println("Level: " + this.player.getLevel());
-
-    //         if (this.tile.getPlowed()) {
-    //             if (this.tile.getHasSeed() == false)
-    //                 tileChar = '_';
-    //             else if (this.tile.getIsWithered())
-    //                 tileChar = 'W';
-    //             else {
-    //                 switch (this.tile.getSeed().getName()) {
-    //                 case "Turnip":
-    //                     tileChar = 'T';
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //         System.out.println("=============");
-    //         System.out.println("     |" + tileChar + "|");
-    //         System.out.println("=============");
-    //         if (this.tile.getHasSeed()) {
-    //             System.out.println("Time left to harvest: " + this.tile.getTime());
-    //             System.out.println("Times watered: " + this.tile.getWater());
-    //             System.out.println("Times fertilized: " + this.tile.getFert());
-    //         }
-
-    //         System.out.println("1. Actions\t2. End Day");
-    //         System.out.print("What would you like to do: ");
-    //         option = sc.nextInt();
-
-    //         switch (option) {
-    //             case 1: {
-    //                 System.out.println("1. Plow\t\t(Cost : 0)\n2. Plant\t(Cost : 5)\n3. Water\t(Cost : 0)\n4. Fertilize\t(Cost : 10)\n5. Dig\t\t(Cost : 7)\n6. Harvest\n7. Back");
-    //                 int action;
-    //                 do {
-    //                     System.out.print("What would you like to do: ");
-    //                     action = sc.nextInt();
-    //                 } while (action < 1 || action > 7);
-    
-    //                 switch (action) {
-    //                     case 1: {
-    //                         if (this.player.plow(this.tool[0], this.tile)) {
-    //                             System.out.println("You plowed the tile!");
-    //                         } else {
-    //                             System.out.println("You cannot plow the tile!");
-    //                         }
-    //                         break;
-    //                     }
-    //                     case 2: {
-    //                         if (this.player.plant(this.seed, this.tile)) {
-    //                             System.out.println("You planted the seed!");
-    //                         } else {
-    //                             System.out.println("You cannot plant on this tile!");
-    //                         }
-    //                         break;
-    //                     }
-    //                     case 3: {
-    //                         if (this.player.water(this.tool[1], this.tile)) {
-    //                             System.out.println("You watered the tile!");
-    //                         } else {
-    //                             System.out.println("You cannot water this tile!");
-    //                         }
-    //                         break;
-    //                     }
-    //                     case 4: {
-    //                         if (this.player.fertilize(this.tool[2], this.tile)) {
-    //                             System.out.println("You fertilized the tile!");
-    //                         } else {
-    //                             System.out.println("Fertilizing failed!");
-    //                         }
-    //                         break;
-    //                     }
-    //                     case 5: {
-    //                         if (this.player.dig(this.tool[3], this.tile)) {
-    //                             System.out.println("You dug the tile out!");
-    //                         } else {
-    //                             System.out.println("Digging failed!");
-    //                         }
-    //                         break;
-    //                     }
-    //                     case 6: {
-    //                         if (this.player.harvest(this.tile)) {
-    //                             System.out.println("You harvested the tile!");
-    //                         } else {
-    //                             System.out.println("Harvesting failed!");
-    //                         }
-    //                         break;
-    //                     }
-    //                 }
-    //                 option = 0;
-    //                 break;
-    //             }
-    //         }
-    //         System.out.println("\n\n");
-    //     } while (option != 2);
+        this.tool[4] = new Tools(50, 15, "Pickaxe");      // initializes the pickaxe tool
         
-    //     this.endDay();
-    // }
+        this.seeds[0] = new Seed(5, 2, 1, 2, 0, 1, 6, 1, 2, 5, "Turnip", "Root Crop"); // instantiates the turnip seed
+        this.seeds[1] = new Seed(10, 3, 1, 2, 0, 1, 9, 1, 2, 7.5, "Carrot", "Root Crop"); // instantiates the carrot seed
+        this.seeds[2] = new Seed(20, 5, 3, 4, 1, 2, 3, 1, 10, 12.5, "Potato", "Root Crop"); // instantiates the potato seed
+        this.seeds[3] = new Seed(5, 2, 2, 3, 0, 1, 5, 1, 1, 2.5, "Rose", "Flower"); // instantiates the rose seed
+        this.seeds[4] = new Seed(10, 2, 2, 3, 0, 1, 9, 1, 1, 5, "Tulips", "Flower"); // instantiates the tulips seed
+        this.seeds[5] = new Seed(20, 3, 2, 3, 1, 2, 19, 1, 1, 7.5, "Sunflower", "Flower"); // instantiates the sunflower seed
+        this.seeds[6] = new Seed(100, 10, 7, 7, 4, 4, 8, 5, 15, 25, "Mango", "Fruit tree"); // instantiates the mango seed
+        this.seeds[7] = new Seed(200, 10, 7, 7, 5, 5, 5, 10, 15, 25, "Apple", "Fruit tree"); // instantiates the apple seed
+    }
 
+    // region unimplemented methods
 // /**
 //  * This method increments the day and updates the harvest time of the tile
 //  */
