@@ -68,13 +68,35 @@ public class MyFarm {
  */
     public boolean gameOver() {
         boolean allTilesWithered = true;
+        boolean noActiveCrops = true;
         for (int i = 0; i < seeds.length; i++) {
-            if (!tiles[i].getHasSeed())
+            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered())
+                noActiveCrops = false;
+            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered())
                 allTilesWithered = false;
-            else if (!tiles[i].getIsWithered())
-                allTilesWithered = false;
-        }    
-        return allTilesWithered || (this.player.getCoins() < 5);
+        }
+        return allTilesWithered || (noActiveCrops && this.player.getCoins() < 5);
+    }
+
+    public boolean availableSurroundings(int tile) {
+        
+        try {
+            for (int i = tile - 6; i < tile - 3; i++) {
+                if (tiles[i].getHasSeed() || (i + 1) % 5 == 0 || (i + 1) % 5 == 4)
+                    return false;
+            }
+            if (tiles[tile - 1].getHasSeed() || tiles[tile + 1].getHasSeed())
+                return false;
+            for (int i = tile + 4; i < tile + 7; i++) {
+                if (tiles[i].getHasSeed() || (i + 1) % 5 == 0 || (i + 1) % 5 == 4)
+                    return false;
+            }
+        }
+        catch (Exception e) {
+            return false;
+        }
+        
+        return true;
     }
 
     // region getters and setters

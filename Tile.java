@@ -10,6 +10,7 @@ public class Tile {
     private int harvestTime;    // The amount of days until the crop is ready to harvest
     private boolean hasSeed;    // If the tile has a seed planted on it
     private boolean isWithered; // If the crop is withered
+    private boolean hasRock;    // If the tile has a rock on it
 
     /**
      * This constructor initializes all the attributes to empty values.
@@ -30,6 +31,7 @@ public class Tile {
         this.harvestTime = 0;
         this.hasSeed = false;
         this.isWithered = false;
+        this.hasRock = false;
     }
 
 /**
@@ -149,5 +151,23 @@ public class Tile {
  */
     public int getFert() {
         return this.fertilizer;
+    }
+
+/**
+ * This method returns the value of hasRock.
+ * 
+ * @return The value of hasRock.
+ */
+    public boolean getHasRock() {
+        return this.hasRock;
+    }
+
+/**
+ * This method sets the value of hasRock to true.
+ * 
+ * @param hasRock The value of hasRock.
+ */
+    public void setRock() {
+        this.hasRock = true;
     }
 }

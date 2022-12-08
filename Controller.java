@@ -14,6 +14,7 @@ public class Controller {
    private void initializeView(GameView farmView) {
     addActionListeners(farmView);
     updateFarmerLabels(farmView);
+    //add filestreaming for rocks and setting rocks
    }
 
    private void updateFarmerLabels(GameView farmView) {
@@ -134,17 +135,35 @@ public class Controller {
         }
     });
 
+    farmView.setAddPickaxeBtnListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (myFarm.getPlayer().mine(myFarm.getTool()[4], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
+                farmView.setCurrTileIndex(-1);
+                farmView.toggleButtons();
+                updateFarmerLabels(farmView);
+            }
+        }
+    });
+
     for (int i = 0; i < myFarm.getSeeds().length; i++) {
         farmView.setAddSeedBtnListener(i, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 farmView.setCurrSeedIndex(farmView.currSeedIndex((JButton) e.getSource()));
-                if (myFarm.getPlayer().plant(myFarm.getSeeds()[farmView.getCurrSeedIndex()], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                    farmView.setButtonText(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
-                    farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
-                    farmView.setCurrTileIndex(-1);
-                    farmView.toggleButtons();
-                    updateFarmerLabels(farmView);
+                boolean canPlant = true;
+                if (myFarm.getSeeds()[farmView.getCurrSeedIndex()].getType() == "Fruit tree")
+                    canPlant = myFarm.availableSurroundings(farmView.getCurrTileIndex());
+                if (canPlant) {
+                    if (myFarm.getPlayer().plant(myFarm.getSeeds()[farmView.getCurrSeedIndex()], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                        farmView.setButtonText(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
+                        farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
+                        farmView.setCurrTileIndex(-1);
+                        farmView.toggleButtons();
+                        updateFarmerLabels(farmView);
+                    }
                 }
             }
         });

@@ -125,6 +125,17 @@ public class Player {
         return false;
     }
     
+    // Mine method
+    public boolean mine(Tools tool, Tile tile) {
+        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
+            tile.setRock();
+            xp += tool.getXp();
+            this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully mined the tile";
+            return true;
+        }
+        return false;
+    }
 /**
  * This method returns a boolean value whether a tile has been successfully dug
  * by having enough obejectCoins. If the tile was dug up, objectCoins of the player 
