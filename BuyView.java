@@ -7,17 +7,18 @@ public class BuyView extends JFrame{
    private JButton buyButtons[];
 
    public BuyView() {
-      
-
-      // shows the type of farmer types to buy 
+      JLabel[] backgrounds = new JLabel[3];
       JPanel[] farmerTypes = new JPanel[3];
       this.buyButtons = new JButton[3];
-      for (int i = 0; i < buyButtons.length; i++){
-        this.buyButtons[i] = new JButton("Buy");
+      for (int i = 0; i < 3; i++){
+        farmerTypes[i] = new JPanel(new GridLayout(8,1, 0, 0));
+        backgrounds[i] = new JLabel(new ImageIcon(new ImageIcon("woodBg.jpg").getImage().getScaledInstance(300,540, Image.SCALE_DEFAULT)));
+        this.buyButtons[i] = new JButton(new ImageIcon(new ImageIcon("buyPic.jpg").getImage().getScaledInstance(300,300, Image.SCALE_DEFAULT)));
       }
-      for (int i = 0; i < farmerTypes.length; i++){
-        farmerTypes[i] = new JPanel(new GridLayout(8,1, 10, 0));
-      }
+      backgrounds[0].setBounds(0,0,290,530);
+      backgrounds[1].setBounds(295,0,290,530);
+      backgrounds[2].setBounds(595,0,290,530);
+
 
       farmerTypes[0].add(new JLabel("Registered Farmer"));
       farmerTypes[0].add(new JLabel("Cost: 200 ObjectCoins"));
@@ -46,17 +47,22 @@ public class BuyView extends JFrame{
       farmerTypes[2].add(new JLabel("Fertilizer Bonus Limit Increase : +1"));
       farmerTypes[2].add(buyButtons[2]);
 
+      farmerTypes[0].setBounds(0,0,290,476);
+      farmerTypes[1].setBounds(296,0,290,476);
+      farmerTypes[2].setBounds(596,0,290,476);
 
-
-
+      farmerTypes[0].setBackground(new Color(0,0,0,0));
+      farmerTypes[1].setBackground(new Color(0,0,0,0));
+      farmerTypes[2].setBackground(new Color(0,0,0,0));
       
-
      this.mainFrame = new JFrame("Buy Farmer Types");
-     this.mainFrame.setLayout(new GridLayout(1, 3));
+     this.mainFrame.setLayout(null);
      this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
      this.mainFrame.setSize(900,500);
+
      for (int i = 0; i < farmerTypes.length; i++){
-      this.mainFrame.add(farmerTypes[i]);
+        this.mainFrame.add(farmerTypes[i]);
+        this.mainFrame.add(backgrounds[i]);
     }
      this.mainFrame.setResizable(false);
      this.mainFrame.setVisible(true);

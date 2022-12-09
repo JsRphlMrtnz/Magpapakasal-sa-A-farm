@@ -14,7 +14,7 @@ public class Controller {
     updateFarmerLabels();
     for (int i = 0; i < myFarm.getTiles().length; i++) {
         if (myFarm.getTiles()[i].getHasRock())
-            farmView.setButtonText(i, "Rock");
+            farmView.setButtonImage(i, "Rock");
     }
 
    }
@@ -47,7 +47,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (myFarm.getPlayer().plow(myFarm.getTool()[0], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                farmView.setButtonText(farmView.getCurrTileIndex(), "Plowed");
+                farmView.setButtonImage(farmView.getCurrTileIndex(), "Plowed");
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
@@ -84,7 +84,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (myFarm.getPlayer().dig(myFarm.getTool()[3], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
@@ -105,7 +105,7 @@ public class Controller {
                 
                 for (int i = 0; i < myFarm.getTiles().length; i++) {
                     if (myFarm.getTiles()[i].getIsWithered()) {
-                        farmView.setButtonText(i, "Withered");
+                        farmView.setButtonImage(i, "Withered");
                     }
                 }
                 farmView.setFeedbackText("");
@@ -194,7 +194,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (myFarm.getPlayer().harvest(myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 myFarm.getTiles()[farmView.getCurrTileIndex()].reset();
                 farmView.setCurrTileIndex(-1);
@@ -208,7 +208,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (myFarm.getPlayer().mine(myFarm.getTool()[4], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
@@ -227,7 +227,7 @@ public class Controller {
                     canPlant = myFarm.availableSurroundings(farmView.getCurrTileIndex());
                 if (canPlant) {
                     if (myFarm.getPlayer().plant(myFarm.getSeeds()[farmView.getCurrSeedIndex()], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
-                        farmView.setButtonText(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
+                        farmView.setButtonImage(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
                         farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                         farmView.setCurrTileIndex(-1);
                         farmView.toggleButtons();
