@@ -59,7 +59,7 @@ public class MyFarm {
  */
     public void endDay() {
         this.day++;
-        for (int i = 0; i < seeds.length; i++) {
+        for (int i = 0; i < tiles.length; i++) {
             if (tiles[i].getHasSeed()) {
                 tiles[i].updateTime();
                 tiles[i].updateWithered();
@@ -76,11 +76,11 @@ public class MyFarm {
     public boolean gameOver() {
         boolean allTilesWithered = true;
         boolean noActiveCrops = true;
-        for (int i = 0; i < seeds.length; i++) {
-            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered())
+        for (int i = 0; i < tiles.length; i++) {
+            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered()) {
                 noActiveCrops = false;
-            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered())
                 allTilesWithered = false;
+            }
         }
         return allTilesWithered || (noActiveCrops && this.player.getCoins() < 5);
     }

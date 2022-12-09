@@ -17,7 +17,7 @@ public class Player {
      */
     public Player(FarmerType type) {
         this.xp = 0;
-        this.objectCoins = 100;
+        this.objectCoins = 1000;
         this.type = type;
     }
 
