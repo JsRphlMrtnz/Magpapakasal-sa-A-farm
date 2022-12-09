@@ -381,6 +381,15 @@ public class GameView extends JFrame {
     }
   
   // region getters and setters
+
+  public void setGameOverButtonYesActionListener(ActionListener listener) {
+    this.gameOverButtonYes.addActionListener(listener);
+  }
+
+  public void setGameOverButtonNoActionListener(ActionListener listener) {
+    this.gameOverButtonNo.addActionListener(listener);
+  }
+
   public void setFeedbackText(String text) {
     this.feedback.setText(text);
   }

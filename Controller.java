@@ -7,24 +7,24 @@ import java.awt.event.MouseListener;
 
 public class Controller {
     MyFarm myFarm;
+    GameView farmView;
    public Controller(){
-    myFarm = new MyFarm();
    }
 
-   private void initializeView(GameView farmView) {
-    addActionListeners(farmView);
-    updateFarmerLabels(farmView);
+   private void initializeView() {
+    addActionListeners();
+    updateFarmerLabels();
     //add filestreaming for rocks and setting rocks
    }
 
-   private void updateFarmerLabels(GameView farmView) {
+   private void updateFarmerLabels() {
     farmView.setObjectCoins(String.valueOf(myFarm.getPlayer().getCoins()));
     farmView.setLevel(String.valueOf(myFarm.getPlayer().getLevel()));
     farmView.setExp(String.valueOf(myFarm.getPlayer().getXp()));
     farmView.setFarmerType(String.valueOf(myFarm.getPlayer().getType()));
    }
 
-   private void addActionListeners(GameView farmView) {
+   private void addActionListeners() {
 
     farmView.setStartActionListener(new ActionListener() {
         @Override
@@ -49,7 +49,7 @@ public class Controller {
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -61,7 +61,7 @@ public class Controller {
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -73,7 +73,7 @@ public class Controller {
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -85,7 +85,7 @@ public class Controller {
                 farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -142,7 +142,7 @@ public class Controller {
               farmView.setFarmerType(myFarm.getPlayer().getType());
               farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
               frame.disableButtons(0);
-              updateFarmerLabels(farmView);
+              updateFarmerLabels();
             }
             else {
               farmView.setFeedbackText("Not enough coins/xp");
@@ -159,7 +159,7 @@ public class Controller {
                 farmView.setFarmerType(myFarm.getPlayer().getType());
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 frame.disableButtons(1);
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
               }
               else {
                 farmView.setFeedbackText("Not enough coins/xp");
@@ -176,7 +176,7 @@ public class Controller {
                 farmView.setFarmerType(myFarm.getPlayer().getType());
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 frame.disableButtons(2);
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
               }
               else {
                 farmView.setFeedbackText("Not enough coins/xp");
@@ -196,7 +196,7 @@ public class Controller {
                 myFarm.getTiles()[farmView.getCurrTileIndex()].reset();
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -209,7 +209,7 @@ public class Controller {
                 farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
-                updateFarmerLabels(farmView);
+                updateFarmerLabels();
             }
         }
     });
@@ -228,7 +228,7 @@ public class Controller {
                         farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                         farmView.setCurrTileIndex(-1);
                         farmView.toggleButtons();
-                        updateFarmerLabels(farmView);
+                        updateFarmerLabels();
                     }
                 }
             }
@@ -236,8 +236,7 @@ public class Controller {
     }
 
     for (int i = 0; i < myFarm.getTiles().length; i++) {
-        farmView.addActionListeneronTiles(i, new MouseListener()
-        {
+        farmView.addActionListeneronTiles(i, new MouseListener() {
 
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -278,12 +277,27 @@ public class Controller {
         });
     }
     
+    farmView.setGameOverButtonNoActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+    });
+
+    farmView.setGameOverButtonYesActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            farmView.dispose();
+            run();
+        }
+    });
     farmView.toggleButtons();
   }
 
   private void run() {
-      GameView view = new GameView();
-      initializeView(view);
+    myFarm = new MyFarm();
+    farmView = new GameView();
+    initializeView();
   }
    public static void main(String[] args){
         Controller controller = new Controller();

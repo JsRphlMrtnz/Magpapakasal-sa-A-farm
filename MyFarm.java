@@ -88,7 +88,6 @@ public class MyFarm {
     public boolean availableSurroundings(int tile) {
         
         try {
-            //FIX ME
             int min = tile - 6;
             int max = tile - 3;
             int prev = 0;
