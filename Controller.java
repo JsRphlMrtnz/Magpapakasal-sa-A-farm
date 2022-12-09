@@ -81,6 +81,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             if (myFarm.getPlayer().dig(myFarm.getTool()[3], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                 farmView.setButtonText(farmView.getCurrTileIndex(), "tile");
+                farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                 farmView.setCurrTileIndex(-1);
                 farmView.toggleButtons();
                 updateFarmerLabels();

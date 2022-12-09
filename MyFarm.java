@@ -23,6 +23,8 @@ public class MyFarm {
         for (int i = 0; i < tiles.length; i++) { // initializes all the tiles
             tiles[i] = new Tile();
         }
+
+        
         this.tool[0] = new Tools(0, 0.5, "Plow");         // initializes the plow tool
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // initializes the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
@@ -67,14 +69,20 @@ public class MyFarm {
  * @return This returns a boolean value to determine if it is gameover.
  */
     public boolean gameOver() {
+        int witherCount = 0;
         boolean allTilesWithered = true;
         boolean noActiveCrops = true;
         for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered()) {
+            if (tiles[i].getHasSeed()) {
                 noActiveCrops = false;
-                allTilesWithered = false;
+                if (tiles[i].getIsWithered())
+                    witherCount++;
             }
         }
+        if (witherCount == tiles.length)
+            allTilesWithered = true;
+        else
+            allTilesWithered = false;
         return allTilesWithered || (noActiveCrops && this.player.getCoins() < 5);
     }
 
