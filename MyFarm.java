@@ -1,17 +1,10 @@
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.Scanner;
-
-import javax.swing.JButton;
-
-
 /**
  * 
  * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
  * 
  * @author Don Laude A. Aspecto
  * @author Jose Raphael E. Martinez
- * @version 1.0
+ * @version 2.0
  */
 public class MyFarm {
     private int day;                     // amount of days that have passed by in the game

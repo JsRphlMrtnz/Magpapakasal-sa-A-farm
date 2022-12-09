@@ -1,16 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
 
-import org.w3c.dom.events.MouseEvent;
-
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.concurrent.Flow;
 
 
 public class GameView extends JFrame {
-    private JFrame mainFrame;
     private CardLayout cardLayout;
     private Container container;
   
