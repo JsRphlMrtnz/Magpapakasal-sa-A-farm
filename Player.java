@@ -17,7 +17,7 @@ public class Player {
      */
     public Player(FarmerType type) {
         this.xp = 0;
-        this.objectCoins = 1000;
+        this.objectCoins = 100;
         this.type = type;
     }
 
@@ -71,7 +71,7 @@ public class Player {
  * @return true if it was successfully plowed.
  */
     public boolean plow(Tools tool, Tile tile) {
-        if (tile.getPlowed() == false) {
+        if (!tile.getPlowed() && !tile.getHasRock()) {
             tile.updatePlow();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
@@ -114,7 +114,7 @@ public class Player {
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
-        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
+        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && !tile.getIsWithered()) {
             tile.updateFert();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
@@ -126,11 +126,11 @@ public class Player {
     
     // Mine method
     public boolean mine(Tools tool, Tile tile) {
-        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
-            tile.setRock();
+        if (this.objectCoins >= tool.getCost() && tile.getHasRock()) {
+            tile.setRock(false);
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
-            feedbackString = "Successfully mined the tile";
+            feedbackString = "Successfully mined the rock";
             return true;
         }
         return false;
@@ -148,14 +148,14 @@ public class Player {
     public boolean dig (Tools tool, Tile tile) {
         if (this.objectCoins < tool.getCost())
             return false;
-        if (tile.getPlowed()) {
+        if (tile.getPlowed() && !tile.getHasRock()) {
             tile.updatePlow();
             if (tile.getHasSeed())
                 tile.reset();
+            xp += tool.getXp();
+            feedbackString = "Successfully dug up the tile.";
         }
-        xp += tool.getXp();
         this.objectCoins -= tool.getCost();
-        feedbackString = "Successfully dug up the tile.";
         return true;
     }
 
@@ -168,7 +168,7 @@ public class Player {
      * @return A boolean value whether a tile has been successfully harvested.
      */
     public boolean harvest(Tile tile) {
-        if (tile.getTime() == 0 && tile.getHasSeed() && tile.getIsWithered() == false) {
+        if (tile.getTime() == 0 && tile.getHasSeed() && !tile.getIsWithered()) {
             int productsProduced = new Random().nextInt(tile.getSeed().getMaxProduce() - tile.getSeed().getMinProduce() + 1) + tile.getSeed().getMinProduce();
             int harvestTotal = productsProduced * (tile.getSeed().getSellingPrice() + this.type.getBonusEarning());
             

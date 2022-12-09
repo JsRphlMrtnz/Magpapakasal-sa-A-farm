@@ -167,7 +167,7 @@ public class Tile {
  * 
  * @param hasRock The value of hasRock.
  */
-    public void setRock() {
-        this.hasRock = true;
+    public void setRock(boolean hasRock) {
+        this.hasRock = hasRock;
     }
 }

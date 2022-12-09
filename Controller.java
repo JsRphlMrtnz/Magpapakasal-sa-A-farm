@@ -12,7 +12,11 @@ public class Controller {
    private void initializeView() {
     addActionListeners();
     updateFarmerLabels();
-    //add filestreaming for rocks and setting rocks
+    for (int i = 0; i < myFarm.getTiles().length; i++) {
+        if (myFarm.getTiles()[i].getHasRock())
+            farmView.setButtonText(i, "Rock");
+    }
+
    }
 
    private void updateFarmerLabels() {
@@ -282,10 +286,15 @@ public class Controller {
         public void mousePressed(java.awt.event.MouseEvent e) {
             if(SwingUtilities.isRightMouseButton(e)){
             JPopupMenu popup = new JPopupMenu();
-            popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getPlowed()));
-            popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getWater()));
-            popup.add(new JLabel("Times Fertilized: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getFert()));
-            popup.add(new JLabel("Days until harvest: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getTime()));
+            if (myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getHasRock()) {
+                popup.add(new JLabel("Currently has a rock"));
+            }
+            else {
+                popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getPlowed()));
+                popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getWater()));
+                popup.add(new JLabel("Times Fertilized: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getFert()));
+                popup.add(new JLabel("Days until harvest: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getTime()));
+            }
             farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource(), 1), e.getX(), e.getY(), 1);
             }
         }

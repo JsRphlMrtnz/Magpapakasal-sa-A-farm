@@ -1,3 +1,6 @@
+import java.io.File;
+import java.util.Scanner;
+
 /**
  * 
  * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
@@ -24,7 +27,17 @@ public class MyFarm {
             tiles[i] = new Tile();
         }
 
-        
+
+        try { // initializes the rocks
+            Scanner sc = new Scanner(new File("rock.txt"));
+            while (sc.hasNext()) {
+                int rock = sc.nextInt();
+                tiles[rock].setRock(true);
+            }
+            sc.close();
+        } catch (Exception e) {
+        }
+
         this.tool[0] = new Tools(0, 0.5, "Plow");         // initializes the plow tool
         this.tool[1] = new Tools(0, 0.5, "Watering Can"); // initializes the watering can tool
         this.tool[2] = new Tools(10, 4, "Fertilizer");    // initializes the fertilizer tool
@@ -73,11 +86,11 @@ public class MyFarm {
         boolean allTilesWithered = true;
         boolean noActiveCrops = true;
         for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i].getHasSeed()) {
+            if (tiles[i].getHasSeed() && !tiles[i].getIsWithered()) {
                 noActiveCrops = false;
-                if (tiles[i].getIsWithered())
-                    witherCount++;
             }
+            if (tiles[i].getIsWithered())
+                    witherCount++;
         }
         if (witherCount == tiles.length)
             allTilesWithered = true;
@@ -95,10 +108,10 @@ public class MyFarm {
             for (int i = min; i < max; i++) {
                 if (i != min)
                     prev = (i - 1) % 5;
-                if (tiles[i].getHasSeed() || prev > i % 5)
+                if (tiles[i].getHasSeed() || tiles[i].getHasRock() || prev > i % 5)
                     return false;
             }
-            if (tiles[tile - 1].getHasSeed() || tiles[tile + 1].getHasSeed())
+            if (tiles[tile - 1].getHasSeed() ||  tiles[tile - 1].getHasRock() || tiles[tile + 1].getHasSeed() ||  tiles[tile + 1].getHasRock())
                 return false;
             min = tile + 4;
             max = tile + 7;
@@ -106,7 +119,7 @@ public class MyFarm {
             for (int i = min; i < max; i++) {
                 if (i != min)
                     prev = (i - 1) % 5;
-                if (tiles[i].getHasSeed() || prev > i % 5)
+                if (tiles[i].getHasSeed() || tiles[i].getHasRock() || prev > i % 5)
                     return false;
             }
         }
