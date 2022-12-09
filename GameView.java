@@ -26,7 +26,6 @@ public class GameView extends JFrame {
     //right
     private JPanel seedArea;
     private JButton[] seeds;//turnip, carrot, potato, rose, tulips, sunflower, mango, apple
-    private JPopupMenu seedPopupMenu[]; //popup menu for each seed
 
     //middle
     private JPanel tileArea;
@@ -136,90 +135,6 @@ public class GameView extends JFrame {
       this.seeds[5] = new JButton("Sunflower");
       this.seeds[6] = new JButton("Mango");
       this.seeds[7] = new JButton("Apple");
-
-
-      this.seedPopupMenu = new JPopupMenu[8];
-      this.seedPopupMenu[0] = new JPopupMenu();
-      this.seedPopupMenu[0].add(new JLabel("Turnip seed"));
-      this.seedPopupMenu[0].add(new JLabel("Time : 2 days"));
-      this.seedPopupMenu[0].add(new JLabel("Water : 1 (2)"));
-      this.seedPopupMenu[0].add(new JLabel("Fertilizer : 0 (1)"));
-      this.seedPopupMenu[0].add(new JLabel("Produce : 1-2"));
-      this.seedPopupMenu[0].add(new JLabel("Cost : 5"));
-      this.seedPopupMenu[0].add(new JLabel("Sell : 6"));
-      this.seedPopupMenu[0].add(new JLabel("XP : 5"));
-
-      this.seedPopupMenu[1] = new JPopupMenu();
-      this.seedPopupMenu[1].add(new JLabel("Seed : Carrot"));
-      this.seedPopupMenu[1].add(new JLabel("Time : 3 days"));
-      this.seedPopupMenu[1].add(new JLabel("Water : 1 (2)"));
-      this.seedPopupMenu[1].add(new JLabel("Fertilizer : 0 (1)"));
-      this.seedPopupMenu[1].add(new JLabel("Produce : 1-2"));
-      this.seedPopupMenu[1].add(new JLabel("Cost : 10"));
-      this.seedPopupMenu[1].add(new JLabel("Sell : 9"));
-      this.seedPopupMenu[1].add(new JLabel("XP : 7.5"));
-
-
-      this.seedPopupMenu[2] = new JPopupMenu();
-      this.seedPopupMenu[2].add(new JLabel("Seed : Potato"));
-      this.seedPopupMenu[2].add(new JLabel("Time : 5 days"));
-      this.seedPopupMenu[2].add(new JLabel("Water : 3 (4)"));
-      this.seedPopupMenu[2].add(new JLabel("Fertilizer : 1 (2)"));
-      this.seedPopupMenu[2].add(new JLabel("Produce : 1-10"));
-      this.seedPopupMenu[2].add(new JLabel("Cost : 20"));
-      this.seedPopupMenu[2].add(new JLabel("Sell : 3"));
-      this.seedPopupMenu[2].add(new JLabel("XP : 12.5"));
-
-      this.seedPopupMenu[3] = new JPopupMenu();
-      this.seedPopupMenu[3].add(new JLabel("Seed : Rose"));
-      this.seedPopupMenu[3].add(new JLabel("Time : 1 day"));
-      this.seedPopupMenu[3].add(new JLabel("Water : 1 (2)"));
-      this.seedPopupMenu[3].add(new JLabel("Fertilizer : 0 (1)"));
-      this.seedPopupMenu[3].add(new JLabel("Produce : 1"));
-      this.seedPopupMenu[3].add(new JLabel("Cost : 5"));
-      this.seedPopupMenu[3].add(new JLabel("Sell : 5"));
-      this.seedPopupMenu[3].add(new JLabel("XP : 2.5"));
-
-      this.seedPopupMenu[4] = new JPopupMenu();
-      this.seedPopupMenu[4].add(new JLabel("Seed : Tulips"));
-      this.seedPopupMenu[4].add(new JLabel("Time : 2 days"));
-      this.seedPopupMenu[4].add(new JLabel("Water : 2 (3)"));
-      this.seedPopupMenu[4].add(new JLabel("Fertilizer : 0 (1)"));
-      this.seedPopupMenu[4].add(new JLabel("Produce : 1"));
-      this.seedPopupMenu[4].add(new JLabel("Cost : 10"));
-      this.seedPopupMenu[4].add(new JLabel("Sell : 9"));
-      this.seedPopupMenu[4].add(new JLabel("XP : 5"));
-
-
-      this.seedPopupMenu[5] = new JPopupMenu();
-      this.seedPopupMenu[5].add(new JLabel("Seed : Sunflower"));
-      this.seedPopupMenu[5].add(new JLabel("Time : 3 days"));
-      this.seedPopupMenu[5].add(new JLabel("Water : 2 (3)"));
-      this.seedPopupMenu[5].add(new JLabel("Fertilizer : 1 (2)"));
-      this.seedPopupMenu[5].add(new JLabel("Produce : 1"));
-      this.seedPopupMenu[5].add(new JLabel("Cost : 20"));
-      this.seedPopupMenu[5].add(new JLabel("Sell : 19"));
-      this.seedPopupMenu[5].add(new JLabel("XP : 7.5"));
-
-      this.seedPopupMenu[6] = new JPopupMenu();
-      this.seedPopupMenu[6].add(new JLabel("Seed : Mango"));
-      this.seedPopupMenu[6].add(new JLabel("Time : 10 days"));
-      this.seedPopupMenu[6].add(new JLabel("Water : 7 (7)"));
-      this.seedPopupMenu[6].add(new JLabel("Fertilizer : 4 (4)"));
-      this.seedPopupMenu[6].add(new JLabel("Produce : 5-15"));
-      this.seedPopupMenu[6].add(new JLabel("Cost : 100"));
-      this.seedPopupMenu[6].add(new JLabel("Sell : 8"));
-      this.seedPopupMenu[6].add(new JLabel("XP : 25"));
-
-      this.seedPopupMenu[7] = new JPopupMenu();
-      this.seedPopupMenu[7].add(new JLabel("Seed : Apple"));
-      this.seedPopupMenu[7].add(new JLabel("Time : 10 days"));
-      this.seedPopupMenu[7].add(new JLabel("Water : 7 (7)"));
-      this.seedPopupMenu[7].add(new JLabel("Fertilizer : 5 (5)"));
-      this.seedPopupMenu[7].add(new JLabel("Produce : 10-15"));
-      this.seedPopupMenu[7].add(new JLabel("Cost : 200"));
-      this.seedPopupMenu[7].add(new JLabel("Sell : 5"));
-      this.seedPopupMenu[7].add(new JLabel("XP : 25"));
 
       // holds the seeds
       this.seedArea = new JPanel();
@@ -336,11 +251,6 @@ public class GameView extends JFrame {
       this.container.add("1", startUp);
       this.container.add("2", gameArea);
       this.container.add("3", gameOver);
-      
-
-      for(int i = 0; i < this.seeds.length; i++){
-        addActionListeneronSeed(seeds[i], i);
-      }
 
   }
 
@@ -356,10 +266,19 @@ public class GameView extends JFrame {
       return -1;
     }
   
-  public int rightClickIndex(JButton b) {
-    for (int i = 0; i < this.tiles.length; i++) {
-      if (b == this.tiles[i]) {
-        return i;
+  public int rightClickIndex(JButton b, int mode) {
+    if (mode == 1) {
+      for (int i = 0; i < tiles.length; i++) {
+        if (b == this.tiles[i]) {
+          return i;
+        }
+      }
+    }
+    else if (mode == 2) {
+      for (int i = 0; i < seeds.length; i++) {
+        if (b == this.seeds[i]) {
+          return i;
+        }
       }
     }
     return -1;
@@ -451,10 +370,15 @@ public class GameView extends JFrame {
       this.day.setText(text);
     }
 
-    public void setPopupMenu(JPopupMenu popupMenu, int i, int x, int y){
+    public void setPopupMenu(JPopupMenu popupMenu, int i, int x, int y, int mode){
       this.popupMenu = popupMenu;
-      this.popupMenu.show(tiles[i], x, y);
+      if (mode == 1)
+        this.popupMenu.show(tiles[i], x, y);
+      else if (mode == 2)
+        this.popupMenu.show(seeds[i], x, y);
     }
+
+    
     
     public void setObjectCoins(String coins){
       this.objectCoins.setText(coins);
@@ -518,43 +442,9 @@ public class GameView extends JFrame {
       tiles[i].addMouseListener(listener);
   }
 
-  public void addActionListeneronSeed(JButton seeds, int number)
+  public void addActionListeneronSeed(int i, MouseListener listener)
   {
-      seeds.addMouseListener((MouseListener) new MouseListener()
-      {
-
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mousePressed(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          if(SwingUtilities.isRightMouseButton(e)){
-            seedPopupMenu[number].show(seeds, e.getX(), e.getY());
-          }
-        }
-
-        @Override
-        public void mouseReleased(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mouseEntered(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-
-        @Override
-        public void mouseExited(java.awt.event.MouseEvent e) {
-          // TODO Auto-generated method stub
-          
-        }
-      });
+      seeds[i].addMouseListener(listener);
   }
 
 }

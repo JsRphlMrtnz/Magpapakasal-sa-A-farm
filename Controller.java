@@ -231,6 +231,43 @@ public class Controller {
                 }
             }
         });
+
+        farmView.addActionListeneronSeed(i, (MouseListener) new MouseListener()
+        {
+  
+          @Override
+          public void mouseClicked(java.awt.event.MouseEvent e) {            
+          }
+  
+          @Override
+          public void mousePressed(java.awt.event.MouseEvent e) {
+            if(SwingUtilities.isRightMouseButton(e)){
+                JPopupMenu popup = new JPopupMenu();
+                popup.add(new JLabel("Seed : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getName()));
+                popup.add(new JLabel("Time : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getHarvestTime() + " days"));
+                popup.add(new JLabel("Water : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMinWater() + " (" + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMaxWater() + ")"));
+                popup.add(new JLabel("Fertilizer : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMinFertilizer() + " (" + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMaxFertilizer() + ")"));
+                popup.add(new JLabel("Produce : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMinProduce() + "-" + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getMaxProduce()));
+                popup.add(new JLabel("Cost : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getCost()));
+                popup.add(new JLabel("Sell : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getSellingPrice()));
+                popup.add(new JLabel("XP : " + myFarm.getSeeds()[farmView.rightClickIndex((JButton) e.getSource(), 2)].getXp()));
+                
+                farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource(), 2), e.getX(), e.getY(), 2);
+            }
+          }
+  
+          @Override
+          public void mouseReleased(java.awt.event.MouseEvent e) {            
+          }
+  
+          @Override
+          public void mouseEntered(java.awt.event.MouseEvent e) {            
+          }
+  
+          @Override
+          public void mouseExited(java.awt.event.MouseEvent e) {            
+          }
+        });
     }
 
     for (int i = 0; i < myFarm.getTiles().length; i++) {
@@ -244,11 +281,11 @@ public class Controller {
         public void mousePressed(java.awt.event.MouseEvent e) {
             if(SwingUtilities.isRightMouseButton(e)){
             JPopupMenu popup = new JPopupMenu();
-            popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getPlowed()));
-            popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getWater()));
-            popup.add(new JLabel("Times Fertilized: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getFert()));
-            popup.add(new JLabel("Days until harvest: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource())].getTime()));
-            farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource()), e.getX(), e.getY());
+            popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getPlowed()));
+            popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getWater()));
+            popup.add(new JLabel("Times Fertilized: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getFert()));
+            popup.add(new JLabel("Days until harvest: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getTime()));
+            farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource(), 1), e.getX(), e.getY(), 1);
             }
         }
 
