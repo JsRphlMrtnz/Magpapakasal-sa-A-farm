@@ -88,14 +88,25 @@ public class MyFarm {
     public boolean availableSurroundings(int tile) {
         
         try {
-            for (int i = tile - 6; i < tile - 3; i++) {
-                if (tiles[i].getHasSeed() || (i + 1) % 5 == 0 || (i + 1) % 5 == 4)
+            //FIX ME
+            int min = tile - 6;
+            int max = tile - 3;
+            int prev = 0;
+            for (int i = min; i < max; i++) {
+                if (i != min)
+                    prev = (i - 1) % 5;
+                if (tiles[i].getHasSeed() || prev > i % 5)
                     return false;
             }
             if (tiles[tile - 1].getHasSeed() || tiles[tile + 1].getHasSeed())
                 return false;
-            for (int i = tile + 4; i < tile + 7; i++) {
-                if (tiles[i].getHasSeed() || (i + 1) % 5 == 0 || (i + 1) % 5 == 4)
+            min = tile + 4;
+            max = tile + 7;
+            prev = 0;
+            for (int i = min; i < max; i++) {
+                if (i != min)
+                    prev = (i - 1) % 5;
+                if (tiles[i].getHasSeed() || prev > i % 5)
                     return false;
             }
         }
