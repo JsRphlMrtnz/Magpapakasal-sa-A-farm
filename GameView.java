@@ -281,18 +281,25 @@ public class GameView extends JFrame {
         }
       }
     }
-    return -1;
-  }
-    public int currSeedIndex(JButton b) {
-      
-      for (int i = 0; i < this.seeds.length; i++) {
-        if (b == this.seeds[i]) {
+    else if (mode == 3) {
+      for (int i = 0; i < tools.length; i++) {
+        if (b == this.tools[i]) {
           return i;
         }
       }
-      
-      return -1;
     }
+    return -1;
+  
+  }
+  public int currSeedIndex(JButton b) {
+    for (int i = 0; i < this.seeds.length; i++) {
+      if (b == this.seeds[i]) {
+        return i;
+      }
+    }
+    
+    return -1;
+  }
   
   // region getters and setters
 
@@ -376,6 +383,8 @@ public class GameView extends JFrame {
         this.popupMenu.show(tiles[i], x, y);
       else if (mode == 2)
         this.popupMenu.show(seeds[i], x, y);
+      else if (mode == 3)
+        this.popupMenu.show(tools[i], x, y);
     }
 
     
@@ -442,10 +451,12 @@ public class GameView extends JFrame {
       tiles[i].addMouseListener(listener);
   }
 
-  public void addActionListeneronSeed(int i, MouseListener listener)
-  {
+  public void addActionListeneronSeed(int i, MouseListener listener) {
       seeds[i].addMouseListener(listener);
   }
 
+  public void addActionListeneronTools(int i, MouseListener listener) {
+      tools[i].addMouseListener(listener);
+  }
 }
 

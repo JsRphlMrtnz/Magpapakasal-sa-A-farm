@@ -315,6 +315,40 @@ public class Controller {
         });
     }
     
+    for (int i = 0; i < myFarm.getTool().length; i++) {
+        farmView.addActionListeneronTools(i + 1, new MouseListener() {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+            }
+    
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                JPopupMenu popup = new JPopupMenu();
+                popup.add(new JLabel("Name : " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getName()));
+                popup.add(new JLabel("Cost : " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getCost()));
+                popup.add(new JLabel("XP: " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getXp()));
+                farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource(), 3), e.getX(), e.getY(), 3);
+                }
+            }
+    
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+            }
+    
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                
+            }
+    
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                
+            }
+            });
+    }
+
     farmView.setGameOverButtonNoActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
