@@ -343,6 +343,11 @@ public class GameView extends JFrame {
 
   //region --------------GETTERS & SETTERS----------------
 
+  /**
+   * This method sets the border of the tile to white or grey
+   * @param i the index of the tile
+   * @param mode 1 if white, 2 if grey
+   */
   public void setButtonBorder(int i, int mode) {
     if (mode == 1) {
       this.tiles[i].setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
