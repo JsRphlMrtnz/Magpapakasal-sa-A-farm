@@ -67,7 +67,7 @@ public class GameView extends JFrame {
       this.seedSprites[1] = new ImageIcon(new ImageIcon("carrot.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
       this.seedSprites[2] = new ImageIcon(new ImageIcon("potato.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
       this.seedSprites[3] = new ImageIcon(new ImageIcon("rose.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-      this.seedSprites[4] = new ImageIcon(new ImageIcon("tulips.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+      this.seedSprites[4] = new ImageIcon(new ImageIcon("tulip.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
       this.seedSprites[5] = new ImageIcon(new ImageIcon("sunflower.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
       this.seedSprites[6] = new ImageIcon(new ImageIcon("mango.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
       this.seedSprites[7] = new ImageIcon(new ImageIcon("apple.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
