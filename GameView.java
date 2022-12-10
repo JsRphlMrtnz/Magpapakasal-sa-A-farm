@@ -267,11 +267,11 @@ public class GameView extends JFrame {
   }
   
   /**
-   * This method is used to get the index of the seed that is right clicked
+   * This method is used to get the index of the button that is right clicked
    * 
    * @param b the button that is right clicked
    * @param mode 1 if tile, 2 if seed, 3 if tool
-   * @return the index of the button, -1 if seed is clicked again
+   * @return the index of the button, -1 if button is right clicked again
    */
   public int rightClickIndex(JButton b, int mode) {
     if (mode == 1) {
