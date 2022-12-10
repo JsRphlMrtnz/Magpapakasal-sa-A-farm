@@ -105,6 +105,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().dig(myFarm.getTools()[3], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
