@@ -31,11 +31,9 @@ public class GameView extends JFrame {
   private JButton[] tools; // harvest, plow, wateringCan, fertilizer, pickaxe, shovel
 
   // right
-  private JPanel seedArea;
   private JButton[] seeds; // turnip, carrot, potato, rose, tulips, sunflower, mango, apple
 
   //middle
-  private JPanel tileArea; // tile area
   private JButton[] tiles; // tiles buttons
   private JPopupMenu popupMenu; // popup menu for tiles
   
@@ -155,13 +153,13 @@ public class GameView extends JFrame {
     this.seeds[7] = new JButton(new ImageIcon(new ImageIcon("assets/appleOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
 
     // holds the seeds
-    this.seedArea = new JPanel();
-    this.seedArea.setBorder(BorderFactory.createLineBorder(Color.black));
-    this.seedArea.setLayout(new GridLayout(1,8));
+    JPanel seedArea = new JPanel();
+    seedArea.setBorder(BorderFactory.createLineBorder(Color.black));
+    seedArea.setLayout(new GridLayout(1,8));
     for(int j = 0; j < this.seeds.length; j++){
-      this.seedArea.add(seeds[j]);
+      seedArea.add(seeds[j]);
     }
-    this.seedArea.setBounds(260, 0, 810, 96); 
+    seedArea.setBounds(260, 0, 810, 96); 
     //endregion
 
     //region --------------TILE AREA----------------
@@ -173,7 +171,7 @@ public class GameView extends JFrame {
 
 
     //holds the tiles
-    tileArea = new JPanel(new GridLayout(5,10));
+    JPanel tileArea = new JPanel(new GridLayout(5,10));
     tileArea.setBackground(new Color(0, 0, 0, 0));
     tileArea.setBounds(296, 250, 570, 400);
     
@@ -216,7 +214,7 @@ public class GameView extends JFrame {
     gameArea.add(name);
     gameArea.add(toolArea);
     gameArea.add(tileArea);
-    gameArea.add(this.seedArea);
+    gameArea.add(seedArea);
     gameArea.add(this.advanceDay);
     gameArea.add(dayPanel);
     gameArea.add(feedback);
