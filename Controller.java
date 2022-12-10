@@ -68,6 +68,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().plow(myFarm.getTools()[0], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Plowed");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
@@ -81,6 +82,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().water(myFarm.getTools()[01], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
@@ -93,6 +95,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().fertilize(myFarm.getTools()[2], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
@@ -216,6 +219,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().harvest(myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     myFarm.getTiles()[farmView.getCurrTileIndex()].reset();
@@ -230,6 +234,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myFarm.getPlayer().mine(myFarm.getTools()[4], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
@@ -249,6 +254,7 @@ public class Controller {
                         canPlant = myFarm.availableSurroundings(farmView.getCurrTileIndex());
                     if (canPlant) {
                         if (myFarm.getPlayer().plant(myFarm.getSeeds()[farmView.getCurrSeedIndex()], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                            farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                             farmView.setButtonImage(farmView.getCurrTileIndex(), myFarm.getSeeds()[farmView.getCurrSeedIndex()].getName());
                             farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                             farmView.setCurrTileIndex(-1);
