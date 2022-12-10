@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-
+/**
+ * This class is the view of the game. It displays the game board, the tools, the
+ * seeds, the farmer, the feedback, and the buttons to advance the day.
+ */
 public class GameView extends JFrame {
 
   // layout 

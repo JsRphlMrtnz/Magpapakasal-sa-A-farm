@@ -2,6 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * This class is the view of the buy menu for the farmer types. It displays the
+ * information of the farmer types and the buttons to buy them.
+ */
 public class BuyView extends JFrame{
    private JFrame mainFrame;
    private JButton buyButtons[];

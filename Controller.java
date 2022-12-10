@@ -3,6 +3,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
+/**
+ * 
+ * Magpapakasal-sa-A-farm is farming simulation game that runs on Java.
+ * 
+ * @author Don Laude A. Aspecto
+ * @author Jose Raphael E. Martinez
+ * @version 2.0
+ */
 public class Controller {
     MyFarm myFarm;      // the model
     GameView farmView;  // the view
