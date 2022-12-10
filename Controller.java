@@ -59,7 +59,7 @@ public class Controller {
         farmView.setAddPlowBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (myFarm.getPlayer().plow(myFarm.getTool()[0], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                if (myFarm.getPlayer().plow(myFarm.getTools()[0], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Plowed");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
@@ -72,7 +72,7 @@ public class Controller {
         farmView.setAddWateringCanBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (myFarm.getPlayer().water(myFarm.getTool()[01], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                if (myFarm.getPlayer().water(myFarm.getTools()[01], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
@@ -84,7 +84,7 @@ public class Controller {
         farmView.setAddFertilizerBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (myFarm.getPlayer().fertilize(myFarm.getTool()[2], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                if (myFarm.getPlayer().fertilize(myFarm.getTools()[2], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
@@ -96,7 +96,7 @@ public class Controller {
         farmView.setAddShovelBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (myFarm.getPlayer().dig(myFarm.getTool()[3], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                if (myFarm.getPlayer().dig(myFarm.getTools()[3], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
@@ -220,7 +220,7 @@ public class Controller {
         farmView.setAddPickaxeBtnListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (myFarm.getPlayer().mine(myFarm.getTool()[4], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
+                if (myFarm.getPlayer().mine(myFarm.getTools()[4], myFarm.getTiles()[farmView.getCurrTileIndex()])) {
                     farmView.setButtonImage(farmView.getCurrTileIndex(), "Tile");
                     farmView.setFeedbackText(myFarm.getPlayer().getFeedbackString());
                     farmView.setCurrTileIndex(-1);
@@ -331,7 +331,7 @@ public class Controller {
             });
         }
         
-        for (int i = 0; i < myFarm.getTool().length; i++) {
+        for (int i = 0; i < myFarm.getTools().length; i++) {
             farmView.setMouseListeneronTools(i + 1, new MouseListener() {
 
                 @Override
@@ -342,9 +342,9 @@ public class Controller {
                 public void mousePressed(java.awt.event.MouseEvent e) {
                     if(SwingUtilities.isRightMouseButton(e)){
                     JPopupMenu popup = new JPopupMenu();
-                    popup.add(new JLabel("Name : " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getName()));
-                    popup.add(new JLabel("Cost : " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getCost()));
-                    popup.add(new JLabel("XP: " + myFarm.getTool()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getXp()));
+                    popup.add(new JLabel("Name : " + myFarm.getTools()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getName()));
+                    popup.add(new JLabel("Cost : " + myFarm.getTools()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getCost()));
+                    popup.add(new JLabel("XP: " + myFarm.getTools()[farmView.rightClickIndex((JButton) e.getSource(), 3) - 1].getXp()));
                     farmView.setPopupMenu(popup, farmView.rightClickIndex((JButton) e.getSource(), 3), e.getX(), e.getY(), 3);
                     }
                 }

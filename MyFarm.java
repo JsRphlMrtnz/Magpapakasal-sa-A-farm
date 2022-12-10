@@ -63,7 +63,8 @@ public class MyFarm {
     }
 
 /**
- * This method increments the day and updates the harvest time of the tile
+ * This method increments the day and updates the harvest time of the tiles
+ * It also checks if a tile should be withered or not.
  */
     public void endDay() {
         this.day++;
@@ -99,6 +100,12 @@ public class MyFarm {
         return allTilesWithered || (noActiveCrops && this.player.getCoins() < 5);
     }
 
+    /**
+     * This method checks if the tile is available for planting a tree.
+     * The method checks the 3x3 surrounding tiles of the tile to be planted on.
+     * @param tile is index of the tile to be checked.
+     * @return true if the tile is available for planting a tree, false otherwise.
+     */
     public boolean availableSurroundings(int tile) {
         
         try {
@@ -131,27 +138,52 @@ public class MyFarm {
     }
 
     // region getters and setters
+    /**
+     * This method returns the day of the game.
+     * @return the current day of the game.
+     */
     public int getDay() {
         return this.day;
     }
 
+    /**
+     * This method returns the player of the game.
+     * @return the player of the game.
+     */
     public Player getPlayer() {
         return this.player;
     }
 
+    /**
+     * This method returns the farm land of the game.
+     * @return the farm land of the game.
+     */
     public Tile[] getTiles() {
         return tiles;
     }
 
-    public Tools[] getTool() {
+    /**
+     * This method returns the tools of the game.
+     * @return the tools of the game.
+     */
+    public Tools[] getTools() {
         return tool;
     }
 
+    /**
+     * This method returns the seeds of the game.
+     * @return the seeds of the game.
+     */
     public Seed[] getSeeds() {
         return seeds;
     }
 
+    /**
+     * This method returns the farmer types of the game.
+     * @return the farmer types of the game.
+     */
     public FarmerType[] getFarmerTypes() {
         return farmerTypes;
     }
+    //endregion
 }
