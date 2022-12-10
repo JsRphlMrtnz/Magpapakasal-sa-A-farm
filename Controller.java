@@ -289,6 +289,9 @@ public class Controller {
             if (myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getHasRock()) {
                 popup.add(new JLabel("Currently has a rock"));
             }
+            else if (myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getIsWithered()) {
+                popup.add(new JLabel("Plant is withered"));
+            }
             else {
                 popup.add(new JLabel("Plowed: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getPlowed()));
                 popup.add(new JLabel("Times Watered: " + myFarm.getTiles()[farmView.rightClickIndex((JButton) e.getSource(), 1)].getWater()));
