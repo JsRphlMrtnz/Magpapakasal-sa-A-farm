@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  * This class contains the necessary attributes of the player.
- * It contains the player's name, money, and the player's inventory.
+ * It contains the money, xp, farmer type, and feedback string.
  * It also contains the necessary actions for each tool as well as harvesting.
  */
 public class Player {
@@ -12,7 +12,7 @@ public class Player {
     private String feedbackString; // The feedback string that will be displayed on the GUI
 
     /**
-     * This constructor assigns the name and initializes each attribute.
+     * This constructor assigns the farmer type and initializes each attribute.
      * @param type the starting farmer type of the player
      */
     public Player(FarmerType type) {
