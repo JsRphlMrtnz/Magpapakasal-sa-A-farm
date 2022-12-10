@@ -17,7 +17,7 @@ public class Player {
      */
     public Player(FarmerType type) {
         this.xp = 0;
-        this.objectCoins = 100;
+        this.objectCoins = 1000;
         this.type = type;
     }
 
@@ -146,9 +146,9 @@ public class Player {
  * @return true if the tile was successfully dug.
  */
     public boolean dig (Tools tool, Tile tile) {
-        if (this.objectCoins < tool.getCost())
+        if (this.objectCoins < tool.getCost() || tile.getHasRock())
             return false;
-        if (tile.getPlowed() && !tile.getHasRock()) {
+        if (tile.getPlowed()) {
             tile.updatePlow();
             if (tile.getHasSeed())
                 tile.reset();
