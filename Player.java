@@ -6,20 +6,19 @@ import java.util.Random;
  * It also contains the necessary actions for each tool as well as harvesting.
  */
 public class Player {
-    private double xp;          // The player's experience points
-    private double objectCoins; // The player's money
-    private FarmerType type;    // The player's farmer type
-    private String name;        // The player's name
+    private double xp;             // The player's experience points
+    private double objectCoins;    // The player's money
+    private FarmerType type;       // The player's farmer type
+    private String feedbackString; // The feedback string that will be displayed on the GUI
 
     /**
      * This constructor assigns the name and initializes each attribute.
-     * @param name The player's name
+     * @param type the starting farmer type of the player
      */
-    public Player(String name) {
-        this.name = name;
+    public Player(FarmerType type) {
         this.xp = 0;
         this.objectCoins = 100;
-        type = new FarmerType(0, 0, 0, 0, 0, 0, "Farmer");
+        this.type = type;
     }
 
  /**
@@ -30,9 +29,10 @@ public class Player {
   * @return true if the player has met the requirements for the next type
   */
     public boolean updateFarmerType(FarmerType newType) {
-        if (newType.getMinLevel() <= this.getLevel() && this.objectCoins >= newType.getRegFee()) {
+        if (newType.getMinLevel() <= this.getLevel() && this.objectCoins >= newType.getRegFee() && newType.getMinLevel() - this.type.getMinLevel() == 5) {
             this.type = newType;
             this.objectCoins -= newType.getRegFee();
+            feedbackString = "Successfully changed to " + type.getType();
             return true;
         }
         return false;
@@ -55,6 +55,7 @@ public class Player {
         
         this.objectCoins -= seed.getCost();
         tile.setSeed(seed);
+        feedbackString = "Successfully planted the " + seed.getName() + " seed";
         return true;
     }
 
@@ -70,10 +71,11 @@ public class Player {
  * @return true if it was successfully plowed.
  */
     public boolean plow(Tools tool, Tile tile) {
-        if (tile.getPlowed() == false) {
+        if (!tile.getPlowed() && !tile.getHasRock()) {
             tile.updatePlow();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully plowed the tile";
             return true;
         }
         return false;
@@ -94,6 +96,7 @@ public class Player {
             tile.updateWater();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully watered the " + tile.getSeed().getName();
             return true;
         }
         return false;
@@ -107,19 +110,40 @@ public class Player {
  * a true value.
  * 
  * @param tool The tool that is being used to fertilize the tile.
- * @param tile Tile object
+ * @param tile The tile that the player is trying to fertilize.
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
-        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && tile.getIsWithered() == false) {
+        if (this.objectCoins >= tool.getCost() && tile.getHasSeed() && !tile.getIsWithered()) {
             tile.updateFert();
             xp += tool.getXp();
             this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully fertilized the " + tile.getSeed().getName();
             return true;
         }
         return false;
     }
     
+    /**
+     * This method returns a boolean value whether a tile has been successfully mined.
+     * The tile can only be successfully mined if the player has enough objectCoins and the tile has a rock.
+     * If mined correctly, it will update the tile to not have a rock, 
+     * subtract the objectCoins of the player by the cost of using the certain tool,
+     * the player receives a certain amount of xp, and the method returns a true value.
+     * @param tool the tool that the player is using
+     * @param tile The tile that the player is trying to mine
+     * @return true if the tile was successfully mined.
+     */
+    public boolean mine(Tools tool, Tile tile) {
+        if (this.objectCoins >= tool.getCost() && tile.getHasRock()) {
+            tile.setRock(false);
+            xp += tool.getXp();
+            this.objectCoins -= tool.getCost();
+            feedbackString = "Successfully mined the rock";
+            return true;
+        }
+        return false;
+    }
 /**
  * This method returns a boolean value whether a tile has been successfully dug
  * by having enough obejectCoins. If the tile was dug up, objectCoins of the player 
@@ -131,14 +155,15 @@ public class Player {
  * @return true if the tile was successfully dug.
  */
     public boolean dig (Tools tool, Tile tile) {
-        if (this.objectCoins < tool.getCost())
+        if (this.objectCoins < tool.getCost() || tile.getHasRock())
             return false;
         if (tile.getPlowed()) {
             tile.updatePlow();
             if (tile.getHasSeed())
                 tile.reset();
+            xp += tool.getXp();
+            feedbackString = "Successfully dug up the tile.";
         }
-        xp += tool.getXp();
         this.objectCoins -= tool.getCost();
         return true;
     }
@@ -152,7 +177,7 @@ public class Player {
      * @return A boolean value whether a tile has been successfully harvested.
      */
     public boolean harvest(Tile tile) {
-        if (tile.getTime() == 0 && tile.getHasSeed() && tile.getIsWithered() == false) {
+        if (tile.getTime() == 0 && tile.getHasSeed() && !tile.getIsWithered()) {
             int productsProduced = new Random().nextInt(tile.getSeed().getMaxProduce() - tile.getSeed().getMinProduce() + 1) + tile.getSeed().getMinProduce();
             int harvestTotal = productsProduced * (tile.getSeed().getSellingPrice() + this.type.getBonusEarning());
             
@@ -167,14 +192,15 @@ public class Player {
             double fertBonus = harvestTotal * 0.5 * (fertCount - 1);
             
             double total = harvestTotal + waterBonus + fertBonus;
+            if (tile.getSeed().getType() == "Flower")
+                total *= 1.1;
             this.objectCoins += total;
 
             double xpGain = tile.getSeed().getXp();
             this.xp += xpGain;
 
-            System.out.println("Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.");
-            System.out.println("Gained " + xpGain + " xp.");
-            tile.reset();
+            feedbackString = "Harvested " + productsProduced + " " + tile.getSeed().getName() + " for " + total + " ObjectCoins.";
+            feedbackString += " Gained " + xpGain + " xp.";
             return true;
         }
         return false;
@@ -198,15 +224,6 @@ public class Player {
         return this.objectCoins;
     }
 
-/**
- * It returns the name of the player.
- * 
- * @return The name variable is being returned.
- */
-    public String getName() {
-        return this.name;
-    }
-
   /**
    * This method returns the type of farmer the player is in.(farmer, registered, distinguished, legendary)
    * 
@@ -214,5 +231,23 @@ public class Player {
    */
     public String getType() {
         return this.type.getType();
+    }
+
+   /**
+    * This method returns the amount of xp that the player has.
+    *
+    * @return current xp of player
+    */
+    public double getXp() {
+        return this.xp;
+    }
+
+   /**
+    * This method returns the feedback string that is being used to display the feedback to the player.
+    * 
+    * @return The feedback string.
+    */
+    public String getFeedbackString() {
+        return this.feedbackString;
     }
 }
