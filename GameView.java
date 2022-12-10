@@ -253,16 +253,20 @@ public class GameView extends JFrame {
   
   /**
    * This method is used to get the index of the tile that is clicked
-   * 
+   * It also sets the border of the tile that is clicked to white
    * @param b the button that is clicked
    * @return the index of the button, -1 if tile is clicked again
    */
   public int currTileIndex(JButton b) {
+    if (currIndex != -1)
+      setButtonBorder(currIndex, 2);
     for (int i = 0; i < this.tiles.length; i++) {
       if (b == this.tiles[i] && currIndex != i) {
+        setButtonBorder(i, 1);
         return i;
       }
     }
+    
     return -1;
   }
   
@@ -338,6 +342,15 @@ public class GameView extends JFrame {
   //endregion
 
   //region --------------GETTERS & SETTERS----------------
+
+  public void setButtonBorder(int i, int mode) {
+    if (mode == 1) {
+      this.tiles[i].setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+    }
+    else if (mode == 2) {
+      this.tiles[i].setBorder(BorderFactory.createLineBorder(new Color(122, 138, 153), 1));
+    }
+  }
 
   /**
    * This method is used to set an action listener to the "Yes" 

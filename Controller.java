@@ -39,9 +39,9 @@ public class Controller {
      * This method updates the farmer info labels on the view.
      */
     private void updateFarmerLabels() {
-        farmView.setObjectCoins(String.valueOf(myFarm.getPlayer().getCoins()));
+        farmView.setObjectCoins(String.format("%.2f", myFarm.getPlayer().getCoins()));
         farmView.setLevel(String.valueOf(myFarm.getPlayer().getLevel()));
-        farmView.setExp(String.valueOf(myFarm.getPlayer().getXp()));
+        farmView.setExp(String.format("%.2f", myFarm.getPlayer().getXp()));
         farmView.setFarmerType(String.valueOf(myFarm.getPlayer().getType()));
     }
 
@@ -120,10 +120,10 @@ public class Controller {
                 myFarm.endDay();
                 //game over
                 if (!myFarm.gameOver()) {
+                    farmView.setButtonBorder(farmView.getCurrTileIndex(), 2);
                     farmView.setCurrTileIndex(-1);
                     farmView.toggleButtons();
                     farmView.setDayLabel(String.valueOf(myFarm.getDay()));
-                    
                     for (int i = 0; i < myFarm.getTiles().length; i++) {
                         if (myFarm.getTiles()[i].getIsWithered()) {
                             farmView.setButtonImage(i, "Withered");
