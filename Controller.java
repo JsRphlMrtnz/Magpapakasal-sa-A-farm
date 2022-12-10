@@ -237,7 +237,7 @@ public class Controller {
             }
         });
 
-        farmView.addActionListeneronSeed(i, (MouseListener) new MouseListener()
+        farmView.setMouseListeneronSeed(i, (MouseListener) new MouseListener()
         {
   
           @Override
@@ -276,7 +276,7 @@ public class Controller {
     }
 
     for (int i = 0; i < myFarm.getTiles().length; i++) {
-        farmView.addActionListeneronTiles(i, new MouseListener() {
+        farmView.setMouseListeneronTiles(i, new MouseListener() {
 
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -319,7 +319,7 @@ public class Controller {
     }
     
     for (int i = 0; i < myFarm.getTool().length; i++) {
-        farmView.addActionListeneronTools(i + 1, new MouseListener() {
+        farmView.setMouseListeneronTools(i + 1, new MouseListener() {
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {

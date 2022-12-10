@@ -19,10 +19,10 @@ public class Tile {
         reset();
     }
 
-/**
- * This method resets the seed, isPlowed, water, fertilizer, harvestTime, and hasSeed variables to
- * their default values
- */
+    /**
+     * This method resets the seed, isPlowed, water, fertilizer, harvestTime, and hasSeed variables to
+     * their default values
+     */
     public void reset() {
         this.seed = null;
         this.isPlowed = false;
