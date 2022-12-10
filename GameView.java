@@ -49,27 +49,27 @@ public class GameView extends JFrame {
    */
   public GameView(){
     //region --------------SPRITES----------------
-    this.rock = new ImageIcon(new ImageIcon("assets\\stone.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.tile = new ImageIcon(new ImageIcon("assets\\grass.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.plowed = new ImageIcon(new ImageIcon("assets\\plowedTile.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.withered = new ImageIcon(new ImageIcon("assets\\withered.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.rock = new ImageIcon(new ImageIcon("assets/stone.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.tile = new ImageIcon(new ImageIcon("assets/grass.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.plowed = new ImageIcon(new ImageIcon("assets/plowedTile.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.withered = new ImageIcon(new ImageIcon("assets/withered.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
 
     this.seedSprites = new ImageIcon[8];
-    this.seedSprites[0] = new ImageIcon(new ImageIcon("assets\\turnip.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[1] = new ImageIcon(new ImageIcon("assets\\carrot.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[2] = new ImageIcon(new ImageIcon("assets\\potato.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[3] = new ImageIcon(new ImageIcon("assets\\rose.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[4] = new ImageIcon(new ImageIcon("assets\\tulip.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[5] = new ImageIcon(new ImageIcon("assets\\sunflower.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[6] = new ImageIcon(new ImageIcon("assets\\mango.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
-    this.seedSprites[7] = new ImageIcon(new ImageIcon("assets\\apple.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[0] = new ImageIcon(new ImageIcon("assets/turnip.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[1] = new ImageIcon(new ImageIcon("assets/carrot.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[2] = new ImageIcon(new ImageIcon("assets/potato.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[3] = new ImageIcon(new ImageIcon("assets/rose.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[4] = new ImageIcon(new ImageIcon("assets/tulip.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[5] = new ImageIcon(new ImageIcon("assets/sunflower.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[6] = new ImageIcon(new ImageIcon("assets/mango.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
+    this.seedSprites[7] = new ImageIcon(new ImageIcon("assets/apple.jpg").getImage().getScaledInstance(55, 80, Image.SCALE_DEFAULT));
     //endregion
 
     //region --------------STARTUP----------------
-    this.startGame = new JButton(new ImageIcon(new ImageIcon("assets\\startImg.jpg").getImage().getScaledInstance(350,220, Image.SCALE_DEFAULT)));
+    this.startGame = new JButton(new ImageIcon(new ImageIcon("assets/startImg.jpg").getImage().getScaledInstance(350,220, Image.SCALE_DEFAULT)));
     startGame.setBounds(500, 550, 300, 80);
 
-    ImageIcon startupPic = new ImageIcon(new ImageIcon("assets\\startupPic.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
+    ImageIcon startupPic = new ImageIcon(new ImageIcon("assets/startupPic.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
     JLabel startUpBg = new JLabel(startupPic);
     startUpBg.setBounds(0, 0 , 1280, 720);
 
@@ -86,7 +86,7 @@ public class GameView extends JFrame {
   
     //region --------------PLAYER AREA----------------
     // background 
-    ImageIcon gameAreaPic = new ImageIcon(new ImageIcon("assets\\farm.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
+    ImageIcon gameAreaPic = new ImageIcon(new ImageIcon("assets/farm.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
     JLabel gameAreaBg = new JLabel(gameAreaPic);
     gameAreaBg.setBounds(0, 0 , 1280, 720);
 
@@ -98,10 +98,10 @@ public class GameView extends JFrame {
     this.exp = new JLabel("0");
     JLabel farmerTypeLabel = new JLabel("Farmer Type : ");
     this.farmerType = new JButton("Farmer");
+    this.farmerType.setFont(new Font("Arial", Font.BOLD, 7));
 
     // holds player info
     JPanel playerInfo = new JPanel(new GridLayout(4,2, 0,0));
-    playerInfo.setBackground(new Color (102, 51, 0));
     playerInfo.setBounds(95, 0, 166, 96);
     playerInfo.add(objectCoinsLabel);
     playerInfo.add(this.objectCoins);
@@ -123,12 +123,12 @@ public class GameView extends JFrame {
     toolArea.setBorder(BorderFactory.createLineBorder(Color.black));
     toolArea.setBounds(1130, 107, 140, 500);
     this.tools = new JButton[6];
-    this.tools[0] = new JButton(new ImageIcon(new ImageIcon("assets\\Scythe.png").getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
-    this.tools[1] = new JButton(new ImageIcon(new ImageIcon("assets\\Hoe.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
-    this.tools[2] = new JButton(new ImageIcon(new ImageIcon("assets\\Watering Can.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
-    this.tools[3] = new JButton(new ImageIcon(new ImageIcon("assets\\Seed Bag.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
-    this.tools[4] = new JButton(new ImageIcon(new ImageIcon("assets\\Pick.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
-    this.tools[5] = new JButton(new ImageIcon(new ImageIcon("assets\\Shovel.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
+    this.tools[0] = new JButton(new ImageIcon(new ImageIcon("assets/Scythe.png").getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+    this.tools[1] = new JButton(new ImageIcon(new ImageIcon("assets/Hoe.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
+    this.tools[2] = new JButton(new ImageIcon(new ImageIcon("assets/Watering Can.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
+    this.tools[3] = new JButton(new ImageIcon(new ImageIcon("assets/Seed Bag.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
+    this.tools[4] = new JButton(new ImageIcon(new ImageIcon("assets/Pick.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
+    this.tools[5] = new JButton(new ImageIcon(new ImageIcon("assets/Shovel.png").getImage().getScaledInstance(55,80, Image.SCALE_DEFAULT)));
     
 
     // toolArea
@@ -139,14 +139,14 @@ public class GameView extends JFrame {
     
     //region --------------SEED AREA----------------
     this.seeds = new JButton[8];
-    this.seeds[0] = new JButton(new ImageIcon(new ImageIcon("assets\\turnipOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[1] = new JButton(new ImageIcon(new ImageIcon("assets\\carrotOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[2] = new JButton(new ImageIcon(new ImageIcon("assets\\potatoOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[3] = new JButton(new ImageIcon(new ImageIcon("assets\\roseOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[4] = new JButton(new ImageIcon(new ImageIcon("assets\\tulipOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[5] = new JButton(new ImageIcon(new ImageIcon("assets\\sunflowerOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[6] = new JButton(new ImageIcon(new ImageIcon("assets\\mangoOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
-    this.seeds[7] = new JButton(new ImageIcon(new ImageIcon("assets\\appleOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[0] = new JButton(new ImageIcon(new ImageIcon("assets/turnipOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[1] = new JButton(new ImageIcon(new ImageIcon("assets/carrotOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[2] = new JButton(new ImageIcon(new ImageIcon("assets/potatoOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[3] = new JButton(new ImageIcon(new ImageIcon("assets/roseOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[4] = new JButton(new ImageIcon(new ImageIcon("assets/tulipOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[5] = new JButton(new ImageIcon(new ImageIcon("assets/sunflowerOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[6] = new JButton(new ImageIcon(new ImageIcon("assets/mangoOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
+    this.seeds[7] = new JButton(new ImageIcon(new ImageIcon("assets/appleOption.jpg").getImage().getScaledInstance(100,92, Image.SCALE_DEFAULT)));
 
     // holds the seeds
     this.seedArea = new JPanel();
@@ -177,7 +177,7 @@ public class GameView extends JFrame {
     //endregion
 
     //region --------------BOTTOM AREA----------------
-    this.advanceDay = new JButton(new ImageIcon(new ImageIcon("assets\\advancePic.jpg").getImage().getScaledInstance(150, 180, Image.SCALE_DEFAULT)));
+    this.advanceDay = new JButton(new ImageIcon(new ImageIcon("assets/advancePic.jpg").getImage().getScaledInstance(150, 180, Image.SCALE_DEFAULT)));
     this.advanceDay.setBounds(1138, 635, 120, 40);
     //endregion
 
@@ -220,14 +220,14 @@ public class GameView extends JFrame {
     //region --------------GAME OVER----------------
     JPanel gameOverButtonPanel = new JPanel();
     gameOverButtonPanel.setLayout(new GridLayout(1,2, 40, 10));
-    this.gameOverButtonNo = new JButton(new ImageIcon(new ImageIcon("assets\\no.jpg").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT)));
-    this.gameOverButtonYes = new JButton(new ImageIcon(new ImageIcon("assets\\yes.jpg").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT)));
+    this.gameOverButtonNo = new JButton(new ImageIcon(new ImageIcon("assets/no.jpg").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT)));
+    this.gameOverButtonYes = new JButton(new ImageIcon(new ImageIcon("assets/yes.jpg").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT)));
     gameOverButtonPanel.add(gameOverButtonYes);
     gameOverButtonPanel.add(gameOverButtonNo);
     gameOverButtonPanel.setBounds(440, 500, 400, 100);
     gameOverButtonPanel.setBackground(new Color(0, 0, 0, 0));
 
-    ImageIcon gameOverPic = new ImageIcon(new ImageIcon("assets\\gameOver.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
+    ImageIcon gameOverPic = new ImageIcon(new ImageIcon("assets/gameOver.jpg").getImage().getScaledInstance(1285,730, Image.SCALE_DEFAULT));
     JLabel gameOverBg = new JLabel(gameOverPic);
     gameOverBg.setBounds(0, 0 , 1280, 720);
     

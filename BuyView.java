@@ -12,8 +12,8 @@ public class BuyView extends JFrame{
       this.buyButtons = new JButton[3];
       for (int i = 0; i < 3; i++){
         farmerTypes[i] = new JPanel(new GridLayout(8,1, 0, 0));
-        backgrounds[i] = new JLabel(new ImageIcon(new ImageIcon("woodBg.jpg").getImage().getScaledInstance(300,540, Image.SCALE_DEFAULT)));
-        this.buyButtons[i] = new JButton(new ImageIcon(new ImageIcon("buyPic.jpg").getImage().getScaledInstance(300,300, Image.SCALE_DEFAULT)));
+        backgrounds[i] = new JLabel(new ImageIcon(new ImageIcon("assets/woodBg.jpg").getImage().getScaledInstance(300,540, Image.SCALE_DEFAULT)));
+        this.buyButtons[i] = new JButton(new ImageIcon(new ImageIcon("assets/buyPic.jpg").getImage().getScaledInstance(300,300, Image.SCALE_DEFAULT)));
       }
       backgrounds[0].setBounds(0,0,290,530);
       backgrounds[1].setBounds(295,0,290,530);

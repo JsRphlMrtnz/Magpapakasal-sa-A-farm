@@ -54,9 +54,9 @@ public class MyFarm {
         this.seeds[7] = new Seed(200, 10, 7, 7, 5, 5, 5, 10, 15, 25, "Apple", "Fruit tree"); // instantiates the apple seed
 
         this.farmerTypes[0] = new FarmerType(0, 0, 0, 0, 0, 0, "Farmer"); // instantiates the farmer type
-        this.farmerTypes[1] = new FarmerType(1, 1, 0, 0, 200, 5, "Registered Farmer"); // instantiates the registered farmer type
-        this.farmerTypes[2] = new FarmerType(2, 2, 1, 0, 300, 10, "Distinguished Farmer"); // instantiates the distinguished farmer type
-        this.farmerTypes[3] = new FarmerType(4, 3, 2, 1, 400, 15, "Legendary Farmer"); // instantiates the legendary farmer type
+        this.farmerTypes[1] = new FarmerType(1, 1, 0, 0, 200, 5, "Registered"); // instantiates the registered farmer type
+        this.farmerTypes[2] = new FarmerType(2, 2, 1, 0, 300, 10, "Distinguished"); // instantiates the distinguished farmer type
+        this.farmerTypes[3] = new FarmerType(4, 3, 2, 1, 400, 15, "Legendary"); // instantiates the legendary farmer type
 
         this.player = new Player(farmerTypes[0]);
         this.day = 1;
