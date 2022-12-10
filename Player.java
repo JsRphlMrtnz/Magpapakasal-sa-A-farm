@@ -13,7 +13,7 @@ public class Player {
 
     /**
      * This constructor assigns the name and initializes each attribute.
-     * @param name The player's name
+     * @param type the starting farmer type of the player
      */
     public Player(FarmerType type) {
         this.xp = 0;

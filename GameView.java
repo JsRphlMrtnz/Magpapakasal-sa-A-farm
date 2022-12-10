@@ -6,23 +6,23 @@ import java.awt.event.MouseListener;
 
 /**
  * This class is the view of the game. It displays the game board, the tools, the
- * seeds, the farmer, the feedback, and the buttons to advance the day.
+ * seeds, the farmer, the feedback, and the button to advance the day.
  */
 public class GameView extends JFrame {
 
   // layout 
-  private CardLayout cardLayout;
-  private Container container;
+  private CardLayout cardLayout; // card layout for container
+  private Container container; // container for start up, game, and game over
 
   // for all the sprites
-  private ImageIcon rock, tile, plowed, withered;
-  private ImageIcon[] seedSprites;
+  private ImageIcon rock, tile, plowed, withered; // tile sprites
+  private ImageIcon[] seedSprites; // seed sprites
 
 
-  private JButton startGame;
+  private JButton startGame; // start game button
 
-  private JLabel  level, exp, objectCoins, day;
-  private JButton farmerType;
+  private JLabel  level, exp, objectCoins, day; // player and game info labels
+  private JButton farmerType; // farmer type button
   
   // tools on top
   private JButton[] tools; // harvest, plow, wateringCan, fertilizer, pickaxe, shovel
@@ -32,20 +32,20 @@ public class GameView extends JFrame {
   private JButton[] seeds; // turnip, carrot, potato, rose, tulips, sunflower, mango, apple
 
   //middle
-  private JPanel tileArea;
-  private JButton[] tiles;
+  private JPanel tileArea; // tile area
+  private JButton[] tiles; // tiles buttons
   private JPopupMenu popupMenu; // popup menu for tiles
   
   // bottom
-  private JTextField feedback;
-  private JButton advanceDay;
+  private JTextField feedback; // feedback text field
+  private JButton advanceDay; // advance day button
     
   // game over butttons
-  private JButton gameOverButtonYes;
-  private JButton gameOverButtonNo;
+  private JButton gameOverButtonYes; // yes game over button
+  private JButton gameOverButtonNo; // no game over button
 
-  private int currIndex = -1;
-  private int currSeedIndex = -1;
+  private int currIndex = -1; // current index of selected tile
+  private int currSeedIndex = -1; // current index of selected seed
 
   /**
    * This constructor initializes all the components.
@@ -500,7 +500,7 @@ public class GameView extends JFrame {
 
   /**
    * This method sets the text of the current coins label
-   * @param text the text to be set
+   * @param coins the current balance of the player
    */
   public void setObjectCoins(String coins){
     this.objectCoins.setText(coins);
@@ -508,7 +508,7 @@ public class GameView extends JFrame {
 
   /**
    * This method sets the text of the current level label
-   * @param text the text to be set
+   * @param level the level of the player
    */
   public void setLevel(String level){
     this.level.setText(level);
@@ -516,7 +516,7 @@ public class GameView extends JFrame {
 
   /**
    * This method sets the text of the current farmer type label
-   * @param text the text to be set
+   * @param farmerType the farmer type of the player
    */
   public void setFarmerType(String farmerType){
     this.farmerType.setText(farmerType);
@@ -524,7 +524,7 @@ public class GameView extends JFrame {
 
   /**
    * This method sets the text of the current experience label
-   * @param text the text to be set
+   * @param exp the exp of the player
    */
   public void setExp(String exp){
     this.exp.setText(exp);

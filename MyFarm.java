@@ -9,13 +9,12 @@ public class MyFarm {
     private int day;                     // amount of days that have passed by in the game
     private Player player;               // the player of the game
     private Tile[] tiles = new Tile[50]; // 50 tiles
-    private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Shovel, Pickaxe
+    private Tools[] tool = new Tools[5]; // Plow, Watering Can, Fertilizer, Pickaxe, Shovel
     private Seed[] seeds = new Seed[8];  // Turnip, Carrot, Potato, Rose, Tulips, Sunflower, Mango, Apple
     private FarmerType[] farmerTypes = new FarmerType[4]; // Regular Farmer, Registered Farmer, Distinguished Farmer, Legendary Farmer
 
     /**
      * This constructor initializes all the attributes of the MyFarm class.
-     * @param name is the name of the farmer to be used on the Player class constructor.
      */
     public MyFarm() {
 

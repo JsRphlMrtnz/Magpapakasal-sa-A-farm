@@ -10,10 +10,14 @@ public class BuyView extends JFrame{
    private JFrame mainFrame;
    private JButton buyButtons[];
 
+    /**
+      * This constructor creates the buy menu for the farmer types.
+      * It displays the information of the farmer types and the buttons to buy them.
+      */
    public BuyView() {
-      JLabel[] backgrounds = new JLabel[3];
-      JPanel[] farmerTypes = new JPanel[3];
-      this.buyButtons = new JButton[3];
+      JLabel[] backgrounds = new JLabel[3]; // backgrounds for each farmer type
+      JPanel[] farmerTypes = new JPanel[3]; // panels for each farmer type
+      this.buyButtons = new JButton[3]; // buttons to buy each farmer type
       for (int i = 0; i < 3; i++){
         farmerTypes[i] = new JPanel(new GridLayout(8,1, 0, 0));
         backgrounds[i] = new JLabel(new ImageIcon(new ImageIcon("assets/woodBg.jpg").getImage().getScaledInstance(300,540, Image.SCALE_DEFAULT)));
