@@ -12,10 +12,13 @@ public class GameView extends JFrame {
 
   // layout 
   private CardLayout cardLayout; // card layout for container
-  private Container container; // container for start up, game, and game over
+  private Container container;   // container for start up, game, and game over
 
   // for all the sprites
-  private ImageIcon rock, tile, plowed, withered; // tile sprites
+  private ImageIcon rock;          // rock sprite
+  private ImageIcon tile;          // tile sprite
+  private ImageIcon plowed;        // plowed sprite
+  private ImageIcon withered;      // withered sprite
   private ImageIcon[] seedSprites; // seed sprites
 
 
@@ -38,7 +41,7 @@ public class GameView extends JFrame {
   
   // bottom
   private JTextField feedback; // feedback text field
-  private JButton advanceDay; // advance day button
+  private JButton advanceDay;  // advance day button
     
   // game over butttons
   private JButton gameOverButtonYes; // yes game over button
@@ -560,6 +563,7 @@ public class GameView extends JFrame {
 
   /**
    * This method sets the action listener for the seed buttons
+   * @param i the index of the button
    * @param listener the action listener
    */
   public void setAddSeedBtnListener(int i, ActionListener listener){

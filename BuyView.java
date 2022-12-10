@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
  * information of the farmer types and the buttons to buy them.
  */
 public class BuyView extends JFrame{
-   private JFrame mainFrame;
-   private JButton buyButtons[];
+   private JFrame mainFrame;     // the main frame of the buy menu
+   private JButton buyButtons[]; // buttons to buy each farmer type
 
     /**
       * This constructor creates the buy menu for the farmer types.
@@ -78,18 +78,34 @@ public class BuyView extends JFrame{
 
    }
 
+   /** 
+    * This method sets the action listener for the registered farmer type button.
+    * @param listener the action listener
+    */
    public void setRegisteredBtnActionListener(ActionListener listener){
     this.buyButtons[0].addActionListener(listener);
    }
 
+    /** 
+    * This method sets the action listener for the distinguished farmer type button.
+    * @param listener the action listener
+    */
     public void setDistinguishedBtnActionListener(ActionListener listener){
       this.buyButtons[1].addActionListener(listener);
     }
 
+    /** 
+    * This method sets the action listener for the legendary farmer type button.
+    * @param listener the action listener
+    */
     public void setLegendaryBtnActionListener(ActionListener listener){
       this.buyButtons[2].addActionListener(listener);
     }
 
+    /**
+     * This method disables the buttons of the farmer types that have already been bought.
+     * @param index the index of the farmer type
+     */
     public void disableButtons(int index) {
       this.buyButtons[index].setEnabled(false);
     }
