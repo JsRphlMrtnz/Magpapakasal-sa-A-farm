@@ -110,7 +110,7 @@ public class Player {
  * a true value.
  * 
  * @param tool The tool that is being used to fertilize the tile.
- * @param tile Tile object
+ * @param tile The tile that the player is trying to fertilize.
  * @return true if the tile was successfully fertilized.
  */
     public boolean fertilize(Tools tool, Tile tile) {
@@ -124,7 +124,16 @@ public class Player {
         return false;
     }
     
-    // Mine method
+    /**
+     * This method returns a boolean value whether a tile has been successfully mined.
+     * The tile can only be successfully mined if the player has enough objectCoins and the tile has a rock.
+     * If mined correctly, it will update the tile to not have a rock, 
+     * subtract the objectCoins of the player by the cost of using the certain tool,
+     * the player receives a certain amount of xp, and the method returns a true value.
+     * @param tool the tool that the player is using
+     * @param tile The tile that the player is trying to mine
+     * @return true if the tile was successfully mined.
+     */
     public boolean mine(Tools tool, Tile tile) {
         if (this.objectCoins >= tool.getCost() && tile.getHasRock()) {
             tile.setRock(false);
